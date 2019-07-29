@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <usb-device VID="0781" PID="5590"/>
+    <usb-device VID="17EF" PID="3875"/>
+
+</resources>

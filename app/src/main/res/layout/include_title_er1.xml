@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/maincolor"
+    android:id="@+id/llTitle"
+    android:orientation="vertical">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/padding20"/>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/padding50"
+    android:padding="@dimen/padding10"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:focusableInTouchMode="true">
+    <RelativeLayout
+        android:id="@+id/rlBack"
+        android:layout_width="@dimen/padding30"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/padding10">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@mipmap/back"/>
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="新闻资讯"
+        android:textSize="@dimen/text18"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"/>
+    <TextView
+        android:id="@+id/tvSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="新增"
+        android:visibility="invisible"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/padding10"
+        android:padding="@dimen/padding5"
+        android:textSize="@dimen/text14"
+        android:textColor="@color/white"/>
+</RelativeLayout>
+
+</LinearLayout>

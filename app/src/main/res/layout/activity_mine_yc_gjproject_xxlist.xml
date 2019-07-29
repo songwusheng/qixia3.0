@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.heziz.qixia3.ui.mine.yc.MineYcGJProjectXXListActivity">
+
+    <include layout="@layout/include_double_title_er"/>
+
+    <TextView
+        android:id="@+id/tvTitle1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="南京大学项目"
+        android:textColor="@color/white"
+        android:background="@color/maincolor1"
+        android:padding="@dimen/padding10"
+        android:gravity="center"
+        android:textSize="@dimen/text12" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

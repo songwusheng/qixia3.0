@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:id="@+id/rl_bottom"
+    android:layout_height="wrap_content"
+    >
+<RadioGroup
+    android:id="@+id/rgBottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding5"
+    android:gravity="center"
+    android:orientation="horizontal">
+    <RadioButton
+        android:id="@+id/shouye"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:button="@null"
+        android:checked="true"
+        android:drawableTop="@drawable/home_bottom_shouye_selector"
+        android:gravity="center_horizontal"
+        android:drawablePadding="@dimen/padding5"
+        android:textColor="@drawable/home_bottom_txt_color_selector"
+        android:text="项目概况"/>
+    <RadioButton
+        android:id="@+id/project"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:button="@null"
+        android:drawableTop="@drawable/home_bottom_gongcheng_selector"
+        android:gravity="center_horizontal"
+        android:drawablePadding="@dimen/padding5"
+        android:textColor="@drawable/home_bottom_txt_color_selector"
+        android:text="工程列表"/>
+    <RadioButton
+        android:id="@+id/zhihui"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:button="@null"
+        android:drawableTop="@drawable/home_bottom_zhihui_selector"
+        android:gravity="center_horizontal"
+        android:drawablePadding="@dimen/padding5"
+        android:textColor="@drawable/home_bottom_txt_color_selector"
+        android:text="智慧工地"/>
+    <RadioButton
+        android:id="@+id/renwu"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:button="@null"
+        android:drawableTop="@drawable/home_bottom_renwu_selector"
+        android:gravity="center_horizontal"
+        android:drawablePadding="@dimen/padding5"
+        android:textColor="@drawable/home_bottom_txt_color_selector"
+        android:text="日常检查"/>
+    <RadioButton
+        android:id="@+id/mine"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:button="@null"
+        android:drawableTop="@drawable/home_bottom_mine_selector"
+        android:gravity="center_horizontal"
+        android:drawablePadding="@dimen/padding5"
+        android:textColor="@drawable/home_bottom_txt_color_selector"
+        android:text="我的"/>
+</RadioGroup>
+</RelativeLayout>
