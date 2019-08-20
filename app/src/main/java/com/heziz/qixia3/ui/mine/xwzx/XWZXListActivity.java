@@ -78,10 +78,12 @@ public class XWZXListActivity extends BaseActivity implements View.OnClickListen
     private Dialog dialog;
     private UserInfor userInfor;
     Map<String, String> params = new HashMap<>();
+    Map<String, String> params1 = new HashMap<>();
     private File file;
     private List<XWZXBean> list=new ArrayList<>();
     private XWZXListAdapter adapter;
 
+    private int pageNow=1;
     private SpinnerPopuwindowBottom xgSpinnerPopuwindow;
     /**修改信息*/
     private List<String> xgData;
@@ -223,12 +225,26 @@ public class XWZXListActivity extends BaseActivity implements View.OnClickListen
     }
     private void initDatas() {
         String url2 = API.MINE_XWZX_LIST;
+        params.put("siteId",API.STATION);
+        params1.put("pageNow",pageNow+"");
+        params1.put("pageSize",10+"");
         JsonCallBack1<SRequstBean<List<XWZXBean>>> jsonCallBack2 = new JsonCallBack1<SRequstBean<List<XWZXBean>>>() {
             @Override
             public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<List<XWZXBean>>> response) {
 dissmissProgressDialog();
 
-                list.addAll(response.body().getData());
+
+                if (response.body().getData()!=null){
+//                            carDDetailsBeanList.addAll(response.body().getData().getList());
+                    if(response.body().getData().size()!=0){
+                        list.addAll(response.body().getData());
+                        adapter.loadMoreComplete();
+                    }else{
+                        adapter.loadMoreEnd();
+                    }
+                }else{
+                    adapter.loadMoreFail();
+                }
                 adapter.notifyDataSetChanged();
             }
 
@@ -240,7 +256,7 @@ dissmissProgressDialog();
 
         };
         OkGoClient.getInstance()
-                .postJsonData(url2, params, jsonCallBack2);
+                .postJsonData2(url2, params,params1, jsonCallBack2);
     }
 
     private void initListeners() {
@@ -248,7 +264,13 @@ dissmissProgressDialog();
         tvSave.setOnClickListener(this);
         btnSearch.setOnClickListener(this);
 
-
+        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                pageNow++;
+                initDatas();
+            }
+        });
     }
 
     @Override
@@ -265,6 +287,7 @@ dissmissProgressDialog();
                 go();
                 String name=etName.getText().toString();
                 params.put("originalName", name);
+                pageNow=1;
                 list.clear();
                 initDatas();
                 break;
@@ -372,7 +395,7 @@ dissmissProgressDialog();
          * 保存数据到服务器
          */
             //上传单个文件
-            String url = API.FILE+name;
+            String url = API.FILE+name+"&siteId="+API.STATION;
 //    File  file = new File(file.getAbsolutePath(), file.getName());
         List<File> list1=new ArrayList<>();
         list1.add(file);
@@ -388,6 +411,7 @@ dissmissProgressDialog();
                             dialog.dismiss();
                             etTitle.setText("");
                             params.put("originalName", "");
+                            pageNow=1;
                             list.clear();
                             initDatas();
 //                            dissmissProgressDialog();

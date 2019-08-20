@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.heziz.qixia3">
-<!--更新测试-->
+
+    <!-- 更新测试 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -105,7 +106,7 @@
         <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.project.ProjectDetailsActivity" />
         <activity android:name=".ui.zhihui.clwcx.CarDetailsActivity" />
-        <activity android:name=".ui.zhihui.yc.YcDetailsActivity"/>
+        <activity android:name=".ui.zhihui.yc.YcDetailsActivity" />
         <activity android:name=".ui.home.HomeTotalActivity" />
         <activity android:name=".ui.home.HomeTypeActivity" />
         <activity android:name=".ui.home.HomeProjectListActivity" />
@@ -137,15 +138,21 @@
         <activity android:name=".ui.mine.zxjc.MineZXJCDetailsActivity" />
         <activity android:name=".ui.mine.zxjc.MineZXJCZGDetailsActivity" />
         <activity android:name=".ui.zhihui.clwcx.ClcxDeviceDetailsActivity" />
-        <activity android:name=".ui.rcjc.HGLActivity"></activity>
-        <activity android:name=".ui.rcjc.WebviewActivity"/>
-        <activity android:name=".bigimage.JBrowseImgActivity"
+        <activity android:name=".ui.rcjc.HGLActivity" />
+        <activity android:name=".ui.rcjc.WebviewActivity" />
+        <activity
+            android:name=".bigimage.JBrowseImgActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Full"/>
-        <activity android:name=".ui.mine.xwzx.XWZXListActivity"/>
-        <activity android:name=".ui.mine.xwzx.WebActivity"/>
-        <activity android:name=".ui.mine.mineinfo.MineInfoActivity"/>
-        <activity android:name=".ui.mine.mineinfo.MineXGMMActivity"/>
+            android:theme="@style/Full" />
+        <activity android:name=".ui.mine.xwzx.XWZXListActivity" />
+        <activity android:name=".ui.mine.xwzx.WebActivity" />
+        <activity android:name=".ui.mine.mineinfo.MineInfoActivity" />
+        <activity android:name=".ui.mine.mineinfo.MineXGMMActivity" />
+        <activity android:name=".ui.NewHomeActivity" />
+        <activity android:name=".ui.newjm.BaojingxxActivity" />
+        <activity android:name=".ui.newjm.CommActivity" />
+        <activity android:name=".ui.newjm.CLCXListActivity" />
+        <activity android:name=".ui.newjm.CLCXDetailsActivity"></activity>
     </application>
 
 </manifest>

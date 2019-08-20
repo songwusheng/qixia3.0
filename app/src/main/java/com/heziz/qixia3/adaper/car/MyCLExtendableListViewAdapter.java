@@ -27,6 +27,7 @@ import com.heziz.qixia3.bean.car.CarZHBean;
 import com.heziz.qixia3.bean.sp.ProjectVideoBean;
 import com.heziz.qixia3.bean.sp.SpProjectBean;
 import com.heziz.qixia3.bean.sp.VideoProjectBean;
+import com.heziz.qixia3.ui.newjm.CLCXListActivity;
 import com.heziz.qixia3.ui.project.ProjectDetailsActivity;
 import com.heziz.qixia3.ui.video.VXiangqingActivity;
 import com.heziz.qixia3.ui.zhihui.clwcx.CarDetailsActivity;
@@ -138,7 +139,9 @@ public class MyCLExtendableListViewAdapter extends BaseExpandableListAdapter {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(mContext,ClcxDeviceDetailsActivity.class);
+                    //Intent intent=new Intent(mContext,ClcxDeviceDetailsActivity.class);
+                    Intent intent=new Intent(mContext,CLCXListActivity.class);
+                    intent.putExtra("name",list.get(groupPosition).getName());
                     intent.putExtra("id",list.get(groupPosition).getDavstring().get(childPosition).getDavId());
                     mContext.startActivity(intent);
                 }

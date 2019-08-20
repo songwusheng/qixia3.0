@@ -39,7 +39,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * A simple {@link Fragment} subclass.
+ * new_clcx_d_cph simple {@link Fragment} subclass.
  */
 public class MineFragment extends BaseFragment implements View.OnClickListener {
 

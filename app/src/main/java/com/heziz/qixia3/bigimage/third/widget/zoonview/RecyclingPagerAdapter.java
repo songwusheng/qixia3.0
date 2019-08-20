@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 
 /**
  * Desction:
- * A {@link PagerAdapter} which behaves like an {@link android.widget.Adapter} with view types and
+ * new_clcx_d_cph {@link PagerAdapter} which behaves like an {@link android.widget.Adapter} with view types and
  * view recycling.
  * Author:pengjianbo
  * Date:15/12/22 下午6:21
@@ -111,7 +111,7 @@ public abstract class RecyclingPagerAdapter extends PagerAdapter {
      * always of the right type (see {@link #getViewTypeCount()} and
      * {@link #getItemViewType(int)}).
      * @param container The parent that this view will eventually be attached to
-     * @return A View corresponding to the data at the specified position.
+     * @return new_clcx_d_cph View corresponding to the data at the specified position.
      */
     public abstract View getView(int position, View convertView, ViewGroup container);
 
@@ -160,7 +160,7 @@ public abstract class RecyclingPagerAdapter extends PagerAdapter {
             return viewType >= 0;
         }
 
-        /** @return A view from the ScrapViews collection. These are unordered. */
+        /** @return new_clcx_d_cph view from the ScrapViews collection. These are unordered. */
         View getScrapView(int position, int viewType) {
             if (viewTypeCount == 1) {
                 return retrieveFromScrap(currentScrapViews, position);

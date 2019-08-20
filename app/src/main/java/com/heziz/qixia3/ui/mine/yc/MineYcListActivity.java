@@ -86,6 +86,8 @@ public class MineYcListActivity extends BaseActivity implements View.OnClickList
     LinearLayout llsx;
     @BindView(R.id.llcb)
     LinearLayout llcb;
+    @BindView(R.id.llaz)
+    LinearLayout llaz;
     @BindView(R.id.tvsx)
     TextView tvsx;
     /** 管辖级别数据*/
@@ -248,6 +250,7 @@ showProgressDialog();
         mContext=this;
         tvTitle.setText("扬尘告警信息");
         llcb.setVisibility(View.GONE);
+        llaz.setVisibility(View.GONE);
 //        llList.setVisibility(View.VISIBLE);
         userInfor=MyApplication.getInstance().getUserInfor();
         adapter=new MineYcGJListAdapter(mContext,projectBeanList);

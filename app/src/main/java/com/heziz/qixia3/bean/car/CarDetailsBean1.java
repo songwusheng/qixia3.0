@@ -43,7 +43,7 @@ public class CarDetailsBean1 implements Serializable {
     private Object projectArea;
     private Object managerRoleName;
     private Object videotape;
-    private Object video;
+    private String video;
     private Object projectInfoName;
     private String inserttime;
     private Object distantview;
@@ -152,11 +152,11 @@ public class CarDetailsBean1 implements Serializable {
         this.videotape = videotape;
     }
 
-    public Object getVideo() {
+    public String getVideo() {
         return video;
     }
 
-    public void setVideo(Object video) {
+    public void setVideo(String video) {
         this.video = video;
     }
 

@@ -25,11 +25,14 @@ public class API {
  //首页
  public static String HOME_DATA1=base_url1+"getQxAppProjectVo";
 
+ //首页天气预报（新）
+ public static String HOME_WHEATHER=base_url+"hzjg/weatherForecast/getRequestWeatherForecastDataTask";
+
  //首页列表
  public static String HOME_DATA2=base_url1+"queryEveryPopedom";
  //首页--二级页面--全部项目列表
  public static String HOME_TOTAL_PROJECT_LIST=base_url1+"queryForPageAndStreet";
- //工程列表 地图
+ //工程列表 home_map
  public static String PROJECT_LIST=base_url1+"queryByCondition";
  public static String PROJECT_LIST1=base_url1+"queryForsubList";
 // public static String PROJECT_LIST1=base_url1+"queryForsubList";
@@ -87,6 +90,9 @@ public static String WEBSOCKET_URL="ws://skt.heziz.com:28012/websocket";
  public static String CL_PROJECT_LIST=base_url+"hzjg/qxNewDemand/getFtpIsOnlineavgByRole";
  //根据项目id查看车辆设备数
  public static String CL_LIST=base_url+"hzjg/qxNewDemand/getFTPbyproject";
+
+ //根据设备id查看车辆未冲洗列表
+ public static String CL_NEW_LIST=base_url+"hzjg/ftpCarsInfoManager/getRequesEsCarsInfo";
 
  //获取非道路机械的各街道的数据list
  public static String FDL_STREET_LIST=base_url+"hzjg/projectDieselOilOpt/statisticsNowDayRecordBy";

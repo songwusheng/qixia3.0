@@ -74,6 +74,8 @@ public class MineCLCXListActivity extends BaseActivity implements View.OnClickLi
     LinearLayout llsx;
     @BindView(R.id.llcb)
     LinearLayout llcb;
+    @BindView(R.id.llaz)
+    LinearLayout llaz;
     @BindView(R.id.tvsx)
     TextView tvsx;
     /** 管辖级别数据*/
@@ -188,7 +190,7 @@ public class MineCLCXListActivity extends BaseActivity implements View.OnClickLi
             params1.put("managerRoleIds","["+userInfor.getManagerId()+"]");
             initProjectData();
         }else if(userInfor.getPosition().equals("1")){
-            params1.put("cardsProjectEndpoint",userInfor.getStation()+"");
+            params1.put("station",userInfor.getStation()+"");
             initProjectData();
         }
 
@@ -253,6 +255,7 @@ public class MineCLCXListActivity extends BaseActivity implements View.OnClickLi
         mContext=this;
         tvTitle.setText("车辆冲洗告警信息");
         llcb.setVisibility(View.GONE);
+        llaz.setVisibility(View.GONE);
 //        llList.setVisibility(View.VISIBLE);
         userInfor=MyApplication.getInstance().getUserInfor();
         adapter=new MineCLCXGJListAdapter(mContext,projectBeanList);

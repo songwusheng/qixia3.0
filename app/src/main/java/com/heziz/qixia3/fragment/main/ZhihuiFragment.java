@@ -46,7 +46,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * A simple {@link Fragment} subclass.
+ * new_clcx_d_cph simple {@link Fragment} subclass.
  */
 public class ZhihuiFragment extends BaseFragment implements View.OnClickListener {
 

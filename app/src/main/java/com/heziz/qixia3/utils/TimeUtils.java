@@ -50,6 +50,18 @@ public class TimeUtils {
         Date date = new Date(cal.getTimeInMillis());
         return simpleDateFormat.format(date);
     }
+
+    public static String getYearTime(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar ca = Calendar.getInstance();
+        ca.set(Calendar.HOUR_OF_DAY, 0);
+        ca.clear(Calendar.MINUTE);
+        ca.clear(Calendar.SECOND);
+        ca.clear(Calendar.MILLISECOND);
+        ca.set(Calendar.DAY_OF_YEAR, 1);
+        Date date = new Date(ca.getTimeInMillis());
+        return simpleDateFormat.format(date);
+    }
     public static String setSTime(Date date){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date1 = new Date(date.getTime());
