@@ -84,6 +84,8 @@ public class SpStreetDeviceListActivity extends BaseActivity implements View.OnC
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recycleView.setLayoutManager(manager);
         recycleView.setAdapter(adapter);
+        adapter.bindToRecyclerView(recycleView);
+        adapter.setEmptyView(R.layout.empty_view);
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

@@ -6,7 +6,8 @@
 
     <!--<color name="maincolor">#03a3d7</color>-->
     <color name="maincolor">#596EFF</color>
-    <color name="maincolor1">#9DAEFC</color>
+    <!--<color name="maincolor1">#9DAEFC</color>-->
+    <color name="maincolor1">#45A6F7</color>
     <color name="maincolor2">#92CEFF</color>
     <color name="textcolor">#45A6F7</color>
     <color name="black">#000000</color>

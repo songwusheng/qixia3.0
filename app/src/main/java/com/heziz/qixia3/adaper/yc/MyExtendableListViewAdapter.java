@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.heziz.qixia3.R;
 import com.heziz.qixia3.bean.yc.YconlineofflineDeviceBean;
 import com.heziz.qixia3.bean.yc.YczlxNumBean1;
+import com.heziz.qixia3.ui.newjm.YcDetailsNewActivity;
 import com.heziz.qixia3.ui.zhihui.yc.YcDetailsActivity;
 import com.heziz.qixia3.utils.NumberUtils;
 
@@ -120,7 +121,8 @@ public class MyExtendableListViewAdapter extends BaseExpandableListAdapter {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent1=new Intent(mContext,YcDetailsActivity.class);
+//                    Intent intent1=new Intent(mContext,YcDetailsActivity.class);
+                    Intent intent1=new Intent(mContext,YcDetailsNewActivity.class);
                     intent1.putExtra("id",Long.valueOf(list.get(groupPosition).getProjectId()));
                     intent1.putExtra("name",list.get(groupPosition).getName());
                     intent1.putExtra("deviceid",list.get(groupPosition).getDeviceList().get(childPosition).getDavId());

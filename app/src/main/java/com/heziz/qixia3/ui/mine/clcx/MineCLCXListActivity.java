@@ -258,11 +258,15 @@ public class MineCLCXListActivity extends BaseActivity implements View.OnClickLi
         llaz.setVisibility(View.GONE);
 //        llList.setVisibility(View.VISIBLE);
         userInfor=MyApplication.getInstance().getUserInfor();
+
         adapter=new MineCLCXGJListAdapter(mContext,projectBeanList);
+
         LinearLayoutManager manager=new LinearLayoutManager(mContext.getApplicationContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
+        adapter.bindToRecyclerView(recyclerView);
+        adapter.setEmptyView(R.layout.empty_view);
 //        adapter.bindToRecyclerView(recyclerView);
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override

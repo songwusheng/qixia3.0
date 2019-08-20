@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/maincolor"
+    android:background="@mipmap/new_title_bar_bg"
     android:id="@+id/llTitle"
     android:orientation="vertical">
     <View

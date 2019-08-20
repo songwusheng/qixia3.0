@@ -26,7 +26,7 @@ public class MineCLCXProjectDetailsListAdapter extends BaseQuickAdapter<MineCLCX
     private Context context;
     private MineCLCXBean mineYcListBean;
     public MineCLCXProjectDetailsListAdapter(Context context, List<MineCLCXListBean> list, MineCLCXBean mineYcListBean) {
-        super(R.layout.mine_yc_detals_item,list);
+        super(R.layout.mine_clcx_detals_item,list);
         this.context=context;
         this.mineYcListBean=mineYcListBean;
     }

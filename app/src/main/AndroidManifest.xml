@@ -152,7 +152,10 @@
         <activity android:name=".ui.newjm.BaojingxxActivity" />
         <activity android:name=".ui.newjm.CommActivity" />
         <activity android:name=".ui.newjm.CLCXListActivity" />
-        <activity android:name=".ui.newjm.CLCXDetailsActivity"></activity>
+        <activity
+            android:name=".ui.newjm.CLCXDetailsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"></activity>
+        <activity android:name=".ui.newjm.YcDetailsNewActivity"></activity>
     </application>
 
 </manifest>

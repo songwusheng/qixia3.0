@@ -90,6 +90,9 @@ public class MineCLCXProjectXXActivity extends BaseActivity {
                     if(response.body().getData().getList().size()!=0){
                         list.addAll(response.body().getData().getList());
                         adapter.loadMoreComplete();
+                        if(list.size()<10){
+                            adapter.loadMoreEnd();
+                        }
                     }else{
                         adapter.loadMoreEnd();
                     }
