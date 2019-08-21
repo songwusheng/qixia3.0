@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import com.heziz.qixia3.app.MyApplication;
 import com.heziz.qixia3.base.BaseActivity;
 import com.heziz.qixia3.bean.DataBean;
 import com.heziz.qixia3.bean.HomeBean;
+import com.heziz.qixia3.bean.KqzlBean;
 import com.heziz.qixia3.bean.UserInfor;
 import com.heziz.qixia3.network.API;
 import com.heziz.qixia3.network.JsonCallBack1;
@@ -30,7 +32,9 @@ import com.heziz.qixia3.ui.zhihui.sp.SpStreetDeviceListActivity;
 import com.heziz.qixia3.ui.zhihui.sp.SpStreetProjectActivity;
 import com.heziz.qixia3.ui.zhihui.yc.StreetYcDeviceListActivity;
 import com.heziz.qixia3.ui.zhihui.yc.YcStreetProjectListActivity;
+import com.heziz.qixia3.utils.ToastUtil;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -64,6 +68,15 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
     TextView tvFd;
     @BindView(R.id.tvVertion)
     TextView tvVertion;
+
+    @BindView(R.id.tvTd)
+    TextView tvTd;
+    @BindView(R.id.tvSmz)
+    TextView tvSmz;
+    @BindView(R.id.tvAq)
+    TextView tvAq;
+    @BindView(R.id.tvZl)
+    TextView tvZl;
 
     @BindView(R.id.tvWeather)
     TextView tvWeather;
@@ -106,6 +119,8 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
                     String fj=sk.getString("wind_strength");
                     tvFl.setText(fl+" "+fj);
 
+                    tvKq.setText("良 61");
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -121,6 +136,38 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
         };
         OkGoClient.getInstance()
                 .postJsonData0(url1, params1, jsonCallBack);
+
+        Map<String,String> params2=new HashMap<>();
+        String url2 = API.HOME_WHEATHER1 + "?access_token=" + userInfor.getUuid();
+        params2.put("cityNamePinyin","nanjing");
+        JsonCallBack1<SRequstBean<KqzlBean>> jsonCallBack1 = new JsonCallBack1<SRequstBean<KqzlBean>>() {
+            @Override
+            public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<KqzlBean>> response) {
+
+                KqzlBean dataBean=response.body().getData();
+                String resulte=dataBean.getResult().replace("\\","");
+                try {
+                    JSONArray arr=new JSONArray(resulte);
+                   JSONObject object=arr.getJSONObject(0);
+                   JSONObject object1=object.getJSONObject("citynow");
+
+                    tvKq.setText(object1.getString("quality")+" "+object1.getString("AQI"));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onError(com.lzy.okgo.model.Response<SRequstBean<KqzlBean>> response) {
+                super.onError(response);
+                dissmissProgressDialog();
+            }
+
+        };
+        OkGoClient.getInstance()
+                .postJsonData0(url2, params2, jsonCallBack1);
     }
 
     private void initViews() {
@@ -140,6 +187,10 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
         tvDt.setOnClickListener(this);
         tvRc.setOnClickListener(this);
         tvFd.setOnClickListener(this);
+        tvTd.setOnClickListener(this);
+        tvSmz.setOnClickListener(this);
+        tvAq.setOnClickListener(this);
+        tvZl.setOnClickListener(this);
     }
 
     @Override
@@ -150,6 +201,7 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
                 intent.setClass(mContext,CommActivity.class);
                 intent.putExtra("type",3);
                 intent.putExtra("title","我的管理");
+                startActivity(intent);
                 break;
             case R.id.tvSp:
                 if(userInfor.getPosition().equals("3")){
@@ -159,7 +211,9 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
                 }else {
                     intent.setClass(mContext,SpStreetDeviceListActivity.class);
                 }
+                startActivity(intent);
                 break;
+
             case R.id.tvYc:
                 if(userInfor.getPosition().equals("3")){
                     intent=new Intent(mContext, YcStreetProjectListActivity.class);
@@ -169,9 +223,11 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
                     intent.setClass(mContext,StreetYcDeviceListActivity.class);
                     intent.putExtra("type","yc");
                 }
+                startActivity(intent);
                 break;
             case R.id.tvBj:
                 intent.setClass(mContext,BaojingxxActivity.class);
+                startActivity(intent);
                 break;
             case R.id.tvCl:
                 if(userInfor.getPosition().equals("3")){
@@ -181,21 +237,25 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
                 }else {
                     intent.setClass(mContext,ClwcxStreetDeviceActivity.class);
                 }
+                startActivity(intent);
                 break;
             case R.id.tvXm:
                 intent.setClass(mContext,CommActivity.class);
                 intent.putExtra("type",0);
                 intent.putExtra("title","项目总览");
+                startActivity(intent);
                 break;
             case R.id.tvDt:
                 intent.setClass(mContext,CommActivity.class);
                 intent.putExtra("type",1);
                 intent.putExtra("title","地图");
+                startActivity(intent);
                 break;
             case R.id.tvRc:
                 intent.setClass(mContext,CommActivity.class);
                 intent.putExtra("type",2);
                 intent.putExtra("title","日常检查");
+                startActivity(intent);
                 break;
             case R.id.tvFd:
                 if(userInfor.getPosition().equals("3")){
@@ -204,9 +264,22 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
                 }else{
                     intent.setClass(mContext,FdlStreetDeviceListActivity.class);
                 }
+                startActivity(intent);
+                break;
+            case R.id.tvTd:
+                ToastUtil.showToast("暂无数据");
+                break;
+            case R.id.tvSmz:
+                ToastUtil.showToast("暂无数据");
+                break;
+            case R.id.tvAq:
+                ToastUtil.showToast("暂无数据");
+                break;
+            case R.id.tvZl:
+                ToastUtil.showToast("暂无数据");
                 break;
         }
-        startActivity(intent);
+
     }
 
     private String getVersion(){
@@ -223,6 +296,6 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return  versionName;
+        return  "v"+versionName;
     }
 }

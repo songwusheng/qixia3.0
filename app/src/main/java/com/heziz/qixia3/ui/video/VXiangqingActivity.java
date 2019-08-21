@@ -92,7 +92,7 @@ public class VXiangqingActivity extends BaseActivity implements View.OnClickList
     public static final int KEY_Handler_Talk_Success = 70;
     public static final int KEY_Handler_Talk_failed = 80;
     private RelativeLayout rlBack;
-    private LinearLayout llTitle;
+    private RelativeLayout llTitle;
     private RelativeLayout rlMain;
     private LinearLayout llV;
     private TextView tvTitle;
@@ -424,7 +424,7 @@ public class VXiangqingActivity extends BaseActivity implements View.OnClickList
         recycleView= (RecyclerView) findViewById(R.id.recycleView);
         mPlayWin= (PlayWindow) findViewById(R.id.play_window);
 
-        llTitle= (LinearLayout) findViewById(R.id.llTitle);
+        llTitle= (RelativeLayout) findViewById(R.id.llTitle);
         rlMain= (RelativeLayout) findViewById(R.id.rlMain);
         llV= (LinearLayout) findViewById(R.id.llV);
 

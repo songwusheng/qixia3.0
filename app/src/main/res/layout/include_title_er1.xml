@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/maincolor"
     android:id="@+id/llTitle"
     android:orientation="vertical">
-    <View
+    <ImageView
+        android:id="@+id/iv"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/padding20"/>
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/padding50"
-    android:padding="@dimen/padding10"
-    android:focusable="true"
-    android:gravity="center_vertical"
-    android:focusableInTouchMode="true">
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/title_bar_bg"/>
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/view"
+        android:layout_alignBottom="@+id/iv"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_height="wrap_content">
     <RelativeLayout
         android:id="@+id/rlBack"
         android:layout_width="@dimen/padding30"
@@ -52,4 +60,4 @@
         android:textColor="@color/white"/>
 </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

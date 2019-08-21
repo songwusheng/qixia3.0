@@ -66,7 +66,8 @@ public class ClcxStreetProjectActivity extends BaseActivity implements View.OnCl
 
     @BindView(R.id.expanded_menu)
     ExpandableListView expanded_menu;
-
+    @BindView(R.id.tvJdTitle)
+    TextView tvJdTitle;
     @BindView(R.id.btnSearch)
     Button btnSearch;
     @BindView(R.id.etName)
@@ -129,6 +130,7 @@ public class ClcxStreetProjectActivity extends BaseActivity implements View.OnCl
         mContext=this;
         userInfor= MyApplication.getInstance().getUserInfor();
         tvTitle.setText("车辆冲洗");
+        tvJdTitle.setText("项目名称");
         ivIcon.setImageResource(R.drawable.zh_sp_icon1);
         managerRoleIds=getIntent().getStringExtra("id");
         if(!userInfor.getPosition().equals("3")){

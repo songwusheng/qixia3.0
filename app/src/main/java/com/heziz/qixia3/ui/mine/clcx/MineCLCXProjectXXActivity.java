@@ -2,6 +2,7 @@ package com.heziz.qixia3.ui.mine.clcx;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -44,10 +45,14 @@ public class MineCLCXProjectXXActivity extends BaseActivity {
 //    LinearLayout llList;
     @BindView(R.id.recycleView)
     RecyclerView recyclerView;
+    @BindView(R.id.recycleView1)
+    RecyclerView recyclerView1;
 
     private int pageNow=1;
     private MineCLCXProjectDetailsListAdapter adapter;
+    private MineCLCXProjectDetailsListAdapter adapter1;
     private List<MineCLCXListBean> list=new ArrayList<>();
+    private List<MineCLCXListBean> list1=new ArrayList<>();
     private MineCLCXBean mineYcListBean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +74,64 @@ public class MineCLCXProjectXXActivity extends BaseActivity {
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         adapter.bindToRecyclerView(recyclerView);
+        adapter.setEmptyView(R.layout.empty_view);
+        adapter1=new MineCLCXProjectDetailsListAdapter(this,list1,mineYcListBean);
+        LinearLayoutManager manager1=new LinearLayoutManager(mContext.getApplicationContext());
+        manager1.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView1.setLayoutManager(manager1);
+        recyclerView1.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+        recyclerView1.setAdapter(adapter1);
+        adapter1.bindToRecyclerView(recyclerView1);
+        adapter1.setEmptyView(R.layout.empty_view);
     }
 
     private void initDatas() {
         showProgressDialog();
+        getToday();
+        String url1 = API.MINE_CLCX_DETAILS_LIST1+"/"+pageNow+"/10";
+        Map<String,String> params=new HashMap<>();
+        params.put("access_token", MyApplication.getInstance().getUserInfor().getUuid());
+        params.put("projectId",mineYcListBean.getProjectId());
+        params.put("licenseType","-1");
+        params.put("licensePlateColor","黄");
+        params.put("startTime", TimeUtils.getYesterdayTime());
+        JsonCallBack1<SRequstBean<RequestBean<List<MineCLCXListBean>>>> jsonCallBack1 = new JsonCallBack1<SRequstBean<RequestBean<List<MineCLCXListBean>>>>() {
+            @Override
+            public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<RequestBean<List<MineCLCXListBean>>>> response) {
+                dissmissProgressDialog();
+                if (response.body().getData()!=null){
+//                            carDDetailsBeanList.addAll(response.body().getData().getList());
+                    if(response.body().getData().getList().size()!=0){
+                        list1.addAll(response.body().getData().getList());
+                        adapter1.loadMoreComplete();
+                        if(list1.size()<10){
+                            adapter1.loadMoreEnd();
+                        }
+                    }else{
+                        adapter1.loadMoreEnd();
+                    }
+                }else{
+                    adapter1.loadMoreFail();
+                }
+
+                adapter1.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(com.lzy.okgo.model.Response<SRequstBean<RequestBean<List<MineCLCXListBean>>>> response) {
+                super.onError(response);
+                dissmissProgressDialog();
+            }
+
+        };
+        OkGoClient.getInstance()
+                .getJsonData1(url1, params, jsonCallBack1);
+
+    }
+
+    private void getToday(){
         String url1 = API.MINE_CLCX_DETAILS_LIST+"/"+pageNow+"/10";
         Map<String,String> params=new HashMap<>();
         params.put("access_token", MyApplication.getInstance().getUserInfor().getUuid());
@@ -89,15 +147,10 @@ public class MineCLCXProjectXXActivity extends BaseActivity {
 //                            carDDetailsBeanList.addAll(response.body().getData().getList());
                     if(response.body().getData().getList().size()!=0){
                         list.addAll(response.body().getData().getList());
-                        adapter.loadMoreComplete();
-                        if(list.size()<10){
-                            adapter.loadMoreEnd();
-                        }
+
                     }else{
-                        adapter.loadMoreEnd();
+                        adapter.setEmptyView(R.layout.empty_view);
                     }
-                }else{
-                    adapter.loadMoreFail();
                 }
 
                 adapter.notifyDataSetChanged();
@@ -116,7 +169,7 @@ public class MineCLCXProjectXXActivity extends BaseActivity {
     }
 
     private void initListeners() {
-        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+        adapter1.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
                 pageNow++;

@@ -27,7 +27,8 @@ public class API {
 
  //首页天气预报（新）
  public static String HOME_WHEATHER=base_url+"hzjg/weatherForecast/getRequestWeatherForecastDataTask";
-
+ //首页空气质量（新）
+ public static String HOME_WHEATHER1=base_url+"hzjg/airQuality/getRequestKqzlCityListDataTask";
  //首页列表
  public static String HOME_DATA2=base_url1+"queryEveryPopedom";
  //首页--二级页面--全部项目列表
@@ -123,10 +124,14 @@ public static String WEBSOCKET_URL="ws://skt.heziz.com:28012/websocket";
  public static String MINE_YC_LIST=base_url+"hzjg/qxNewDemand/getWeatherAlarmByProject";
  //我的--扬尘报警列表--工地详情列表
  public static String MINE_YC_DETAILS_LIST=base_url+"hzjg/qxNewDemand/getWeatherAlarmByprojectId";
+ //我的--扬尘报警列表--工地详情列表
+ public static String MINE_YC_DETAILS_LIST1=base_url+"hzjg/qxNewDemand/getWeatherAlarmByprojectId1";
  //我的--车辆报警列表
  public static String MINE_CLCX_LIST=base_url+"hzjg/qxNewDemand/getFtpAlarmByProject";
  //我的--车辆报警列表--工地详情列表
  public static String MINE_CLCX_DETAILS_LIST=base_url+"hzjg/qxNewDemand/getFtpAlarmByprojectId";
+ //我的--车辆报警列表--工地详情列表
+ public static String MINE_CLCX_DETAILS_LIST1=base_url+"hzjg/qxNewDemand/getFtpAlarmByprojectId1";
  //我的--五达标一公示list
  public static String MINE_WDBYGS_LIST=base_url+"hzxm/daliy/searchAPPPage";
  //我的--专项检查list

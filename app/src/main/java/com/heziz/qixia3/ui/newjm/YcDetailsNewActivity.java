@@ -7,6 +7,8 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -86,6 +88,10 @@ public class YcDetailsNewActivity extends BaseActivity {
     RadioGroup rg1;
     @BindView(R.id.rg2)
     RadioGroup rg2;
+    @BindView(R.id.rb3)
+    RadioButton rb3;
+    @BindView(R.id.llEmpty)
+    LinearLayout llEmpty;
 
     private String name;
     private String deviceid;
@@ -96,6 +102,7 @@ public class YcDetailsNewActivity extends BaseActivity {
     private List<YcRealNumberBean> list=new ArrayList<>();
     private String defTime;
     Map<String,String> params=new HashMap<>();
+    TimePickerView pvTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,6 +123,26 @@ public class YcDetailsNewActivity extends BaseActivity {
         deviceid=getIntent().getStringExtra("deviceid");
         getWebsocket(deviceid);
         tvName.setText(name);
+
+        //时间选择器
+        pvTime = new TimePickerBuilder(YcDetailsNewActivity.this, new OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {
+//                                date.setHours(23);
+//                                date.setMinutes(59);
+//                                date.setSeconds(59);
+//                                endTime=TimeUtils.setSTime(date);
+                date.setHours(23);
+                date.setMinutes(59);
+                date.setSeconds(59);
+                defTime=TimeUtils.setSTime(date);
+                params.put("defTime",defTime);
+                type=2;
+                getReal();
+            }
+        })
+                .build();
+        pvTime.setTitleText("请选择查询时间");
     }
 
     private void getWebsocket(String ycDeviceid) {
@@ -219,25 +246,6 @@ public class YcDetailsNewActivity extends BaseActivity {
                         break;
                     case R.id.rb3:
 
-                        //时间选择器
-                        TimePickerView pvTime = new TimePickerBuilder(YcDetailsNewActivity.this, new OnTimeSelectListener() {
-                            @Override
-                            public void onTimeSelect(Date date, View v) {
-//                                date.setHours(23);
-//                                date.setMinutes(59);
-//                                date.setSeconds(59);
-//                                endTime=TimeUtils.setSTime(date);
-                                date.setHours(0);
-                                date.setMinutes(0);
-                                date.setSeconds(0);
-                                defTime=TimeUtils.setSTime(date);
-                                params.put("defTime",defTime);
-                                type=2;
-                                getReal();
-                            }
-                        })
-                                .build();
-                        pvTime.setTitleText("请选择查询时间");
                         pvTime.show();
 
                         break;
@@ -259,10 +267,19 @@ public class YcDetailsNewActivity extends BaseActivity {
                 }
             }
         });
+        rb3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!pvTime.isShowing()){
+                    pvTime.show();
+                }
+            }
+        });
     }
     private void getReal(){
+        list.clear();
+        showProgressDialog();
         String url = API.YC_HISTORY_URL1;
-
         params.put("access_token", MyApplication.getInstance().getUserInfor().getUuid());
         params.put("deviceId",deviceid+"");
         params.put("type",type+"");
@@ -270,19 +287,20 @@ public class YcDetailsNewActivity extends BaseActivity {
         JsonCallBack1<SRequstBean<List<YcRealNumberBean>>> jsonCallBack = new JsonCallBack1<SRequstBean<List<YcRealNumberBean>>>() {
             @Override
             public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<List<YcRealNumberBean>>> response) {
-//
 //                if (flag==0){
+                dissmissProgressDialog();
+                if(response.body().getData()!=null){
                     list.addAll(response.body().getData());
-                    Collections.reverse(list);
-//                    num++;
-//                }else{
-//                    pm25List.addAll(response.body().getData());
-//                    Collections.reverse(pm25List);
-//                    num++;
-//                }
-//                if(num==2){
-                    initChart1();
-//                }
+                    //Collections.reverse(list);
+                    if(list.size()!=0){
+                        initChart1();
+                        llEmpty.setVisibility(View.GONE);
+                        chart.setVisibility(View.VISIBLE);
+                    }else{
+                        llEmpty.setVisibility(View.VISIBLE);
+                        chart.setVisibility(View.GONE);
+                    }
+                }
 
             }
 
@@ -380,7 +398,7 @@ public class YcDetailsNewActivity extends BaseActivity {
             ll1.enableDashedLine(20f, 3f, 0f);
             ll1.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
             ll1.setTextSize(10f);
-            ll1.setLineColor(getResources().getColor(R.color.maincolor));
+            ll1.setLineColor(getResources().getColor(R.color.zxt_yjx_color));
 //            ll1.setTypeface(tfRegular);
 
             LimitLine ll2 = new LimitLine(100f, "PM2.5");
@@ -388,7 +406,7 @@ public class YcDetailsNewActivity extends BaseActivity {
             ll2.enableDashedLine(20f, 3f, 0f);
             ll2.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
             ll2.setTextSize(10f);
-            ll2.setLineColor(getResources().getColor(R.color.maincolor));
+            ll2.setLineColor(getResources().getColor(R.color.zxt_yjx_color));
 //            ll2.setTypeface(tfRegular);
 
             // draw limit lines behind data instead of on top
@@ -397,10 +415,10 @@ public class YcDetailsNewActivity extends BaseActivity {
             yAxis.removeAllLimitLines();
             // add limit lines
             if(flag.equals("a34002-Rtd")){
-                yAxis.addLimitLine(ll1);
-            }else{
-                yAxis.addLimitLine(ll2);
-            }
+            yAxis.addLimitLine(ll1);
+        }else{
+            yAxis.addLimitLine(ll2);
+        }
 
 
 //            xAxis.addLimitLine(llXAxis);
@@ -436,12 +454,22 @@ public class YcDetailsNewActivity extends BaseActivity {
                 chart.getData().getDataSetCount() > 0) {
             set1 = (LineDataSet) chart.getData().getDataSetByIndex(0);
             set1.setValues(values);
+            if(flag.equals("a34002-Rtd")){
+                set1.setLabel("PM10");
+            }else{
+                set1.setLabel("PM2.5");
+            }
             set1.notifyDataSetChanged();
             chart.getData().notifyDataChanged();
             chart.notifyDataSetChanged();
         } else {
             // create a dataset and give it a type
-            set1 = new LineDataSet(values, "");
+            if(flag.equals("a34002-Rtd")){
+                set1 = new LineDataSet(values, "PM10");
+            }else{
+                set1 = new LineDataSet(values, "PM2.5");
+            }
+
 
             set1.setDrawIcons(false);
 

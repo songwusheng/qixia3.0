@@ -38,6 +38,7 @@ import com.heziz.qixia3.network.JsonCallBack1;
 import com.heziz.qixia3.network.OkGoClient;
 import com.heziz.qixia3.network.RequestBean;
 import com.heziz.qixia3.network.SRequstBean;
+import com.heziz.qixia3.ui.newjm.YcDetailsNewActivity;
 import com.heziz.qixia3.ui.zhihui.clwcx.CarDetailsActivity;
 import com.heziz.qixia3.ui.zhihui.yc.YcDetailsActivity;
 import com.heziz.qixia3.utils.LogUtils;
@@ -443,7 +444,7 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.llyc:
                 if(list!=null&&list.size()!=0){
-                    Intent intent1=new Intent(ProjectDetailsActivity.this,YcDetailsActivity.class);
+                    Intent intent1=new Intent(ProjectDetailsActivity.this,YcDetailsNewActivity.class);
                     intent1.putExtra("id",id);
                     intent1.putExtra("name",bean.getName());
                     intent1.putExtra("deviceid",list.get(0).getWeacherDeviceId());

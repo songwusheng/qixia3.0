@@ -154,8 +154,12 @@
         <activity android:name=".ui.newjm.CLCXListActivity" />
         <activity
             android:name=".ui.newjm.CLCXDetailsActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"></activity>
-        <activity android:name=".ui.newjm.YcDetailsNewActivity"></activity>
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+        <activity android:name=".ui.newjm.YcDetailsNewActivity" />
+        <activity
+            android:name=".ui.newjm.MineActivity"
+            android:label="@string/title_activity_mine"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -19,6 +19,7 @@
     <string name="dl_yl">购油量</string>
     <string name="online">在线数</string>
     <string name="offline">离线数</string>
+    <string name="title_activity_mine">MineActivity</string>
 
 
 </resources>

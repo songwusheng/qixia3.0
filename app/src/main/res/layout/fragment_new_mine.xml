@@ -16,38 +16,56 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/mine_banner"
+                android:layout_marginTop="@dimen/padding1"
                 android:gravity="center">
                 <ImageView
-                    android:id="@+id/ivMine"
+                    android:id="@+id/iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/mine_tx"/>
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/mine_top_bg1"/>
 
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text16"
-                    android:visibility="gone"
-                    android:layout_marginTop="@dimen/padding5"
-                    android:text="张三"/>
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:id="@+id/ivMine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/mine_tx"/>
+                    <TextView
+                        android:id="@+id/tvPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text16"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/padding5"
+                        android:text=""/>
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvPhone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text16"
-                    android:layout_marginTop="@dimen/padding15"
-                    android:text=""/>
 
-            </LinearLayout>
+                <!--<TextView-->
+                    <!--android:id="@+id/tvName"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:layout_below="@+id/ivMine"-->
+                    <!--android:textSize="@dimen/text16"-->
+                    <!--android:visibility="gone"-->
+                    <!--android:layout_marginTop="@dimen/padding5"-->
+                    <!--android:text="张三"/>-->
+
+
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/llYc"
@@ -118,6 +136,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/text16"
                 android:padding="@dimen/padding10"
+                android:textStyle="bold"
                 android:text="日常工作"/>
             <TextView
                 android:layout_width="match_parent"

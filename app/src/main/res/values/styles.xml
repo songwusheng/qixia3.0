@@ -13,6 +13,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="Full" parent="Theme.AppCompat.Light">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -44,9 +45,7 @@
 
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style
-        name="no_border_dialog"
-        parent="@android:style/Theme.Dialog">
+    <style name="no_border_dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item><!-- 边框 -->
         <item name="android:windowIsFloating">true</item><!-- 是否浮现在activity之上 -->
         <item name="android:windowIsTranslucent">true</item><!-- 半透明 -->
