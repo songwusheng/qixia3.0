@@ -3,6 +3,7 @@ package com.heziz.qixia3.ui;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,7 @@ import com.heziz.qixia3.network.OkGoClient;
 import com.heziz.qixia3.network.SRequstBean;
 import com.heziz.qixia3.ui.newjm.BaojingxxActivity;
 import com.heziz.qixia3.ui.newjm.CommActivity;
+import com.heziz.qixia3.ui.newjm.TdSmzAqZlActivity;
 import com.heziz.qixia3.ui.zhihui.clwcx.ClcxStreetProjectActivity;
 import com.heziz.qixia3.ui.zhihui.clwcx.ClwcxStreetDeviceActivity;
 import com.heziz.qixia3.ui.zhihui.fdl.FDLProjectListActivity;
@@ -85,6 +87,8 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
     @BindView(R.id.tvKq)
     TextView tvKq;
 
+    @BindView(R.id.ivKf)
+    ImageView ivKf;
     private UserInfor userInfor;
     private String position;
     private NewHomeActivity mContext;
@@ -191,6 +195,12 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
         tvSmz.setOnClickListener(this);
         tvAq.setOnClickListener(this);
         tvZl.setOnClickListener(this);
+        ivKf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callPhone("4001165850");
+            }
+        });
     }
 
     @Override
@@ -201,7 +211,6 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
                 intent.setClass(mContext,CommActivity.class);
                 intent.putExtra("type",3);
                 intent.putExtra("title","我的管理");
-                startActivity(intent);
                 break;
             case R.id.tvSp:
                 if(userInfor.getPosition().equals("3")){
@@ -211,7 +220,6 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
                 }else {
                     intent.setClass(mContext,SpStreetDeviceListActivity.class);
                 }
-                startActivity(intent);
                 break;
 
             case R.id.tvYc:
@@ -223,11 +231,9 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
                     intent.setClass(mContext,StreetYcDeviceListActivity.class);
                     intent.putExtra("type","yc");
                 }
-                startActivity(intent);
                 break;
             case R.id.tvBj:
                 intent.setClass(mContext,BaojingxxActivity.class);
-                startActivity(intent);
                 break;
             case R.id.tvCl:
                 if(userInfor.getPosition().equals("3")){
@@ -237,25 +243,21 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
                 }else {
                     intent.setClass(mContext,ClwcxStreetDeviceActivity.class);
                 }
-                startActivity(intent);
                 break;
             case R.id.tvXm:
                 intent.setClass(mContext,CommActivity.class);
                 intent.putExtra("type",0);
                 intent.putExtra("title","项目总览");
-                startActivity(intent);
                 break;
             case R.id.tvDt:
                 intent.setClass(mContext,CommActivity.class);
                 intent.putExtra("type",1);
                 intent.putExtra("title","地图");
-                startActivity(intent);
                 break;
             case R.id.tvRc:
                 intent.setClass(mContext,CommActivity.class);
                 intent.putExtra("type",2);
                 intent.putExtra("title","日常检查");
-                startActivity(intent);
                 break;
             case R.id.tvFd:
                 if(userInfor.getPosition().equals("3")){
@@ -264,24 +266,37 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
                 }else{
                     intent.setClass(mContext,FdlStreetDeviceListActivity.class);
                 }
-                startActivity(intent);
+
                 break;
             case R.id.tvTd:
-                ToastUtil.showToast("暂无数据");
+                intent.setClass(mContext, TdSmzAqZlActivity.class);
+                intent.putExtra("title","塔吊监控");
+                intent.putExtra("type",100);
                 break;
             case R.id.tvSmz:
-                ToastUtil.showToast("暂无数据");
+                intent.setClass(mContext, TdSmzAqZlActivity.class);
+                intent.putExtra("title","实名制考勤");
+                intent.putExtra("type",101);
                 break;
             case R.id.tvAq:
-                ToastUtil.showToast("暂无数据");
+                intent.setClass(mContext, TdSmzAqZlActivity.class);
+                intent.putExtra("title","安全管理");
+                intent.putExtra("type",102);
                 break;
             case R.id.tvZl:
-                ToastUtil.showToast("暂无数据");
+                intent.setClass(mContext, TdSmzAqZlActivity.class);
+                intent.putExtra("title","质量管理");
+                intent.putExtra("type",103);
                 break;
         }
-
+        startActivity(intent);
     }
-
+    public void callPhone(String phoneNum) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Uri data = Uri.parse("tel:" + phoneNum);
+        intent.setData(data);
+        startActivity(intent);
+    }
     private String getVersion(){
         PackageInfo pkg;
         String versionName="";
@@ -296,6 +311,6 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return  "v"+versionName;
+        return  "v "+versionName;
     }
 }

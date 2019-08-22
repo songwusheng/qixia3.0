@@ -153,7 +153,11 @@ public class MineWDBYGSListActivity extends BaseActivity implements View.OnClick
                         list.addAll(response.body().getData().getList());
                         adapter.loadMoreComplete();
                     }else{
-                        adapter.loadMoreEnd();
+                        if(page==1){
+                            adapter.setEmptyView(R.layout.empty_view);
+                        }else{
+                            adapter.loadMoreEnd();
+                        }
                     }
                 }else{
                     adapter.loadMoreFail();

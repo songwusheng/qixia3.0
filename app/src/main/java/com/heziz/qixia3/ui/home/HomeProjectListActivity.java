@@ -24,6 +24,7 @@ import com.heziz.qixia3.network.JsonCallBack1;
 import com.heziz.qixia3.network.OkGoClient;
 import com.heziz.qixia3.network.RequestBean;
 import com.heziz.qixia3.network.SRequstBean;
+import com.heziz.qixia3.ui.newjm.SanjiActivity;
 import com.heziz.qixia3.ui.project.ProjectDetailsActivity;
 import com.heziz.qixia3.utils.ListDataSave;
 
@@ -50,6 +51,7 @@ public class HomeProjectListActivity extends BaseActivity implements View.OnClic
     private List<ProjectBean> projectBeanList=new ArrayList<>();
     private String id;
     private int type;
+    private int type1;
     private String name;
     Map<String,String> params1=new HashMap<>();
     Map<String,String> params2=new HashMap<>();
@@ -68,6 +70,7 @@ public class HomeProjectListActivity extends BaseActivity implements View.OnClic
         userInfo=MyApplication.getInstance().getUserInfor();
         id=getIntent().getStringExtra("id");
         type=getIntent().getIntExtra("type",0);
+        type1=getIntent().getIntExtra("type1",0);
         name=getIntent().getStringExtra("name");
         tvTitle.setText(name);
         dataSave = new ListDataSave(getApplicationContext(), "project_list");
@@ -160,7 +163,12 @@ private void getData(){
                 projectBeanList.addAll(response.body().getData().getList());
                 adapter.loadMoreComplete();
             }else{
-                adapter.loadMoreEnd();
+                if (pageNow==1){
+                    adapter.setEmptyView(R.layout.empty_view);
+                }else{
+                    adapter.loadMoreEnd();
+                }
+
             }
             adapter.notifyDataSetChanged();
             dissmissProgressDialog();
@@ -184,9 +192,16 @@ private void getData(){
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent(HomeProjectListActivity.this, ProjectDetailsActivity.class);
-                intent.putExtra("id",projectBeanList.get(position).getId());
-                startActivity(intent);
+                if(type1==0){
+                    Intent intent=new Intent(HomeProjectListActivity.this, ProjectDetailsActivity.class);
+                    intent.putExtra("id",projectBeanList.get(position).getId());
+                    startActivity(intent);
+                }else{
+                    Intent intent=new Intent(HomeProjectListActivity.this, SanjiActivity.class);
+                    intent.putExtra("type",type1);
+                    startActivity(intent);
+                }
+
             }
         });
     }

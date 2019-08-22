@@ -175,7 +175,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 if (!userInfor.getPosition().equals("3")) {
                     Intent intent = new Intent(getActivity(), HomeProjectListActivity.class);
                     intent.putExtra("type", 0);
-                    intent.putExtra("name", homeListBeans.get(position).getPopedomName() + "home_xmzl");
+                    intent.putExtra("name", homeListBeans.get(position).getPopedomName());
                     intent.putExtra("id", homeListBeans.get(position).getPopedom());
                     startActivity(intent);
                 }

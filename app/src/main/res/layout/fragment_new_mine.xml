@@ -201,7 +201,7 @@
                 android:padding="@dimen/padding15"
                 android:textSize="@dimen/text14"
                 android:background="@color/white"
-                android:text="新闻资讯"
+                android:text="政策文件"
                 android:drawableRight="@drawable/project_jt"/>
 
             <View

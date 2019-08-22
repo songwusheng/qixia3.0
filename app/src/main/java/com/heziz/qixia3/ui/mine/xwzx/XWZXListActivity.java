@@ -240,7 +240,11 @@ dissmissProgressDialog();
                         list.addAll(response.body().getData());
                         adapter.loadMoreComplete();
                     }else{
-                        adapter.loadMoreEnd();
+                        if(pageNow==1){
+                            adapter.setEmptyView(R.layout.empty_view);
+                        }else{
+                            adapter.loadMoreEnd();
+                        }
                     }
                 }else{
                     adapter.loadMoreFail();
