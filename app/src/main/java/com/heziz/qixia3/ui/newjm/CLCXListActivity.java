@@ -160,7 +160,7 @@ public class CLCXListActivity extends BaseActivity {
         String url1 = API.CL_NEW_LIST+"?access_token="+ MyApplication.getInstance().getUserInfor().getUuid();
         Map<String,String> params1=new HashMap<>();
         Map<String,String> params2=new HashMap<>();
-        params1.put("projectName","gldt7h");
+        params1.put("projectName",id);
         params1.put("endTime", endTime1);
         params1.put("startTime",startTime1);
         params1.put("licensePlateColor","黄");
