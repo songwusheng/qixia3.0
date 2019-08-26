@@ -38,6 +38,7 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.heziz.qixia3.R;
@@ -72,7 +73,7 @@ import butterknife.ButterKnife;
 public class ProjectFragment extends BaseFragment implements View.OnClickListener {
 
     @BindView(R.id.mapview)
-    MapView mapView;
+    TextureMapView mapView;
     @BindView(R.id.cb)
     CheckBox checkBox;
     private BaiduMap baiduMap;
