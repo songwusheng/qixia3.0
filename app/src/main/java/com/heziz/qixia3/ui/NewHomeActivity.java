@@ -23,6 +23,7 @@ import com.heziz.qixia3.network.API;
 import com.heziz.qixia3.network.JsonCallBack1;
 import com.heziz.qixia3.network.OkGoClient;
 import com.heziz.qixia3.network.SRequstBean;
+import com.heziz.qixia3.ui.mine.xwzx.XWZXListActivity;
 import com.heziz.qixia3.ui.newjm.BaojingxxActivity;
 import com.heziz.qixia3.ui.newjm.CommActivity;
 import com.heziz.qixia3.ui.newjm.TdSmzAqZlActivity;
@@ -79,6 +80,8 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
     TextView tvAq;
     @BindView(R.id.tvZl)
     TextView tvZl;
+    @BindView(R.id.tvZcwj)
+    TextView tvZcwj;
 
     @BindView(R.id.tvWeather)
     TextView tvWeather;
@@ -195,6 +198,7 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
         tvSmz.setOnClickListener(this);
         tvAq.setOnClickListener(this);
         tvZl.setOnClickListener(this);
+        tvZcwj.setOnClickListener(this);
         ivKf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -287,6 +291,9 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
                 intent.setClass(mContext, TdSmzAqZlActivity.class);
                 intent.putExtra("title","质量管理");
                 intent.putExtra("type",103);
+                break;
+            case R.id.tvZcwj:
+                intent.setClass(mContext, XWZXListActivity.class);
                 break;
         }
         startActivity(intent);

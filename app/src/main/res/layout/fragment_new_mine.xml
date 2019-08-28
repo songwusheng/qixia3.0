@@ -194,20 +194,16 @@
                 android:layout_height="@dimen/padding10"
                 android:background="@color/hui" />
 
+
             <TextView
-                android:id="@+id/tvXWZX"
+                android:id="@+id/tvXGMM"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding15"
                 android:textSize="@dimen/text14"
                 android:background="@color/white"
-                android:text="政策文件"
+                android:text="修改密码"
                 android:drawableRight="@drawable/project_jt"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/hui" />
             <Button
                 android:id="@+id/btn"
                 android:layout_width="match_parent"

@@ -27,6 +27,7 @@ import com.heziz.qixia3.ui.LoginActivity;
 import com.heziz.qixia3.ui.mine.clcx.MineCLCXListActivity;
 import com.heziz.qixia3.ui.mine.fdl.MineFdlListActivity;
 import com.heziz.qixia3.ui.mine.mineinfo.MineInfoActivity;
+import com.heziz.qixia3.ui.mine.mineinfo.MineXGMMActivity;
 import com.heziz.qixia3.ui.mine.wdbygs.MineWDBYGSListActivity;
 import com.heziz.qixia3.ui.mine.xwzx.XWZXListActivity;
 import com.heziz.qixia3.ui.mine.yc.MineYcListActivity;
@@ -55,11 +56,10 @@ public class MineNewFragment extends BaseFragment implements View.OnClickListene
     TextView tvZXJC;
     @BindView(R.id.tvFDLJXGL)
     TextView tvFDLJXGL;
-    @BindView(R.id.tvXWZX)
-    TextView tvXWZX;
     @BindView(R.id.ivMine)
     ImageView ivMine;
-
+    @BindView(R.id.tvXGMM)
+    TextView tvXGMM;
     private UserInfor userInfor;
     public MineNewFragment() {
         // Required empty public constructor
@@ -94,7 +94,7 @@ public class MineNewFragment extends BaseFragment implements View.OnClickListene
         tvWDBYGS.setOnClickListener(this);
         tvZXJC.setOnClickListener(this);
         tvFDLJXGL.setOnClickListener(this);
-        tvXWZX.setOnClickListener(this);
+        tvXGMM.setOnClickListener(this);
         ivMine.setOnClickListener(this);
     }
 
@@ -115,11 +115,11 @@ public class MineNewFragment extends BaseFragment implements View.OnClickListene
             case R.id.tvFDLJXGL:
                 intent.setClass(getActivity(), MineFdlListActivity.class);
                 break;
-            case R.id.tvXWZX:
-                intent.setClass(getActivity(), XWZXListActivity.class);
-                break;
             case R.id.ivMine:
                 intent.setClass(getActivity(), MineInfoActivity.class);
+                break;
+            case R.id.tvXGMM:
+                intent.setClass(getActivity(), MineXGMMActivity.class);
                 break;
 
         }

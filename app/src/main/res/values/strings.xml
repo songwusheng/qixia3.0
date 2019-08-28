@@ -3,8 +3,6 @@
     <string name="common_request_loading">正在请求中...</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_vxiangqing">VXiangqingActivity</string>
 
 
     <string name="home_title">栖霞网格化管理平台</string>

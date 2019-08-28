@@ -43,7 +43,6 @@
                 android:gravity="center"
                 android:text="街道"/>
             <TextView
-                android:id="@+id/tvLeixing"
                 android:layout_width="0dp"
                 android:layout_weight="0.7"
                 android:layout_height="wrap_content"
@@ -54,7 +53,6 @@
                 android:text="项目\n类型"/>
 
             <TextView
-                android:id="@+id/tvShuxing"
                 android:layout_width="0dp"
                 android:layout_weight="0.7"
                 android:layout_height="wrap_content"

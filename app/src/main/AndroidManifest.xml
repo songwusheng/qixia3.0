@@ -104,7 +104,6 @@
                 android:resource="@xml/file_path" />
         </provider>
 
-        <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.project.ProjectDetailsActivity" />
         <activity android:name=".ui.zhihui.clwcx.CarDetailsActivity" />
         <activity android:name=".ui.zhihui.yc.YcDetailsActivity" />

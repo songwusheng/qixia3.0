@@ -268,8 +268,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 //保存uuid
                 MyApplication.getInstance().setUserInfor(response.body().data);
                 dissmissProgressDialog();
-                //TODO 跳转主页
-                //startMyActivity(MainActivity.class);
                 startMyActivity(NewHomeActivity.class);
                 finish();
             }

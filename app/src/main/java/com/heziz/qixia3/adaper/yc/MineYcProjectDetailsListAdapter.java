@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -32,10 +33,19 @@ public class MineYcProjectDetailsListAdapter extends BaseQuickAdapter<YcRealTime
 
     @Override
     protected void convert(BaseViewHolder helper, YcRealTimeBean item) {
-        helper.setText(R.id.tvValue, item.getA34002Rtd()+"");
+
         helper.setText(R.id.tvTime, item.getSysdate()+"");
         helper.setText(R.id.tvFzr,StringUtil.isNullOrEmpty(mineYcListBean.getProjectLeader()));
         helper.setText(R.id.tvDh,StringUtil.isNullOrEmpty(mineYcListBean.getProjectPhone()));
+
+        double value1=item.getA34002Rtd();
+        TextView tvValue=helper.getView(R.id.tvValue);
+        if(value1>=100&&value1<150){
+            tvValue.setTextColor(mContext.getResources().getColor(R.color.color1));
+        }else if(value1>=150){
+            tvValue.setTextColor(mContext.getResources().getColor(R.color.color3));
+        }
+        helper.setText(R.id.tvValue, item.getA34002Rtd()+"");
         helper.getView(R.id.ivDDH).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

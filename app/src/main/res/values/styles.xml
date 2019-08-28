@@ -9,10 +9,6 @@
     </style>
 
     <!--通用样式-->
-    <style name="DSSAppTheme" parent="Theme.AppCompat.Light">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 
     <style name="Full" parent="Theme.AppCompat.Light">
         <item name="windowActionBar">false</item>
@@ -22,16 +18,7 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <style name="AppSplash" parent="Theme.AppCompat.Light.NoActionBar">
-        <!--<item name="android:windowIsTranslucent">true</item>-->
-        <item name="android:windowBackground">@null</item>
-    </style>
     <!-- 通用样式 之 菊花loading -->
-    <style name="CommonProgressbarCircle">
-        <item name="android:indeterminateDrawable">@drawable/common_progress_drawable_circle</item>
-        <item name="android:minWidth">20dp</item>
-        <item name="android:minHeight">20dp</item>
-    </style>
 
     <style name="wait_dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item><!--边框-->
@@ -40,10 +27,6 @@
         <item name="android:windowBackground">@android:color/transparent</item><!--背景透明-->
         <item name="android:backgroundDimEnabled">false</item><!--模糊-->
     </style>
-
-    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="no_border_dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item><!-- 边框 -->
@@ -54,35 +37,5 @@
         <item name="android:backgroundDimEnabled">true</item><!--背景是否需要模糊-->
     </style>
 
-    <style name="proinfoTitleStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textSize">@dimen/text12</item>
-        <item name="android:textColor">@color/Text_normal</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:paddingTop">@dimen/padding5</item>
-        <item name="android:paddingBottom">@dimen/padding5</item>
-    </style>
-
-    <style name="proinfoMsgStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textSize">@dimen/text12</item>
-        <item name="android:textColor">@color/Text_normal</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:background">@drawable/home_bottom_lin</item>
-        <item name="android:paddingLeft">@dimen/padding5</item>
-    </style>
-
-    <style name="FullscreenTransTheme" parent="AppTheme">
-        <!--<item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>-->
-        <item name="android:windowActionBarOverlay">false</item>
-        <item name="android:windowBackground">@color/transparent</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowFullscreen">true</item>
-    </style>
-
-
-    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/transparent</item>
-    </style>
 
 </resources>

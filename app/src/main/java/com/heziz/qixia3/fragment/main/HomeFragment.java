@@ -3,12 +3,9 @@ package com.heziz.qixia3.fragment.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import com.heziz.qixia3.R;
 import com.heziz.qixia3.adaper.HomeListAdapter;
-import com.heziz.qixia3.adaper.video.ChannelInfoAdapter;
 import com.heziz.qixia3.app.MyApplication;
 import com.heziz.qixia3.base.BaseFragment;
 import com.heziz.qixia3.bean.HomeBean;
@@ -29,27 +22,15 @@ import com.heziz.qixia3.bean.HomeListBean;
 import com.heziz.qixia3.bean.ProjectBean;
 import com.heziz.qixia3.bean.UserInfor;
 import com.heziz.qixia3.network.API;
-import com.heziz.qixia3.network.Convert;
-import com.heziz.qixia3.network.HezhiResponse;
-import com.heziz.qixia3.network.JsonCallBack;
 import com.heziz.qixia3.network.JsonCallBack1;
 import com.heziz.qixia3.network.OkGoClient;
-import com.heziz.qixia3.network.OkRequestManager;
 import com.heziz.qixia3.network.SRequstBean;
-import com.heziz.qixia3.ui.MainActivity;
 import com.heziz.qixia3.ui.home.HomeProjectListActivity;
 import com.heziz.qixia3.ui.home.HomeTotalActivity;
 import com.heziz.qixia3.ui.home.HomeTypeActivity;
-import com.heziz.qixia3.ui.video.VXiangqingActivity;
 import com.heziz.qixia3.utils.ListDataSave;
 import com.heziz.qixia3.utils.NumberUtils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,13 +38,6 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 /**
  * new_clcx_d_cph simple {@link Fragment} subclass.

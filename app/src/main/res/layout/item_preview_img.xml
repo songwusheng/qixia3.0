@@ -21,7 +21,6 @@
     </com.heziz.qixia3.bigimage.third.widget.zoonview.PhotoView>
 
     <View
-        android:id="@+id/v_cover"
         android:layout_height="match_parent"
         android:layout_width="match_parent"/>
 </RelativeLayout>
