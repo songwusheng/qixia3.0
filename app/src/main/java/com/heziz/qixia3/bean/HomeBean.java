@@ -10,20 +10,23 @@ import java.io.Serializable;
 
 public class HomeBean implements Serializable {
 
+
     /**
-     * total : 0
-     * cost : 0
-     * zhgd : 0
-     * diff : 0
+     * total : 228
+     * cost : 862357.073627
+     * zhgd : 208
+     * diff : 13
      * szg : 0
-     * qzg : 0
-     * fj : 0
-     * sz : 0
-     * yl : 0
-     * jt : 0
-     * sl : 0
-     * dt : 0
-     * qt : 0
+     * qzg : 228
+     * fj : 139
+     * sz : 13
+     * yl : 2
+     * jt : 21
+     * sl : 2
+     * dt : 23
+     * qt : 3
+     * zhDiff : 0
+     * wsbZh : 7
      */
 
     private int total;
@@ -39,6 +42,8 @@ public class HomeBean implements Serializable {
     private int sl;
     private int dt;
     private int qt;
+    private int zhDiff;
+    private int wsbZh;
 
     public int getTotal() {
         return total;
@@ -144,22 +149,19 @@ public class HomeBean implements Serializable {
         this.qt = qt;
     }
 
-    @Override
-    public String toString() {
-        return "HomeBean{" +
-                "total=" + total +
-                ", cost=" + cost +
-                ", zhgd=" + zhgd +
-                ", diff=" + diff +
-                ", szg=" + szg +
-                ", qzg=" + qzg +
-                ", fj=" + fj +
-                ", sz=" + sz +
-                ", yl=" + yl +
-                ", jt=" + jt +
-                ", sl=" + sl +
-                ", dt=" + dt +
-                ", qt=" + qt +
-                '}';
+    public int getZhDiff() {
+        return zhDiff;
+    }
+
+    public void setZhDiff(int zhDiff) {
+        this.zhDiff = zhDiff;
+    }
+
+    public int getWsbZh() {
+        return wsbZh;
+    }
+
+    public void setWsbZh(int wsbZh) {
+        this.wsbZh = wsbZh;
     }
 }

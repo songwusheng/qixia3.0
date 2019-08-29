@@ -28,7 +28,6 @@ import com.heziz.qixia3.network.RequestBean;
 import com.heziz.qixia3.network.SRequstBean;
 import com.heziz.qixia3.utils.TimeUtils;
 import com.heziz.qixia3.utils.ToastUtil;
-import com.heziz.qixia3.view.MyDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -177,8 +176,6 @@ public class MineFDLdetailsActivity extends BaseActivity implements View.OnClick
         ivPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                MyDialog.showDialog(mContext,mineFDLBean.getInvoicePath());
-
 //                JImageShowUtil.displayImage(mineFDLBean.getInvoicePath(),ivPic,true);
                 List<Rect> rects = new ArrayList<>();
                 rects.add(JMatrixUtil.getDrawableBoundsInView(ivPic));

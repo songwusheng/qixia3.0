@@ -50,14 +50,6 @@ public class MineNewFragment extends BaseFragment implements View.OnClickListene
     Button btn;
     @BindView(R.id.tvPhone)
     TextView tvPhone;
-    @BindView(R.id.tvWDBYGS)
-    TextView tvWDBYGS;
-    @BindView(R.id.tvZXJC)
-    TextView tvZXJC;
-    @BindView(R.id.tvFDLJXGL)
-    TextView tvFDLJXGL;
-    @BindView(R.id.ivMine)
-    ImageView ivMine;
     @BindView(R.id.tvXGMM)
     TextView tvXGMM;
     private UserInfor userInfor;
@@ -91,11 +83,7 @@ public class MineNewFragment extends BaseFragment implements View.OnClickListene
 
     private void initeListeners() {
         btn.setOnClickListener(this);
-        tvWDBYGS.setOnClickListener(this);
-        tvZXJC.setOnClickListener(this);
-        tvFDLJXGL.setOnClickListener(this);
         tvXGMM.setOnClickListener(this);
-        ivMine.setOnClickListener(this);
     }
 
     @Override
@@ -106,18 +94,15 @@ public class MineNewFragment extends BaseFragment implements View.OnClickListene
                 intent.setClass(getActivity(), LoginActivity.class);
                 getActivity().finish();
                 break;
-            case R.id.tvWDBYGS:
-                intent.setClass(getActivity(), MineWDBYGSListActivity.class);
-                break;
-            case R.id.tvZXJC:
-                intent.setClass(getActivity(), MineZXJCListActivity.class);
-                break;
-            case R.id.tvFDLJXGL:
-                intent.setClass(getActivity(), MineFdlListActivity.class);
-                break;
-            case R.id.ivMine:
-                intent.setClass(getActivity(), MineInfoActivity.class);
-                break;
+            //case R.id.tvWDBYGS:
+            //    intent.setClass(getActivity(), MineWDBYGSListActivity.class);
+            //    break;
+            //case R.id.tvZXJC:
+            //    intent.setClass(getActivity(), MineZXJCListActivity.class);
+            //    break;
+            //case R.id.tvFDLJXGL:
+            //    intent.setClass(getActivity(), MineFdlListActivity.class);
+            //    break;
             case R.id.tvXGMM:
                 intent.setClass(getActivity(), MineXGMMActivity.class);
                 break;

@@ -26,7 +26,6 @@ import com.heziz.qixia3.network.OkGoClient;
 import com.heziz.qixia3.network.SRequstBean;
 import com.heziz.qixia3.ui.mine.fdl.MineFDLdetailsActivity;
 import com.heziz.qixia3.utils.TimeUtils;
-import com.heziz.qixia3.view.MyDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,7 +79,6 @@ public class FDLProjectDetailListActivity extends BaseActivity implements View.O
 //                Intent intent=new Intent(FDLProjectListActivity.this, ProjectDetailsActivity.class);
 //                intent.putExtra("id",projectBeanList.get(position).getId());
 //                startActivity(intent);
-//                MyDialog.showDialog(mContext,fdlStreetListBeanList.get(position).getInvoicePath());
 
             }
         });

@@ -107,16 +107,26 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
     LinearLayout llaz;
     @BindView(R.id.tvaz)
     TextView tvaz;
-    /** 管辖级别数据*/
+    /**
+     * 管辖级别数据
+     */
     private List<String> gxData;
-    /** 街道数据*/
-    private List<StreetBean> streetBeanList=new ArrayList<>();
+    /**
+     * 街道数据
+     */
+    private List<StreetBean> streetBeanList = new ArrayList<>();
     private List<String> jdData;
-    /** 项目类型数据*/
+    /**
+     * 项目类型数据
+     */
     private List<String> lxData;
-    /** 项目属性数据*/
+    /**
+     * 项目属性数据
+     */
     private List<String> sxData;
-    /** 设备安装数据*/
+    /**
+     * 设备安装数据
+     */
     private List<String> azData;
     private String type_gx;
     private String type_jd;
@@ -124,8 +134,8 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
     private String type_sx;
     private String type_az;
     ProjectListAdapter adapter;
-    private List<ProjectBean> projectBeanList=new ArrayList<>();
-    private List<ProjectBean> projectBeanList1=new ArrayList<>();
+    private List<ProjectBean> projectBeanList = new ArrayList<>();
+    private List<ProjectBean> projectBeanList1 = new ArrayList<>();
 
     private SpinnerPopuwindow gxSpinnerPopuwindow;
     private SpinnerPopuwindow jdSpinnerPopuwindow;
@@ -133,10 +143,10 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
     private SpinnerPopuwindow sxSpinnerPopuwindow;
     private SpinnerPopuwindow azSpinnerPopuwindow;
 
-    Map<String,String> params1=new HashMap<>();
-    Map<String,String> params2=new HashMap<>();
+    Map<String, String> params1 = new HashMap<>();
+    Map<String, String> params2 = new HashMap<>();
 
-    private int pageNow=1;
+    private int pageNow = 1;
     private UserInfor userInfor;
 
     private ProjectBean projectBean;
@@ -152,8 +162,8 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_project, container, false);
-        ButterKnife.bind(this,view);
+        View view = inflater.inflate(R.layout.fragment_project, container, false);
+        ButterKnife.bind(this, view);
         initViews();
         initDatas();
         initListeners();
@@ -161,30 +171,29 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
     }
 
 
-
     private void initListeners() {
         baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 baiduMap.hideInfoWindow();
-                projectBean=((ProjectBean) marker.getExtraInfo().getSerializable("project"));
-                String code=projectBean.getName();
+                projectBean = ((ProjectBean) marker.getExtraInfo().getSerializable("project"));
+                String code = projectBean.getName();
 //
 ////                ToastUtil.showToast(code);
 //                //定义用于显示该InfoWindow的坐标点
                 LatLng pt = new LatLng(Double.valueOf(projectBean.getLatitude()), Double.valueOf(projectBean.getLongitude()));
-                View view=LayoutInflater.from(getActivity()).inflate(R.layout.project_map_marker_info_view,null);
+                View view = LayoutInflater.from(getActivity()).inflate(R.layout.project_map_marker_info_view, null);
 //                //创建InfoWindow , 传入 view， 地理坐标， y 轴偏移量
                 final InfoWindow mInfoWindow = new InfoWindow(view, pt, -65);
 //                //显示InfoWindow
                 baiduMap.showInfoWindow(mInfoWindow);
-                TextView tvName= (TextView) view.findViewById(R.id.tvName);
+                TextView tvName = (TextView) view.findViewById(R.id.tvName);
                 tvName.setText(code);
                 tvName.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(getActivity(), ProjectDetailsActivity.class);
-                        intent.putExtra("id",projectBean.getId());
+                        Intent intent = new Intent(getActivity(), ProjectDetailsActivity.class);
+                        intent.putExtra("id", projectBean.getId());
                         startActivity(intent);
                     }
                 });
@@ -195,19 +204,19 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     checkBox.setBackgroundResource(R.drawable.project_ditu);
                     mapView.setVisibility(View.GONE);
                     llList.setVisibility(View.VISIBLE);
-                    flag=true;
-                    pageNow=1;
+                    flag = true;
+                    pageNow = 1;
                     refresh();
 
-                }else{
+                } else {
                     checkBox.setBackgroundResource(R.drawable.project_liebiao);
                     mapView.setVisibility(View.VISIBLE);
                     llList.setVisibility(View.GONE);
-                    flag=false;
+                    flag = false;
                     initProjectData();
                 }
             }
@@ -231,18 +240,18 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
 
 
         String url = API.STREET_LIST;
-        Map<String,String> params=new HashMap<>();
+        Map<String, String> params = new HashMap<>();
         JsonCallBack1<SRequstBean<List<StreetBean>>> jsonCallBack = new JsonCallBack1<SRequstBean<List<StreetBean>>>() {
             @Override
             public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<List<StreetBean>>> response) {
-                List<StreetBean> list=response.body().getData();
-                if(userInfor.getPosition().equals("2")){
-                    for(int i=0;i<list.size();i++){
-                        if(String.valueOf(list.get(i).getId()).equals(userInfor.getManagerId())){
+                List<StreetBean> list = response.body().getData();
+                if (userInfor.getPosition().equals("2")) {
+                    for (int i = 0; i < list.size(); i++) {
+                        if (String.valueOf(list.get(i).getId()).equals(userInfor.getManagerId())) {
                             streetBeanList.add(list.get(i));
                         }
                     }
-                }else{
+                } else {
                     streetBeanList.addAll(response.body().getData());
                 }
                 StreetData();
@@ -259,17 +268,17 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
                 .getJsonData1(url, params, jsonCallBack);
 
 
-        params1.put("name","");
-        params1.put("vasa","");
-        params1.put("managerRoleIds","");
-        params1.put("pType","");
-        params1.put("diff","");
-        params1.put("relationType","");
-        params1.put("station",API.STATION);
-        if(userInfor.getPosition().equals("3")){
-            params1.put("createName",userInfor.getAccount());
-        }else if(userInfor.getPosition().equals("2")){
-            params1.put("managerRoleIds","["+userInfor.getManagerId()+"]");
+        params1.put("name", "");
+        params1.put("vasa", "");
+        params1.put("managerRoleIds", "");
+        params1.put("pType", "");
+        params1.put("diff", "");
+        params1.put("relationType", "");
+        params1.put("station", API.STATION);
+        if (userInfor.getPosition().equals("3")) {
+            params1.put("createName", userInfor.getAccount());
+        } else if (userInfor.getPosition().equals("2")) {
+            params1.put("managerRoleIds", "[" + userInfor.getManagerId() + "]");
         }
         initProjectData();
 
@@ -277,8 +286,8 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
 
     private void initProjectData() {
         showProgressDialog();
-        Log.w("main","请求参数："+params1.toString());
-        String url1 = API.PROJECT_LIST1+"?access_token="+ MyApplication.getInstance().getUserInfor().getUuid();
+        Log.w("main", "请求参数：" + params1.toString());
+        String url1 = API.PROJECT_LIST1 + "?access_token=" + MyApplication.getInstance().getUserInfor().getUuid();
 
         JsonCallBack1<SRequstBean<List<ProjectBean>>> jsonCallBack1 = new JsonCallBack1<SRequstBean<List<ProjectBean>>>() {
             @Override
@@ -303,9 +312,9 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void initProjectDataList() {
-        params2.put("pageNow",pageNow+"");
-        params2.put("pageSize","10");
-        String url1 = API.HOME_TOTAL_PROJECT_LIST+"?access_token="+ MyApplication.getInstance().getUserInfor().getUuid();
+        params2.put("pageNow", pageNow + "");
+        params2.put("pageSize", "10");
+        String url1 = API.HOME_TOTAL_PROJECT_LIST + "?access_token=" + MyApplication.getInstance().getUserInfor().getUuid();
 
         JsonCallBack1<SRequstBean<RequestBean<List<ProjectBean>>>> jsonCallBack1 = new JsonCallBack1<SRequstBean<RequestBean<List<ProjectBean>>>>() {
             @Override
@@ -314,10 +323,10 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
 //                projectBeanList.addAll(response.body().getData());
 //
 
-                if(response.body().getData().getList().size()!=0){
+                if (response.body().getData().getList().size() != 0) {
                     projectBeanList1.addAll(response.body().getData().getList());
                     adapter.loadMoreComplete();
-                }else{
+                } else {
                     adapter.loadMoreEnd();
                 }
                 adapter.notifyDataSetChanged();
@@ -333,23 +342,23 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
 
         };
         OkGoClient.getInstance()
-                .postJsonData2(url1, params1,params2, jsonCallBack1);
+                .postJsonData2(url1, params1, params2, jsonCallBack1);
     }
 
-    private void refresh(){
+    private void refresh() {
         projectBeanList1.clear();
-        pageNow=1;
+        pageNow = 1;
         showProgressDialog();
         initProjectDataList();
     }
 
     private void initViews() {
-        userInfor=MyApplication.getInstance().getUserInfor();
-        baiduMap=mapView.getMap();
+        userInfor = MyApplication.getInstance().getUserInfor();
+        baiduMap = mapView.getMap();
         baiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);
         setBaidiCenter();
-        adapter=new ProjectListAdapter(getActivity(),projectBeanList1);
-        LinearLayoutManager manager=new LinearLayoutManager(getActivity().getApplicationContext());
+        adapter = new ProjectListAdapter(getActivity(), projectBeanList1);
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity().getApplicationContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
@@ -357,8 +366,8 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent(getActivity(), ProjectDetailsActivity.class);
-                intent.putExtra("id",projectBeanList.get(position).getId());
+                Intent intent = new Intent(getActivity(), ProjectDetailsActivity.class);
+                intent.putExtra("id", projectBeanList.get(position).getId());
                 startActivity(intent);
             }
         });
@@ -368,9 +377,10 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
         SXData();
         AZData();
     }
-    private void setBaidiCenter(){
+
+    private void setBaidiCenter() {
         //118.916498,32.103823
-        LatLng point = new LatLng(32.103823,118.916498);
+        LatLng point = new LatLng(32.103823, 118.916498);
         MapStatus mMapStatus = new MapStatus.Builder()
                 //要移动的点
                 .target(point)
@@ -385,20 +395,20 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
         baiduMap.setMapStatus(mMapStatusUpdate);
     }
 
-    private void showMark(List<ProjectBean> list){
+    private void showMark(List<ProjectBean> list) {
         baiduMap.clear();
         //构建Marker图标
         BitmapDescriptor bitmap = BitmapDescriptorFactory
                 .fromResource(R.drawable.project_location);
         BitmapDescriptor bitmap1 = BitmapDescriptorFactory
                 .fromResource(R.drawable.location_offline);
-        for(int i=0;i<list.size();i++){
+        for (int i = 0; i < list.size(); i++) {
             //定义Maker坐标点
-            if(list.get(i).getLatitude()!=null&&list.get(i).getLongitude()!=null){
+            if (list.get(i).getLatitude() != null && list.get(i).getLongitude() != null) {
                 LatLng point = new LatLng(Double.valueOf(list.get(i).getLatitude()), Double.valueOf(list.get(i).getLongitude()));
                 //构建MarkerOption，用于在地图上添加Marker
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("project",list.get(i));
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("project", list.get(i));
 //                if(list.get(i).getIsonline().equals("0")){
 //                    OverlayOptions option = new MarkerOptions()
 //                            .position(point)
@@ -407,12 +417,12 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
 //                    //在地图上添加Marker，并显示
 //                    baiduMap.addOverlay(option);
 //                }else{
-                    OverlayOptions option = new MarkerOptions()
-                            .position(point)
-                            .extraInfo(bundle)
-                            .icon(bitmap);
-                    //在地图上添加Marker，并显示
-                    baiduMap.addOverlay(option);
+                OverlayOptions option = new MarkerOptions()
+                        .position(point)
+                        .extraInfo(bundle)
+                        .icon(bitmap);
+                //在地图上添加Marker，并显示
+                baiduMap.addOverlay(option);
 //                }
 
             }
@@ -431,45 +441,46 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.llgx:
                 type_gx = tvgx.getText().toString();
-                gxSpinnerPopuwindow = new SpinnerPopuwindow(getActivity(),type_gx,gxData,gxitemsOnClick);
+                gxSpinnerPopuwindow = new SpinnerPopuwindow(getActivity(), type_gx, gxData, gxitemsOnClick);
                 gxSpinnerPopuwindow.showPopupWindow(llSX);
                 gxSpinnerPopuwindow.setTitleText("管辖级别");//给下拉列表设置标题
                 break;
             case R.id.lljd:
                 type_jd = tvjd.getText().toString();
-                jdSpinnerPopuwindow = new SpinnerPopuwindow(getActivity(),type_jd,jdData,jditemsOnClick);
+                jdSpinnerPopuwindow = new SpinnerPopuwindow(getActivity(), type_jd, jdData, jditemsOnClick);
                 jdSpinnerPopuwindow.showPopupWindow(llSX);
                 jdSpinnerPopuwindow.setTitleText("街道");//给下拉列表设置标题
                 break;
             case R.id.lllx:
                 type_lx = tvlx.getText().toString();
-                lxSpinnerPopuwindow = new SpinnerPopuwindow(getActivity(),type_lx,lxData,lxitemsOnClick);
+                lxSpinnerPopuwindow = new SpinnerPopuwindow(getActivity(), type_lx, lxData, lxitemsOnClick);
                 lxSpinnerPopuwindow.showPopupWindow(llSX);
                 lxSpinnerPopuwindow.setTitleText("项目类型");//给下拉列表设置标题
                 break;
             case R.id.llsx:
                 type_sx = tvsx.getText().toString();
-                sxSpinnerPopuwindow = new SpinnerPopuwindow(getActivity(),type_sx,sxData,sxitemsOnClick);
+                sxSpinnerPopuwindow = new SpinnerPopuwindow(getActivity(), type_sx, sxData, sxitemsOnClick);
                 sxSpinnerPopuwindow.showPopupWindow(llSX);
                 sxSpinnerPopuwindow.setTitleText("项目属性");//给下拉列表设置标题
                 break;
             case R.id.llaz:
                 type_az = tvaz.getText().toString();
-                azSpinnerPopuwindow = new SpinnerPopuwindow(getActivity(),type_az,azData,azitemsOnClick);
+                azSpinnerPopuwindow = new SpinnerPopuwindow(getActivity(), type_az, azData, azitemsOnClick);
                 azSpinnerPopuwindow.showPopupWindow(llSX);
                 azSpinnerPopuwindow.setTitleText("项目属性");//给下拉列表设置标题
                 break;
             case R.id.btnSearch:
                 go();
-                String s=etName.getText().toString();
-                params1.put("name",s);
+                String s = etName.getText().toString();
+                params1.put("name", s);
                 getRefresh();
                 break;
         }
     }
+
     private AdapterView.OnItemClickListener gxitemsOnClick = new AdapterView.OnItemClickListener() {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
@@ -477,24 +488,25 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
             String value = gxData.get(gxSpinnerPopuwindow.getText());
 
             gxSpinnerPopuwindow.dismissPopupWindow();
-            if(position==0){
-                params1.put("vasa","");
+            if (position == 0) {
+                params1.put("vasa", "");
                 tvgx.setText("管辖级别");
-            }else{
-                params1.put("vasa",position+"");
+            } else {
+                params1.put("vasa", position + "");
                 tvgx.setText(value);
             }
             getRefresh();
         }
     };
 
-    private void getRefresh(){
-        if(flag){
+    private void getRefresh() {
+        if (flag) {
             refresh();
-        }else{
+        } else {
             initProjectData();
         }
     }
+
     private AdapterView.OnItemClickListener jditemsOnClick = new AdapterView.OnItemClickListener() {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
@@ -502,14 +514,14 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
             String value = jdData.get(jdSpinnerPopuwindow.getText());
 
             jdSpinnerPopuwindow.dismissPopupWindow();
-            if(userInfor.getPosition().equals("2")){
+            if (userInfor.getPosition().equals("2")) {
 
-            }else{
-                if(position==0){
-                    params1.put("managerRoleIds","");
+            } else {
+                if (position == 0) {
+                    params1.put("managerRoleIds", "");
                     tvjd.setText("街道");
-                }else{
-                    params1.put("managerRoleIds","["+streetBeanList.get(position-1).getId()+"]");
+                } else {
+                    params1.put("managerRoleIds", "[" + streetBeanList.get(position - 1).getId() + "]");
                     tvjd.setText(value);
                 }
             }
@@ -522,11 +534,11 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             String value = lxData.get(lxSpinnerPopuwindow.getText());
             lxSpinnerPopuwindow.dismissPopupWindow();
-            if(position==0){
-                params1.put("pType","");
+            if (position == 0) {
+                params1.put("pType", "");
                 tvlx.setText("项目类型");
-            }else{
-                params1.put("pType",position+"");
+            } else {
+                params1.put("pType", position + "");
                 tvlx.setText(value);
             }
             getRefresh();
@@ -538,11 +550,20 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
             String value = sxData.get(sxSpinnerPopuwindow.getText());
 
             sxSpinnerPopuwindow.dismissPopupWindow();
-            if(position==0){
-                params1.put("diff","");
+            if (position == 0) {
+                params1.put("diff", "");
                 tvsx.setText("项目属性");
-            }else{
-                params1.put("diff",position+"");
+            } else if (position == 1) {
+                params1.put("diff", position + "");
+                tvsx.setText(value);
+            } else if (position == 2) {
+                params1.put("diff", position + "");
+                tvsx.setText(value);
+            } else if (position == 3) {
+                params1.put("diff", "1,2");
+                tvsx.setText(value);
+            } else if (position == 4) {
+                params1.put("diff", "0");
                 tvsx.setText(value);
             }
             getRefresh();
@@ -554,16 +575,17 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
             String value = azData.get(azSpinnerPopuwindow.getText());
 
             azSpinnerPopuwindow.dismissPopupWindow();
-            if(position==0){
-                params1.put("relationType","");
+            if (position == 0) {
+                params1.put("relationType", "");
                 tvaz.setText("设备安装");
-            }else{
-                params1.put("relationType",position+"");
+            } else {
+                params1.put("relationType", position + "");
                 tvaz.setText(value);
             }
             getRefresh();
         }
     };
+
     /**
      * 管辖级别数据
      */
@@ -573,17 +595,19 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
         gxData.add("市直管");
         gxData.add("区直管");
     }
+
     /**
      * 街道数据
      */
     private void StreetData() {
         jdData = new ArrayList<>();
         jdData.add("全部");
-        for(int i=0;i<streetBeanList.size();i++){
+        for (int i = 0; i < streetBeanList.size(); i++) {
             jdData.add(streetBeanList.get(i).getName());
         }
 
     }
+
     /**
      * 街道数据
      */
@@ -598,6 +622,7 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
         lxData.add("园林");
         lxData.add("其他");
     }
+
     /**
      * 项目属性数据
      */
@@ -606,7 +631,10 @@ public class ProjectFragment extends BaseFragment implements View.OnClickListene
         sxData.add("全部");
         sxData.add("差别化工地");
         sxData.add("智慧工地");
+        sxData.add("智慧&差别化工地");
+        sxData.add("未申报智慧工地");
     }
+
     /**
      * 设备安装数据  全部安装；2：车辆未冲洗未安装；3：扬尘设备未安装；4：视频未安装；5：均未安装
      */

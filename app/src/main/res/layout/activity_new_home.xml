@@ -32,22 +32,22 @@
             android:padding="@dimen/padding10">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="@dimen/padding20"
+                android:layout_height="@dimen/padding20"
                 android:scaleType="centerInside"
                 android:src="@mipmap/home_tq"/>
             <TextView
                 android:id="@+id/tvWeather"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/padding10"
-                android:textSize="@dimen/text12"
+                android:layout_marginLeft="@dimen/padding5"
+                android:textSize="@dimen/text10"
                 android:gravity="center"
                 android:text=""/>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="@dimen/padding20"
+                android:layout_height="@dimen/padding20"
                 android:scaleType="centerInside"
                 android:layout_marginLeft="@dimen/padding10"
                 android:src="@mipmap/home_fl"/>
@@ -55,14 +55,14 @@
                 android:id="@+id/tvFl"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/padding10"
+                android:layout_marginLeft="@dimen/padding5"
                 android:gravity="center"
-                android:textSize="@dimen/text12"
+                android:textSize="@dimen/text10"
                 android:text=""/>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="@dimen/padding20"
+                android:layout_height="@dimen/padding20"
                 android:scaleType="centerInside"
                 android:layout_marginLeft="@dimen/padding10"
                 android:src="@mipmap/home_kqzl"/>
@@ -71,8 +71,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:layout_marginLeft="@dimen/padding10"
-                android:textSize="@dimen/text12"
+                android:layout_marginLeft="@dimen/padding5"
+                android:textSize="@dimen/text10"
                 android:text=""/>
 
         </LinearLayout>

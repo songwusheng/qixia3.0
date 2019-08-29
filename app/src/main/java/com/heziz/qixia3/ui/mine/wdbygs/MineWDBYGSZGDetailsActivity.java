@@ -14,7 +14,6 @@ import com.heziz.qixia3.adaper.wdbygs.WDBYGSImageListAdapter;
 import com.heziz.qixia3.base.BaseActivity;
 import com.heziz.qixia3.bean.mine.wdbygs.MineWDBYGSListBean;
 import com.heziz.qixia3.utils.StringUtil;
-import com.heziz.qixia3.view.MyDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -279,78 +278,6 @@ public class MineWDBYGSZGDetailsActivity extends BaseActivity implements View.On
 
 
     private void initDatas() {
-//        adapter1.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                MyDialog.showDialog(mContext,list1.get(position));
-//            }
-//        });
-//        adapter2.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                MyDialog.showDialog(mContext,list2.get(position));
-//            }
-//        });
-//        adapter3.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                MyDialog.showDialog(mContext,list3.get(position));
-//            }
-//        });
-//        adapter4.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                MyDialog.showDialog(mContext,list4.get(position));
-//            }
-//        });
-//        adapter5.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                MyDialog.showDialog(mContext,list5.get(position));
-//            }
-//        });
-//        adapter6.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                MyDialog.showDialog(mContext,list6.get(position));
-//            }
-//        });
-//        adapter12.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                MyDialog.showDialog(mContext,list12.get(position));
-//            }
-//        });
-//        adapter22.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                MyDialog.showDialog(mContext,list22.get(position));
-//            }
-//        });
-//        adapter32.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                MyDialog.showDialog(mContext,list32.get(position));
-//            }
-//        });
-//        adapter42.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                MyDialog.showDialog(mContext,list42.get(position));
-//            }
-//        });
-//        adapter52.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                MyDialog.showDialog(mContext,list52.get(position));
-//            }
-//        });
-//        adapter62.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                MyDialog.showDialog(mContext,list62.get(position));
-//            }
-//        });
     }
 
     @Override

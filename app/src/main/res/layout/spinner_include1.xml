@@ -50,12 +50,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
+                android:drawableRight="@drawable/xiala"
+                android:drawablePadding="@dimen/padding5"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:textSize="@dimen/text12"
                 android:text="管辖级别"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/padding5"
-                android:src="@drawable/xiala"/>
 
         </LinearLayout>
         <LinearLayout
@@ -69,12 +69,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
+                android:drawableRight="@drawable/xiala"
+                android:drawablePadding="@dimen/padding5"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:textSize="@dimen/text12"
                 android:text="街道"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/padding5"
-                android:src="@drawable/xiala"/>
 
         </LinearLayout>
         <LinearLayout
@@ -88,12 +88,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
+                android:drawableRight="@drawable/xiala"
+                android:drawablePadding="@dimen/padding5"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:textSize="@dimen/text12"
                 android:text="项目类型"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/padding5"
-                android:src="@drawable/xiala"/>
+
 
         </LinearLayout>
         <LinearLayout
@@ -107,12 +108,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
+                android:drawableRight="@drawable/xiala"
+                android:drawablePadding="@dimen/padding5"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:textSize="@dimen/text12"
                 android:text="项目属性"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/padding5"
-                android:src="@drawable/xiala"/>
+
 
         </LinearLayout>
 

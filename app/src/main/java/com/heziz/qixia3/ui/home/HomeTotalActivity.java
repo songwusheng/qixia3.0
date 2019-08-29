@@ -28,6 +28,7 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.heziz.qixia3.R;
@@ -60,7 +61,7 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
     @BindView(R.id.tvTitle)
     TextView tvTitle;
     @BindView(R.id.mapview)
-    MapView mapView;
+    TextureMapView mapView;
     @BindView(R.id.cb)
     CheckBox checkBox;
     private BaiduMap baiduMap;
@@ -92,21 +93,29 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
     LinearLayout llcb;
     @BindView(R.id.tvsx)
     TextView tvsx;
-    /** 管辖级别数据*/
+    /**
+     * 管辖级别数据
+     */
     private List<String> gxData;
-    /** 街道数据*/
-    private List<StreetBean> streetBeanList=new ArrayList<>();
+    /**
+     * 街道数据
+     */
+    private List<StreetBean> streetBeanList = new ArrayList<>();
     private List<String> jdData;
-    /** 项目类型数据*/
+    /**
+     * 项目类型数据
+     */
     private List<String> lxData;
-    /** 项目属性数据*/
+    /**
+     * 项目属性数据
+     */
     private List<String> sxData;
     private String type_gx;
     private String type_jd;
     private String type_lx;
     private String type_sx;
     ProjectListAdapter adapter;
-    private List<ProjectBean> projectBeanList=new ArrayList<>();
+    private List<ProjectBean> projectBeanList = new ArrayList<>();
 
     private SpinnerPopuwindow gxSpinnerPopuwindow;
     private SpinnerPopuwindow jdSpinnerPopuwindow;
@@ -117,17 +126,20 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
     LinearLayout llaz;
     @BindView(R.id.tvaz)
     TextView tvaz;
-    /** 设备安装数据*/
+    /**
+     * 设备安装数据
+     */
     private List<String> azData;
     private String type_az;
     private SpinnerPopuwindow azSpinnerPopuwindow;
 
-    Map<String,String> params1=new HashMap<>();
-    Map<String,String> params2=new HashMap<>();
+    Map<String, String> params1 = new HashMap<>();
+    Map<String, String> params2 = new HashMap<>();
 
     private UserInfor userInfor;
 
-    private int pageNow=1;
+    private int pageNow = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,15 +149,16 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
         initDatas();
         initListeners();
     }
+
     private void initListeners() {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     checkBox.setBackgroundResource(R.drawable.project_ditu);
                     mapView.setVisibility(View.GONE);
                     llList.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     checkBox.setBackgroundResource(R.drawable.project_liebiao);
                     mapView.setVisibility(View.VISIBLE);
                     llList.setVisibility(View.GONE);
@@ -173,18 +186,18 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
 
         showProgressDialog();
         String url = API.STREET_LIST;
-        Map<String,String> params=new HashMap<>();
+        Map<String, String> params = new HashMap<>();
         JsonCallBack1<SRequstBean<List<StreetBean>>> jsonCallBack = new JsonCallBack1<SRequstBean<List<StreetBean>>>() {
             @Override
             public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<List<StreetBean>>> response) {
-                List<StreetBean> list=response.body().getData();
-                if(userInfor.getPosition().equals("2")){
-                    for(int i=0;i<list.size();i++){
-                        if(String.valueOf(list.get(i).getId()).equals(userInfor.getManagerId())){
+                List<StreetBean> list = response.body().getData();
+                if (userInfor.getPosition().equals("2")) {
+                    for (int i = 0; i < list.size(); i++) {
+                        if (String.valueOf(list.get(i).getId()).equals(userInfor.getManagerId())) {
                             streetBeanList.add(list.get(i));
                         }
                     }
-                }else{
+                } else {
                     streetBeanList.addAll(response.body().getData());
                 }
                 StreetData();
@@ -201,27 +214,27 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
                 .getJsonData1(url, params, jsonCallBack);
 
 
-        params2.put("pageSize","10");
+        params2.put("pageSize", "10");
 
 
-        params1.put("name","");
-        params1.put("vasa","");
-        params1.put("managerRoleIds","");
-        params1.put("pType","");
-        params1.put("diff","");
-        params1.put("station",API.STATION);
-        if(userInfor.getPosition().equals("3")){
-            params1.put("createName",userInfor.getAccount());
-        }else if(userInfor.getPosition().equals("2")){
-            params1.put("managerRoleIds","["+userInfor.getManagerId()+"]");
+        params1.put("name", "");
+        params1.put("vasa", "");
+        params1.put("managerRoleIds", "");
+        params1.put("pType", "");
+        params1.put("diff", "");
+        params1.put("station", API.STATION);
+        if (userInfor.getPosition().equals("3")) {
+            params1.put("createName", userInfor.getAccount());
+        } else if (userInfor.getPosition().equals("2")) {
+            params1.put("managerRoleIds", "[" + userInfor.getManagerId() + "]");
         }
         initProjectData();
 
     }
 
     private void initProjectData() {
-        String url1 = API.HOME_TOTAL_PROJECT_LIST+"?access_token="+ MyApplication.getInstance().getUserInfor().getUuid();
-        params2.put("pageNow",pageNow+"");
+        String url1 = API.HOME_TOTAL_PROJECT_LIST + "?access_token=" + MyApplication.getInstance().getUserInfor().getUuid();
+        params2.put("pageNow", pageNow + "");
         JsonCallBack1<SRequstBean<RequestBean<List<ProjectBean>>>> jsonCallBack1 = new JsonCallBack1<SRequstBean<RequestBean<List<ProjectBean>>>>() {
             @Override
             public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<RequestBean<List<ProjectBean>>>> response) {
@@ -229,10 +242,10 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
 //                projectBeanList.addAll(response.body().getData());
 //
 
-                if(response.body().getData().getList().size()!=0){
+                if (response.body().getData().getList().size() != 0) {
                     projectBeanList.addAll(response.body().getData().getList());
                     adapter.loadMoreComplete();
-                }else{
+                } else {
                     adapter.loadMoreEnd();
                 }
                 adapter.notifyDataSetChanged();
@@ -248,12 +261,12 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
 
         };
         OkGoClient.getInstance()
-                .postJsonData2(url1, params1,params2, jsonCallBack1);
+                .postJsonData2(url1, params1, params2, jsonCallBack1);
     }
 
-    private void refresh(){
+    private void refresh() {
         projectBeanList.clear();
-        pageNow=1;
+        pageNow = 1;
         showProgressDialog();
         initProjectData();
     }
@@ -263,11 +276,11 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
         llcb.setVisibility(View.GONE);
         mapView.setVisibility(View.GONE);
         llList.setVisibility(View.VISIBLE);
-        userInfor=MyApplication.getInstance().getUserInfor();
-        baiduMap=mapView.getMap();
+        userInfor = MyApplication.getInstance().getUserInfor();
+        baiduMap = mapView.getMap();
         baiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);
-        adapter=new ProjectListAdapter(HomeTotalActivity.this,projectBeanList);
-        LinearLayoutManager manager=new LinearLayoutManager(HomeTotalActivity.this.getApplicationContext());
+        adapter = new ProjectListAdapter(HomeTotalActivity.this, projectBeanList);
+        LinearLayoutManager manager = new LinearLayoutManager(HomeTotalActivity.this.getApplicationContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
@@ -275,8 +288,8 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent(HomeTotalActivity.this, ProjectDetailsActivity.class);
-                intent.putExtra("id",projectBeanList.get(position).getId());
+                Intent intent = new Intent(HomeTotalActivity.this, ProjectDetailsActivity.class);
+                intent.putExtra("id", projectBeanList.get(position).getId());
                 startActivity(intent);
             }
         });
@@ -299,41 +312,41 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.llgx:
                 type_gx = tvgx.getText().toString();
-                gxSpinnerPopuwindow = new SpinnerPopuwindow(HomeTotalActivity.this,type_gx,gxData,gxitemsOnClick);
+                gxSpinnerPopuwindow = new SpinnerPopuwindow(HomeTotalActivity.this, type_gx, gxData, gxitemsOnClick);
                 gxSpinnerPopuwindow.showPopupWindow(llSX);
                 gxSpinnerPopuwindow.setTitleText("管辖级别");//给下拉列表设置标题
                 break;
             case R.id.lljd:
                 type_jd = tvjd.getText().toString();
-                jdSpinnerPopuwindow = new SpinnerPopuwindow(HomeTotalActivity.this,type_jd,jdData,jditemsOnClick);
+                jdSpinnerPopuwindow = new SpinnerPopuwindow(HomeTotalActivity.this, type_jd, jdData, jditemsOnClick);
                 jdSpinnerPopuwindow.showPopupWindow(llSX);
                 jdSpinnerPopuwindow.setTitleText("街道");//给下拉列表设置标题
                 break;
             case R.id.lllx:
                 type_lx = tvlx.getText().toString();
-                lxSpinnerPopuwindow = new SpinnerPopuwindow(HomeTotalActivity.this,type_lx,lxData,lxitemsOnClick);
+                lxSpinnerPopuwindow = new SpinnerPopuwindow(HomeTotalActivity.this, type_lx, lxData, lxitemsOnClick);
                 lxSpinnerPopuwindow.showPopupWindow(llSX);
                 lxSpinnerPopuwindow.setTitleText("项目类型");//给下拉列表设置标题
                 break;
             case R.id.llsx:
                 type_sx = tvsx.getText().toString();
-                sxSpinnerPopuwindow = new SpinnerPopuwindow(HomeTotalActivity.this,type_sx,sxData,sxitemsOnClick);
+                sxSpinnerPopuwindow = new SpinnerPopuwindow(HomeTotalActivity.this, type_sx, sxData, sxitemsOnClick);
                 sxSpinnerPopuwindow.showPopupWindow(llSX);
                 sxSpinnerPopuwindow.setTitleText("项目属性");//给下拉列表设置标题
                 break;
             case R.id.llaz:
                 type_az = tvaz.getText().toString();
-                azSpinnerPopuwindow = new SpinnerPopuwindow(HomeTotalActivity.this,type_az,azData,azitemsOnClick);
+                azSpinnerPopuwindow = new SpinnerPopuwindow(HomeTotalActivity.this, type_az, azData, azitemsOnClick);
                 azSpinnerPopuwindow.showPopupWindow(llSX);
                 azSpinnerPopuwindow.setTitleText("项目属性");//给下拉列表设置标题
                 break;
             case R.id.btnSearch:
                 go();
-                String s=etName.getText().toString();
-                params1.put("name",s);
+                String s = etName.getText().toString();
+                params1.put("name", s);
                 refresh();
                 break;
             case R.id.rlBack:
@@ -341,17 +354,18 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
                 break;
         }
     }
+
     private AdapterView.OnItemClickListener gxitemsOnClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             String value = gxData.get(gxSpinnerPopuwindow.getText());
 
             gxSpinnerPopuwindow.dismissPopupWindow();
-            if(position==0){
-                params1.put("vasa","");
+            if (position == 0) {
+                params1.put("vasa", "");
                 tvgx.setText("管辖级别");
-            }else{
-                params1.put("vasa",position+"");
+            } else {
+                params1.put("vasa", position + "");
                 tvgx.setText(value);
             }
             refresh();
@@ -363,14 +377,14 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
             String value = jdData.get(jdSpinnerPopuwindow.getText());
 
             jdSpinnerPopuwindow.dismissPopupWindow();
-            if(userInfor.getPosition().equals("2")){
+            if (userInfor.getPosition().equals("2")) {
 
-            }else{
-                if(position==0){
-                    params1.put("managerRoleIds","");
+            } else {
+                if (position == 0) {
+                    params1.put("managerRoleIds", "");
                     tvjd.setText("街道");
-                }else{
-                    params1.put("managerRoleIds","["+streetBeanList.get(position-1).getId()+"]");
+                } else {
+                    params1.put("managerRoleIds", "[" + streetBeanList.get(position - 1).getId() + "]");
                     tvjd.setText(value);
                 }
             }
@@ -384,11 +398,11 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
             String value = lxData.get(lxSpinnerPopuwindow.getText());
 
             lxSpinnerPopuwindow.dismissPopupWindow();
-            if(position==0){
-                params1.put("pType","");
+            if (position == 0) {
+                params1.put("pType", "");
                 tvlx.setText("项目类型");
-            }else{
-                params1.put("pType",position+"");
+            } else {
+                params1.put("pType", position + "");
                 tvlx.setText(value);
             }
             refresh();
@@ -400,11 +414,20 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
             String value = sxData.get(sxSpinnerPopuwindow.getText());
 
             sxSpinnerPopuwindow.dismissPopupWindow();
-            if(position==0){
-                params1.put("diff","");
+            if (position == 0) {
+                params1.put("diff", "");
                 tvsx.setText("项目属性");
-            }else{
-                params1.put("diff",position+"");
+            } else if (position == 1) {
+                params1.put("diff", position + "");
+                tvsx.setText(value);
+            } else if (position == 2) {
+                params1.put("diff", position + "");
+                tvsx.setText(value);
+            } else if (position == 3) {
+                params1.put("diff", "1,2");
+                tvsx.setText(value);
+            } else if (position == 4) {
+                params1.put("diff", "0");
                 tvsx.setText(value);
             }
             refresh();
@@ -416,16 +439,17 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
             String value = azData.get(azSpinnerPopuwindow.getText());
 
             azSpinnerPopuwindow.dismissPopupWindow();
-            if(position==0){
-                params1.put("relationType","");
+            if (position == 0) {
+                params1.put("relationType", "");
                 tvaz.setText("设备安装");
-            }else{
-                params1.put("relationType",position+"");
+            } else {
+                params1.put("relationType", position + "");
                 tvaz.setText(value);
             }
             refresh();
         }
     };
+
     /**
      * 管辖级别数据
      */
@@ -435,17 +459,19 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
         gxData.add("市直管");
         gxData.add("区直管");
     }
+
     /**
      * 街道数据
      */
     private void StreetData() {
         jdData = new ArrayList<>();
         jdData.add("全部");
-        for(int i=0;i<streetBeanList.size();i++){
+        for (int i = 0; i < streetBeanList.size(); i++) {
             jdData.add(streetBeanList.get(i).getName());
         }
 
     }
+
     /**
      * 街道数据
      */
@@ -460,6 +486,7 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
         lxData.add("园林");
         lxData.add("其他");
     }
+
     /**
      * 项目属性数据
      */
@@ -468,7 +495,10 @@ public class HomeTotalActivity extends BaseActivity implements View.OnClickListe
         sxData.add("全部");
         sxData.add("差别化工地");
         sxData.add("智慧工地");
+        sxData.add("智慧&差别化工地");
+        sxData.add("未申报智慧工地");
     }
+
     /**
      * 设备安装数据  全部安装；2：车辆未冲洗未安装；3：扬尘设备未安装；4：视频未安装；5：均未安装
      */

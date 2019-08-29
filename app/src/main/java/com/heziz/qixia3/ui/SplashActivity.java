@@ -1,5 +1,6 @@
 package com.heziz.qixia3.ui;
 
+import android.Manifest;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -24,37 +25,10 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_splash);
-        requestPermission();
+
         initViews();
     }
 
-    private void requestPermission() {
-
-        if (ContextCompat.checkSelfPermission(this, READ_PHONE_STATE)
-                != PackageManager.PERMISSION_GRANTED) {
-            //申请WRITE_EXTERNAL_STORAGE权限
-            ActivityCompat.requestPermissions(this, new String[]{READ_PHONE_STATE},
-                    10);
-        }
-        if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            //申请WRITE_EXTERNAL_STORAGE权限
-            ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE},
-                    12);
-        }
-        if (ContextCompat.checkSelfPermission(this,ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            //申请WRITE_EXTERNAL_STORAGE权限
-            ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION},
-                    12);
-        }
-        if (ContextCompat.checkSelfPermission(this,CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            //申请WRITE_EXTERNAL_STORAGE权限
-            ActivityCompat.requestPermissions(this, new String[]{CAMERA},
-                    12);
-        }
-    }
 
     private void initViews() {
         version = (TextView) findViewById(R.id.mversion);

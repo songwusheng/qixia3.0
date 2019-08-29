@@ -141,6 +141,12 @@ adapter.bindToRecyclerView(recycleView);
             case 12:
                 params1.put("pType","7");
                 break;
+            case 13:
+                params1.put("diff","1,2");
+                break;
+            case 14:
+                params1.put("diff","0");
+                break;
 
         }
         showProgressDialog();
@@ -155,13 +161,14 @@ private void getData(){
     JsonCallBack1<SRequstBean<RequestBean<List<ProjectBean>>>> jsonCallBack1 = new JsonCallBack1<SRequstBean<RequestBean<List<ProjectBean>>>>() {
         @Override
         public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<RequestBean<List<ProjectBean>>>> response) {
-//                projectBeanList.clear();
-//                projectBeanList.addAll(response.body().getData());
-//
 
             if(response.body().getData().getList().size()!=0){
                 projectBeanList.addAll(response.body().getData().getList());
-                adapter.loadMoreComplete();
+                if(pageNow==response.body().getData().getPage().getTotalPageCount()){
+                    adapter.loadMoreEnd();
+                }else{
+                    adapter.loadMoreComplete();
+                }
             }else{
                 if (pageNow==1){
                     adapter.setEmptyView(R.layout.empty_view);

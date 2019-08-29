@@ -1,5 +1,6 @@
 package com.heziz.qixia3.ui;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -66,6 +67,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         setContentView(R.layout.activity_login2);
 
         ButterKnife.bind(this);
+        requestPermission();
+
         initViews();
 
         initListeners();
@@ -224,6 +227,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void initListeners() {
         btnLogin.setOnClickListener(this);
         llSave.setOnClickListener(this);
+    }
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA,Manifest.permission.ACCESS_FINE_LOCATION},
+                0);
+
     }
 
     @Override

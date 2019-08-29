@@ -13,7 +13,6 @@ import com.heziz.qixia3.bean.HomeListBean;
 import com.heziz.qixia3.bean.car.CarDetailsBean;
 import com.heziz.qixia3.bigimage.JBrowseImgActivity;
 import com.heziz.qixia3.bigimage.util.JMatrixUtil;
-import com.heziz.qixia3.view.MyDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -54,7 +54,9 @@ public class ProjectListAdapter extends BaseQuickAdapter<ProjectBean,BaseViewHol
             diff="差别化工地";
         }else if (item.getDiff().equals("2")){
             diff="智慧工地";
-        }else{
+        }else if (item.getDiff().equals("0")){
+            diff="未申报智慧工地";
+        }else {
             diff="智慧差别";
         }
         helper.setText(R.id.tvProperty,diff);

@@ -14,7 +14,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.7"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/sp_14"
             android:padding="@dimen/padding5"
             android:gravity="center"
             android:text="序号"/>
@@ -24,7 +24,7 @@
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/sp_14"
             android:padding="@dimen/padding5"
             android:gravity="center"
             android:text="项目名"/>
@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.7"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/sp_14"
             android:padding="@dimen/padding5"
             android:gravity="center"
             android:text="街道"/>
@@ -43,7 +43,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.7"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/sp_14"
             android:padding="@dimen/padding5"
             android:gravity="center"
             android:text="项目\n类型"/>
@@ -53,7 +53,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.7"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/sp_14"
             android:padding="@dimen/padding5"
             android:gravity="center"
             android:text="项目\n属性"/>

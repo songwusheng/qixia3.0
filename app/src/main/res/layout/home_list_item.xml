@@ -15,7 +15,7 @@
         android:layout_width="0dp"
         android:layout_weight="0.5"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_16"
+        android:textSize="@dimen/sp_14"
         android:padding="@dimen/padding5"
         android:gravity="center"
         android:text="1"/>
@@ -25,7 +25,7 @@
         android:layout_width="0dp"
         android:layout_weight="0.7"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_16"
+        android:textSize="@dimen/sp_14"
         android:padding="@dimen/padding5"
         android:gravity="center"
         android:text="街道"/>
@@ -35,7 +35,7 @@
         android:layout_width="0dp"
         android:layout_weight="0.7"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_16"
+        android:textSize="@dimen/sp_14"
         android:padding="@dimen/padding5"
         android:gravity="center"
         android:text="5"/>
@@ -44,7 +44,7 @@
         android:layout_width="0dp"
         android:layout_weight="0.8"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_16"
+        android:textSize="@dimen/sp_14"
         android:padding="@dimen/padding5"
         android:gravity="center"
         android:text="10"/>
@@ -59,7 +59,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/sp_14"
             android:padding="@dimen/padding5"
             android:gravity="center"
             android:text="3"/>

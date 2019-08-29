@@ -54,8 +54,10 @@ public class MineYcGJListAdapter extends BaseQuickAdapter<MineYcListBean,BaseVie
             diff="差别化工地";
         }else if (item.getDiff().equals("2")){
             diff="智慧工地";
-        }else{
-            diff="-";
+        }else if (item.getDiff().equals("0")){
+            diff="未申报智慧工地";
+        }else {
+            diff="智慧差别";
         }
         helper.setText(R.id.tvSx,diff);
         helper.setText(R.id.tvNum,item.getAlarmTotalCount()+"");

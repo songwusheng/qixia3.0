@@ -11,10 +11,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.heziz.qixia3.R;
 import com.heziz.qixia3.base.BaseActivity;
 import com.heziz.qixia3.utils.ToastUtil;
-import com.heziz.qixia3.view.ZoomImageView;
+import com.heziz.qixia3.view.DoubleScaleImageView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.model.Response;
@@ -37,10 +40,8 @@ public class WebActivity extends BaseActivity implements TbsReaderView.ReaderCal
     RelativeLayout rlBack;
     @BindView(R.id.tvTitle)
     TextView tvTitle;
-    @BindView(R.id.iv)
-    ImageView iv;
-    @BindView(R.id.webView)
-    WebView webView;
+    @BindView(R.id.iv1)
+    DoubleScaleImageView iv;
 
     // 文件的下载路径
 //    private static final String base = "http://192.168.200.15:8088/xmgl/userfiles/upload/files/201807310923533619.xls";
@@ -68,16 +69,20 @@ public class WebActivity extends BaseActivity implements TbsReaderView.ReaderCal
         // 日期
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new java.util.Date());
-        Log.d("success", "===" + date);
-
         base=getIntent().getStringExtra("url");
-//        savePath = getExternalCacheDir().getPath();
-
+        showProgressDialog();
         if(base.endsWith("jpg")||base.endsWith("jpeg")||base.endsWith("png")||base.endsWith("bmp")){
             iv.setVisibility(View.VISIBLE);
-            Glide.with(this).load(base).into(iv);
+            Glide.with(this).load(base).into(new SimpleTarget<GlideDrawable>() {
+                @Override
+                public void onResourceReady(GlideDrawable glideDrawable, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                    dissmissProgressDialog();
+                    iv.setImageDrawable(glideDrawable);
+                }
+            });
+
         }else{
-            showProgressDialog();
+
             initDoc();
         }
 
@@ -192,5 +197,6 @@ public class WebActivity extends BaseActivity implements TbsReaderView.ReaderCal
         }
         return super.onKeyDown(keyCode, event);
     }
+
 
 }

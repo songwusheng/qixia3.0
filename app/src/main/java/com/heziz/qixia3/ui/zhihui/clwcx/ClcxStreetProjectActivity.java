@@ -482,8 +482,19 @@ public class ClcxStreetProjectActivity extends BaseActivity implements View.OnCl
             sxSpinnerPopuwindow.dismissPopupWindow();
             if(position==0){
                 params1.put("diff","");
-            }else{
+                tvsx.setText("项目属性");
+            }else if(position==1){
                 params1.put("diff",position+"");
+                tvsx.setText(value);
+            }else if(position==2){
+                params1.put("diff",position+"");
+                tvsx.setText(value);
+            }else if(position==3){
+                params1.put("diff","1,2");
+                tvsx.setText(value);
+            }else if(position==4){
+                params1.put("diff","0");
+                tvsx.setText(value);
             }
             initProjectData();
         }
@@ -528,7 +539,9 @@ public class ClcxStreetProjectActivity extends BaseActivity implements View.OnCl
     private void SXData() {
         sxData = new ArrayList<>();
         sxData.add("全部");
-        sxData.add("差别化工地");
-        sxData.add("智慧工地");
+         sxData.add("差别化工地");
+  sxData.add("智慧工地");
+   sxData.add("智慧&差别化工地");
+ sxData.add("未申报智慧工地");
     }
 }

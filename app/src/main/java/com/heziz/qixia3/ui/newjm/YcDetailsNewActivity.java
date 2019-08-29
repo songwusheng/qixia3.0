@@ -213,13 +213,35 @@ public class YcDetailsNewActivity extends BaseActivity {
                     tvZs.setText(bean.getLARtd()+"");
                     tvWD.setText(bean.getA01001Rtd()+"/");
                     tvSD.setText(bean.getA01002Rtd()+"");
-                    tvFx.setText(bean.getA01008Rtd()+"");
+                    tvFx.setText(getFX(bean.getA01008Rtd())+"");
                     tvFs.setText(bean.getA01007Rtd()+"");
-////
                     break;
             }
         }
     };
+
+    private String getFX(double windD){
+        String fx;
+        if((windD>=0&&windD<22.5)||(windD<=360&&windD<337.5)){
+            fx="北风";
+        }else if(windD>=22.5&&windD<67.5){
+            fx="东北风";
+        }else if(windD>=67.5&&windD<112.5){
+            fx="东风";
+        }else if(windD>=112.5&&windD<157.5){
+            fx="东南风";
+        }else if(windD>=157.5&&windD<202.5){
+            fx="南风";
+        }else if(windD>=202.5&&windD<247.5){
+            fx="西南风";
+        }else if(windD>=247.5&&windD<292.5){
+            fx="西风";
+        }else{
+            fx="西北风";
+        }
+        return fx;
+
+    }
     private void initDatas() {
         getReal();
     }

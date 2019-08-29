@@ -15,6 +15,7 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -435,11 +436,11 @@ public class VXiangqingActivity extends BaseActivity implements View.OnClickList
     private void initDatas() {
         getProjectDetails();
         adapter=new ChannelInfoAdapter(VXiangqingActivity.this,channels);
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), home_bg_icon4);
-//        gridLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        LinearLayoutManager manager=new LinearLayoutManager(getApplicationContext());
-        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recycleView.setLayoutManager(manager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 3);
+        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        //LinearLayoutManager manager=new LinearLayoutManager(getApplicationContext());
+        //manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recycleView.setLayoutManager(gridLayoutManager);
         recycleView.setAdapter(adapter);
         showProgressDialog();
         getGroupList();

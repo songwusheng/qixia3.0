@@ -15,7 +15,6 @@ import com.heziz.qixia3.base.BaseActivity;
 import com.heziz.qixia3.bean.mine.wdbygs.MineWDBYGSListBean;
 import com.heziz.qixia3.bean.mine.zxjc.MineZXJCBean;
 import com.heziz.qixia3.utils.StringUtil;
-import com.heziz.qixia3.view.MyDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -97,7 +96,6 @@ public class MineZXJCDetailsActivity extends BaseActivity implements View.OnClic
 //        adapter1.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                MyDialog.showDialog(mContext,list1.get(position));
 //            }
 //        });
     }

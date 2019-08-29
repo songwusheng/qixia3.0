@@ -11,7 +11,7 @@ import com.heziz.qixia3.app.MyApplication;
 import com.heziz.qixia3.bigimage.beans.JPhotosInfos;
 
 /**
- * Created by jincancan on 17/2/13.
+ * Created by jincancan on 17/right_white_jt/13.
  * Description: 基本动画执行工具
  */
 

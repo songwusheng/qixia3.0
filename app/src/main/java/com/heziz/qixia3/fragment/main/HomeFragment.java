@@ -47,10 +47,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @BindView(R.id.all)
     TextView all;
-    @BindView(R.id.total)
-    TextView total;
+    @BindView(R.id.tvZC)
+    TextView tvZC;
     @BindView(R.id.zhnumber)
     TextView zhnumber;
+    @BindView(R.id.zhcbnumber)
+    TextView zhcbnumber;
+    @BindView(R.id.wsbnumber)
+    TextView wsbnumber;
     @BindView(R.id.cbnumber)
     TextView cbnumber;
     @BindView(R.id.szgnumber)
@@ -76,12 +80,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @BindView(R.id.llTotal)
     LinearLayout llTotal;
-    @BindView(R.id.llCost)
-    LinearLayout llCost;
     @BindView(R.id.llZH)
     LinearLayout llZH;
     @BindView(R.id.llCB)
     LinearLayout llCB;
+    @BindView(R.id.llZHCB)
+    LinearLayout llZHCB;
+    @BindView(R.id.llWSB)
+    LinearLayout llWSB;
     @BindView(R.id.llFJ)
     LinearLayout llFJ;
     @BindView(R.id.llSZ)
@@ -118,7 +124,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home1, container, false);
         ButterKnife.bind(this, view);
         initViews();
         initDatas();
@@ -129,7 +135,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private void initListeners() {
         if (!userInfor.getPosition().equals("3")) {
             llTotal.setOnClickListener(this);
-            llCost.setOnClickListener(this);
             llZH.setOnClickListener(this);
             llCB.setOnClickListener(this);
             llSZG.setOnClickListener(this);
@@ -141,6 +146,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             llSL.setOnClickListener(this);
             llDT.setOnClickListener(this);
             llQT.setOnClickListener(this);
+            llZHCB.setOnClickListener(this);
+            llWSB.setOnClickListener(this);
         }
 
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -161,6 +168,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     private void initViews() {
 
+        tvZC.setText("智慧&差别化工地");
         dataSave = new ListDataSave(getActivity().getApplicationContext(), "project_list");
         userInfor = MyApplication.getInstance().getUserInfor();
         adapter = new HomeListAdapter(getActivity(), homeListBeans);
@@ -189,19 +197,21 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<HomeBean>> response) {
                 HomeBean bean = response.body().getData();
-                all.setText(bean.getTotal() + "个");
-                total.setText(NumberUtils.getTwoDecimal(bean.getCost() / 10000.0) + "亿元");
-                zhnumber.setText(bean.getZhgd() + "个");
-                cbnumber.setText(bean.getDiff() + "个");
-                szgnumber.setText(bean.getSzg() + "个");
-                qznumber.setText(bean.getQzg() + "个");
-                fjnumber.setText(bean.getFj() + "个");
-                sznumber.setText(bean.getSz() + "个");
-                ylnumber.setText(bean.getYl() + "个");
-                jtnumber.setText(bean.getJt() + "个");
-                slnumber.setText(bean.getSl() + "个");
-                dtnumber.setText(bean.getDt() + "个");
-                qtnumber.setText(bean.getQt() + "个");
+                all.setText(bean.getTotal() + "");
+                //total.setText(NumberUtils.getTwoDecimal(bean.getCost() / 10000.0) + "亿元");
+                zhnumber.setText(bean.getZhgd() + "");
+                cbnumber.setText(bean.getDiff() + "");
+                szgnumber.setText(bean.getSzg() + "");
+                qznumber.setText(bean.getQzg() + "");
+                fjnumber.setText(bean.getFj() + "");
+                sznumber.setText(bean.getSz() + "");
+                ylnumber.setText(bean.getYl() + "");
+                jtnumber.setText(bean.getJt() + "");
+                slnumber.setText(bean.getSl() + "");
+                dtnumber.setText(bean.getDt() + "");
+                qtnumber.setText(bean.getQt() + "");
+                zhcbnumber.setText(bean.getZhDiff()+"");
+                wsbnumber.setText(bean.getWsbZh()+"");
             }
 
             @Override
@@ -263,11 +273,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.llTotal:
                 startActivity(new Intent(getActivity(), HomeTotalActivity.class));
                 break;
-            case R.id.llCost:
-                Intent intent1 = new Intent(getActivity(), HomeTypeActivity.class);
-                intent1.putExtra("type", 1);
-                startActivity(intent1);
-                break;
+            //case R.id.llCost:
+            //    Intent intent1 = new Intent(getActivity(), HomeTypeActivity.class);
+            //    intent1.putExtra("type", 1);
+            //    startActivity(intent1);
+            //    break;
             case R.id.llZH:
                 intent.putExtra("type", 2);
                 intent.putExtra("name", "智慧工地");
@@ -276,6 +286,16 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.llCB:
                 intent.putExtra("type", 3);
                 intent.putExtra("name", "差别化工地");
+                startActivity(intent);
+                break;
+            case R.id.llZHCB:
+                intent.putExtra("type", 13);
+                intent.putExtra("name", "智慧&差别化工地");
+                startActivity(intent);
+                break;
+            case R.id.llWSB:
+                intent.putExtra("type", 14);
+                intent.putExtra("name", "未申报智慧工地项目");
                 startActivity(intent);
                 break;
             case R.id.llSZG:

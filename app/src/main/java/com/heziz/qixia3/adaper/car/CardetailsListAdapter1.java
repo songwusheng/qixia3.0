@@ -13,8 +13,6 @@ import com.heziz.qixia3.bean.car.CarDetailsBean;
 import com.heziz.qixia3.bean.car.CarDetailsBean1;
 import com.heziz.qixia3.bigimage.JBrowseImgActivity;
 import com.heziz.qixia3.bigimage.util.JMatrixUtil;
-import com.heziz.qixia3.ui.mine.fdl.MineFDLdetailsActivity;
-import com.heziz.qixia3.view.MyDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,7 +48,6 @@ public class CardetailsListAdapter1 extends BaseQuickAdapter<CarDetailsBean1,Bas
         helper.getView(R.id.iv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                MyDialog.showDialog(mContext,item.getLicensePlateImg());
                 List<Rect> rects = new ArrayList<>();
                 rects.add(JMatrixUtil.getDrawableBoundsInView(helper.getView(R.id.iv)));
                 JBrowseImgActivity.start(mContext, new ArrayList<>(Arrays.asList(item.getLicensePlateImg())), 0, rects);
