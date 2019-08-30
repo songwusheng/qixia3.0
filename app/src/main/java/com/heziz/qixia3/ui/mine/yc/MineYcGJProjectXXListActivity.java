@@ -89,6 +89,11 @@ public class MineYcGJProjectXXListActivity extends BaseActivity {
     private void initDatas() {
         showProgressDialog();
         getToday();
+        getHistory();
+
+    }
+
+    private void getHistory(){
         String url1 = API.MINE_YC_DETAILS_LIST1+"/"+pageNow+"/10";
         Map<String,String> params=new HashMap<>();
         params.put("access_token",MyApplication.getInstance().getUserInfor().getUuid());
@@ -102,9 +107,9 @@ public class MineYcGJProjectXXListActivity extends BaseActivity {
                     if(response.body().getData().getList().size()!=0){
                         list1.addAll(response.body().getData().getList());
                         adapter1.loadMoreComplete();
-                        if(list1.size()<10){
-                            adapter1.loadMoreEnd();
-                        }
+                        //if(list1.size()<10){
+                        //    adapter1.loadMoreEnd();
+                        //}
                     }else{
                         adapter1.loadMoreEnd();
                     }
@@ -124,7 +129,6 @@ public class MineYcGJProjectXXListActivity extends BaseActivity {
         };
         OkGoClient.getInstance()
                 .getJsonData1(url1, params, jsonCallBack1);
-
     }
 
     private void getToday(){
@@ -165,7 +169,7 @@ public class MineYcGJProjectXXListActivity extends BaseActivity {
             @Override
             public void onLoadMoreRequested() {
                 pageNow++;
-                initDatas();
+                getHistory();
             }
         });
         rlBack.setOnClickListener(new View.OnClickListener() {

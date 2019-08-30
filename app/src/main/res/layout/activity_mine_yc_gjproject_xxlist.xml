@@ -19,7 +19,7 @@
         android:padding="@dimen/padding10"
         android:gravity="center"
         android:textSize="@dimen/text14" />
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -58,13 +58,14 @@
                     android:id="@+id/recycleView1"
                     android:background="@color/white"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/padding10">
 
                 </android.support.v7.widget.RecyclerView>
             <!--</LinearLayout>-->
 
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
 
 </LinearLayout>

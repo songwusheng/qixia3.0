@@ -62,6 +62,7 @@ import com.heziz.qixia3.ui.project.ProjectDetailsActivity;
 import com.heziz.qixia3.utils.OritationUtil;
 import com.heziz.qixia3.utils.ProjectUtils;
 import com.heziz.qixia3.utils.TimeUtils;
+import com.heziz.qixia3.utils.ToastUtil;
 import com.mm.Api.Camera;
 import com.mm.Api.DPSRTCamera;
 import com.mm.Api.DPSRTCameraParam;
@@ -196,10 +197,16 @@ public class VXiangqingActivity extends BaseActivity implements View.OnClickList
                             channels.add(channelInfo);
                         }
                         adapter.notifyDataSetChanged();
-                        if(channels.size()!=0){
-                            startPlay(channels.get(0));
+                    if(channels.size()!=0){
+                        for (int k=0;k<channels.size();k++){
+                            if(channels.get(k).getState()== ChannelInfo.ChannelState.Online){
+                                startPlay(channels.get(k));
+                                return;
+                            }
                         }
+                        ToastUtil.showToast("设备离线");
 
+                    }
 //                    }
                     break;
                 case 2:
