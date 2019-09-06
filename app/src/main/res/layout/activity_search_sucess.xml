@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.heziz.qixia3.ui.searchpassword.SearchSucessActivity">
+
+    <include layout="@layout/include_title_er2"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:layout_margin="@dimen/padding20"
+        android:src="@drawable/zhmm"/>
+
+    <TextView
+        android:id="@+id/tvInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/maincolor1"
+        android:text="恭喜您密码找回成功！"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/padding50"
+            android:background="@drawable/btn_yj_bg1"
+            android:layout_alignParentBottom="true"
+            android:text="返回首页"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text16" />
+    </RelativeLayout>
+</LinearLayout>

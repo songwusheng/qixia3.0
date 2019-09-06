@@ -261,7 +261,7 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
             case R.id.tvRc:
                 intent.setClass(mContext,CommActivity.class);
                 intent.putExtra("type",2);
-                intent.putExtra("title","日常检查");
+                intent.putExtra("title","五达标一公示");
                 break;
             case R.id.tvFd:
                 if(userInfor.getPosition().equals("3")){
@@ -270,7 +270,6 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
                 }else{
                     intent.setClass(mContext,FdlStreetDeviceListActivity.class);
                 }
-
                 break;
             case R.id.tvTd:
                 intent.setClass(mContext, TdSmzAqZlActivity.class);

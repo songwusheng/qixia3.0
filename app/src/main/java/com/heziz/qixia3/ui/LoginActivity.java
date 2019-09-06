@@ -31,6 +31,8 @@ import com.heziz.qixia3.network.API;
 import com.heziz.qixia3.network.HezhiResponse;
 import com.heziz.qixia3.network.JsonCallBack;
 import com.heziz.qixia3.network.OkGoClient;
+import com.heziz.qixia3.ui.searchpassword.QRYHMActivity;
+import com.heziz.qixia3.ui.searchpassword.SearchPasswordActivity;
 import com.heziz.qixia3.utils.ToastUtil;
 import com.heziz.qixia3.view.ClearEditText;
 import com.pgyersdk.update.DownloadFileListener;
@@ -272,7 +274,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 }
                 break;
             case R.id.tvPass:
-                showPasswordDialog();
+                startMyActivity(QRYHMActivity.class);
+                //showPasswordDialog();
                 break;
         }
     }

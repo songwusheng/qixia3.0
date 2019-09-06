@@ -87,8 +87,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.LoginActivity"
-            android:exported="true"/>
+        <activity
+            android:name=".ui.LoginActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.video.VXiangqingActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
@@ -161,7 +162,10 @@
             android:label="@string/title_activity_mine"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".ui.newjm.TdSmzAqZlActivity" />
-        <activity android:name=".ui.newjm.SanjiActivity"></activity>
+        <activity android:name=".ui.newjm.SanjiActivity" />
+        <activity android:name=".ui.searchpassword.QRYHMActivity" />
+        <activity android:name=".ui.searchpassword.SearchPasswordActivity" />
+        <activity android:name=".ui.searchpassword.SearchSucessActivity"></activity>
     </application>
 
 </manifest>

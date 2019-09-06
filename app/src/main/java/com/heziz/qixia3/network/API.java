@@ -18,6 +18,10 @@ public class API {
  public static String LOGIN=base_url+"urmp/getToken/getTokenByUser1";
  //修改密码
  public static String PASSWORD_XG=base_url+"/urmp/user/alterPassword";
+ //查询用户名是否存在
+ public static String USERNAME_CZ=base_url+"/urmp/user/accountExists";
+ //找回密码
+ public static String PASSWORD_ZH=base_url+"/urmp/user/updatePasswardByAccount";
 
  //栖霞站点id
  public static String STATION="1551258680345413";
@@ -55,7 +59,7 @@ public class API {
 public static String WEBSOCKET_URL="ws://skt.heziz.com:28012/websocket";
  //根据设备id查看扬尘折线图
  public static String YC_HISTORY_URL=base_url+"hzjg/newDemandForDust/getAWeekOrOnDayAvgOfFugitiveDustByDeviceId/1"; //根据项目id获取扬尘报警数据
- public static String YC_HISTORY_URL1=base_url+"hzjg/newDemandForDust/getAWeekOrOnDayAvgOfFugitiveDustByDeviceId1/1"; //根据项目id获取扬尘报警数据
+ public static String YC_HISTORY_URL1=base_url+"hzjg/newDemandForDust/getAWeekOrOnDayAvgOfFugitiveDustByDeviceId1/"; //根据项目id获取扬尘报警数据
  public static String YC_BJ_URL=base_url+"hzjg/elastic/getyangchencountByDate";
  //根据项目id获取扬尘报警数据列表
  public static String YC_BJ_LIST=base_url+"hzjg/elastic/getWeatherEsInfoByProject";

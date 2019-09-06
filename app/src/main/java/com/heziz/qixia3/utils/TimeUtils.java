@@ -68,7 +68,12 @@ public class TimeUtils {
         String startStr = simpleDateFormat.format(date1);
         return startStr;
     }
-
+    public static String setSTime1(Date date){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-ddTHH:mm:ss");
+        Date date1 = new Date(date.getTime());
+        String startStr = simpleDateFormat.format(date1);
+        return startStr;
+    }
 
 
     //ISO时间

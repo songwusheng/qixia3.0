@@ -132,10 +132,15 @@ public class YcDetailsNewActivity extends BaseActivity {
 //                                date.setMinutes(59);
 //                                date.setSeconds(59);
 //                                endTime=TimeUtils.setSTime(date);
+                date.setHours(0);
+                date.setMinutes(0);
+                date.setSeconds(0);
+                String start=TimeUtils.setSTime(date);
                 date.setHours(23);
                 date.setMinutes(59);
                 date.setSeconds(59);
-                defTime=TimeUtils.setSTime(date);
+                String end=TimeUtils.setSTime(date);
+                defTime=start+"&"+end;
                 params.put("defTime",defTime);
                 type=2;
                 getReal();
@@ -301,10 +306,10 @@ public class YcDetailsNewActivity extends BaseActivity {
     private void getReal(){
         list.clear();
         showProgressDialog();
-        String url = API.YC_HISTORY_URL1;
+        String url = API.YC_HISTORY_URL1+type;
         params.put("access_token", MyApplication.getInstance().getUserInfor().getUuid());
         params.put("deviceId",deviceid+"");
-        params.put("type",type+"");
+        //params.put("type",type+"");
         params.put("typeName",flag);
         JsonCallBack1<SRequstBean<List<YcRealNumberBean>>> jsonCallBack = new JsonCallBack1<SRequstBean<List<YcRealNumberBean>>>() {
             @Override
@@ -322,6 +327,9 @@ public class YcDetailsNewActivity extends BaseActivity {
                         llEmpty.setVisibility(View.VISIBLE);
                         chart.setVisibility(View.GONE);
                     }
+                }else{
+                    llEmpty.setVisibility(View.VISIBLE);
+                    chart.setVisibility(View.GONE);
                 }
 
             }
@@ -330,6 +338,8 @@ public class YcDetailsNewActivity extends BaseActivity {
             public void onError(com.lzy.okgo.model.Response<SRequstBean<List<YcRealNumberBean>>> response) {
                 super.onError(response);
                 dissmissProgressDialog();
+                llEmpty.setVisibility(View.VISIBLE);
+                chart.setVisibility(View.GONE);
             }
 
         };
@@ -377,7 +387,7 @@ public class YcDetailsNewActivity extends BaseActivity {
             xAxis.setDrawGridLines(false);
             xAxis.setTextSize(6);
             xAxis.setLabelRotationAngle(45);
-            xAxis.setLabelCount(12);
+            //xAxis.setLabelCount(12);
             // vertical grid lines
 //          如果设置为true，则在绘制时会避免“剪掉”在x轴上的图表或屏幕边缘的第一个和最后一个坐标轴标签项。
             xAxis.setAvoidFirstLastClipping(true);
@@ -385,7 +395,12 @@ public class YcDetailsNewActivity extends BaseActivity {
             xAxis.setValueFormatter(new IAxisValueFormatter() {
                 @Override
                 public String getFormattedValue(float value, AxisBase axis) {
-                    return list.get((int)value).getTimeSlot().split("T")[1].substring(0,5);
+                    String time="";
+                    int value1=(int)value;
+                    if(value1<list.size()){
+                        time=list.get(value1).getTimeSlot().substring(11,16);
+                    }
+                    return time;
                 }
             });
         }
