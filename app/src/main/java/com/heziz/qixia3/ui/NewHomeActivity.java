@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
@@ -71,6 +72,8 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
     TextView tvFd;
     @BindView(R.id.tvVertion)
     TextView tvVertion;
+    @BindView(R.id.llJszc)
+    LinearLayout llJszc;
 
     @BindView(R.id.tvTd)
     TextView tvTd;
@@ -181,7 +184,7 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
         mContext=this;
         userInfor= MyApplication.getInstance().getUserInfor();
         position=userInfor.getPosition();
-        tvVertion.setText(getVersion());
+        //tvVertion.setText(getVersion());
     }
 
     private void initListeners() {
@@ -199,7 +202,7 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
         tvAq.setOnClickListener(this);
         tvZl.setOnClickListener(this);
         tvZcwj.setOnClickListener(this);
-        ivKf.setOnClickListener(new View.OnClickListener() {
+        llJszc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 callPhone("4001165850");
