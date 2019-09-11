@@ -10,20 +10,21 @@
         android:layout_marginLeft="@dimen/padding10"
         android:layout_marginRight="@dimen/padding10"
         android:layout_marginBottom="@dimen/padding10"
+        android:gravity="center_vertical"
         android:padding="@dimen/padding10"
         android:background="@drawable/mine_bg_yuanjiao">
 
 
         <ImageView
             android:id="@+id/ivlx"
-            android:layout_width="@dimen/padding80"
-            android:layout_height="@dimen/padding80"
+            android:layout_width="@dimen/padding50"
+            android:layout_height="@dimen/padding50"
             android:scaleType="centerInside"
             android:src="@mipmap/wj_img"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/padding10"
             android:orientation="vertical">
 
@@ -33,8 +34,9 @@
                 android:layout_height="0dp"
                 android:layout_weight="3"
                 android:textSize="@dimen/text16"
-                android:maxLines="3"
+                android:gravity="center_vertical"
                 android:textColor="@color/black"
+                android:textStyle="bold"
                 android:text="中央第1号文件"/>
             <TextView
                 android:id="@+id/tvTime"
@@ -44,13 +46,10 @@
                 android:layout_marginTop="@dimen/padding5"
                 android:textSize="@dimen/text12"
                 android:gravity="right"
+                android:visibility="gone"
                 android:text="2018-06-28 10:00:00"/>
         </LinearLayout>
 
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:background="@color/black"/>
 
 
     </LinearLayout>

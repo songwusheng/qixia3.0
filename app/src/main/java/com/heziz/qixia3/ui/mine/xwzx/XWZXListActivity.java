@@ -116,38 +116,6 @@ public class XWZXListActivity extends BaseActivity implements View.OnClickListen
         recycleView.setLayoutManager(manager);
         recycleView.setAdapter(adapter);
         adapter.bindToRecyclerView(recycleView);
-//
-//        ItemDragAndSwipeCallback itemDragAndSwipeCallback = new ItemDragAndSwipeCallback(adapter);
-//        itemDragAndSwipeCallback.setSwipeMoveFlags(ItemTouchHelper.START);
-//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemDragAndSwipeCallback);
-//        itemTouchHelper.attachToRecyclerView(recycleView);
-//
-//// 开启拖拽
-////        mAdapter.enableDragItem(itemTouchHelper, R.id.textView, true);
-////        mAdapter.setOnItemDragListener(onItemDragListener);
-//
-//        OnItemSwipeListener onItemSwipeListener = new OnItemSwipeListener() {
-//            @Override
-//            public void onItemSwipeStart(RecyclerView.ViewHolder viewHolder, int pos) {
-//                LogUtils.show("开始左滑");
-//            }
-//            @Override
-//            public void clearView(RecyclerView.ViewHolder viewHolder, int pos) {
-//                LogUtils.show("清除这一条");
-//            }
-//            @Override
-//            public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int pos) {
-//                LogUtils.show("--------------");
-//            }
-//
-//            @Override
-//            public void onItemSwipeMoving(Canvas canvas, RecyclerView.ViewHolder viewHolder, float dX, float dY, boolean isCurrentlyActive) {
-//                LogUtils.show("------"+dX+"--------"+dY);
-//            }
-//        };
-//// 开启滑动删除
-//        adapter.enableSwipeItem();
-//        adapter.setOnItemSwipeListener(onItemSwipeListener);
 
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
