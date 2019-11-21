@@ -13,9 +13,11 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.heziz.qixia3.R;
 import com.heziz.qixia3.adaper.HomeListAdapter;
+import com.heziz.qixia3.adaper.HomeListAdapter2;
 import com.heziz.qixia3.app.MyApplication;
 import com.heziz.qixia3.base.BaseActivity;
 import com.heziz.qixia3.bean.HomeListBean;
+import com.heziz.qixia3.bean.JiedaoNumBean;
 import com.heziz.qixia3.bean.ProjectBean;
 import com.heziz.qixia3.bean.UserInfor;
 import com.heziz.qixia3.network.API;
@@ -41,9 +43,9 @@ public class TdSmzAqZlActivity extends BaseActivity {
     @BindView(R.id.recycleView)
     RecyclerView recycleView;
     String title;
-    HomeListAdapter adapter;
+    HomeListAdapter2 adapter;
     private int type;
-    private List<HomeListBean<List<ProjectBean>>> homeListBeans = new ArrayList<>();
+    private List<HomeListBean<List<JiedaoNumBean>>> homeListBeans = new ArrayList<>();
 
     private UserInfor userInfor;
     @Override
@@ -91,7 +93,7 @@ public class TdSmzAqZlActivity extends BaseActivity {
         title=getIntent().getStringExtra("title");
         tvTitle.setText(title);
         userInfor = MyApplication.getInstance().getUserInfor();
-        adapter = new HomeListAdapter(this, homeListBeans);
+        adapter = new HomeListAdapter2(this, homeListBeans);
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), home_bg_icon4);
 //        gridLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext());
@@ -109,10 +111,10 @@ public class TdSmzAqZlActivity extends BaseActivity {
         if (userInfor.getPosition().equals("3")) {
             params.put("createName", userInfor.getAccount());
         }
-        JsonCallBack1<SRequstBean<List<HomeListBean<List<ProjectBean>>>>> jsonCallBack1 = new JsonCallBack1<SRequstBean<List<HomeListBean<List<ProjectBean>>>>>() {
+        JsonCallBack1<SRequstBean<List<HomeListBean<List<JiedaoNumBean>>>>> jsonCallBack1 = new JsonCallBack1<SRequstBean<List<HomeListBean<List<JiedaoNumBean>>>>>() {
             @Override
-            public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<List<HomeListBean<List<ProjectBean>>>>> response) {
-                List<HomeListBean<List<ProjectBean>>> list = response.body().getData();
+            public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<List<HomeListBean<List<JiedaoNumBean>>>>> response) {
+                List<HomeListBean<List<JiedaoNumBean>>> list = response.body().getData();
                 if (list.size()==0){
                     adapter.setEmptyView(R.layout.empty_view);
                 }else{
@@ -139,7 +141,7 @@ public class TdSmzAqZlActivity extends BaseActivity {
             }
 
             @Override
-            public void onError(com.lzy.okgo.model.Response<SRequstBean<List<HomeListBean<List<ProjectBean>>>>> response) {
+            public void onError(com.lzy.okgo.model.Response<SRequstBean<List<HomeListBean<List<JiedaoNumBean>>>>> response) {
                 super.onError(response);
                 dissmissProgressDialog();
             }

@@ -387,7 +387,7 @@ showProgressDialog();
             }else if(position==3){
                 params1.put("diff","1,2");
                 tvsx.setText(value);
-            }else if(position==3){
+            }else if(position==4){
                 params1.put("diff","0");
                 tvsx.setText(value);
             }

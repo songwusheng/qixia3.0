@@ -205,12 +205,12 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
                 tvWlxj.setText(ProjectUtils.getValue(bean.getWgResult()));
 
                 if(bean.getContractStartDate()!=null){
-                    tvkg.setText(TimeUtils.getTime(bean.getContractStartDate()));
+                    tvkg.setText(bean.getContractStartDate().substring(0,10));
                 }else{
                     tvkg.setText("-");
                 }
                 if(bean.getContractEndDate()!=null){
-                    tvjg.setText(ProjectUtils.getValue(TimeUtils.getTime(bean.getContractEndDate())));
+                    tvjg.setText(ProjectUtils.getValue(bean.getContractEndDate().substring(0,10)));
                 }else{
                     tvjg.setText("-");
                 }

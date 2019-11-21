@@ -22,7 +22,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="五达标一公示"
+                    android:text="八达标一公示"
                     android:textSize="@dimen/text16"
                     android:padding="@dimen/padding5"
                     android:textColor="@color/maincolor"/>

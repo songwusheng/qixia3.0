@@ -123,7 +123,7 @@ public class MineWDBYGSZGDetailsActivity extends BaseActivity implements View.On
 
     private void initViews() {
         mineWDBYGSListBean=(MineWDBYGSListBean) getIntent().getSerializableExtra("mineWDBYGSListBean");
-        tvTitle.setText("五达标一公示");
+        tvTitle.setText("八达标一公示");
         tvTitle1.setText(mineWDBYGSListBean.getProjectName());
 
         String[] images1=mineWDBYGSListBean.getCleaningImage().split(",");

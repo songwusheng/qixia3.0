@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by sws on 2018/5/12.
  * from:
- * describe:五达标一公示--已查项目列表适配器
+ * describe:八达标一公示--已查项目列表适配器
  */
 
 public class MineFDLListAdapter extends BaseQuickAdapter<MineFDLBean,BaseViewHolder> {

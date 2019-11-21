@@ -48,7 +48,7 @@ public class HGLActivity extends BaseActivity implements View.OnClickListener {
         }else{
             tvtoptitle.setText("网络人员检查情况");
         }
-        tvTitle.setText("五达标一公示");
+        tvTitle.setText("八达标一公示");
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         if (ycxmFragment == null) {
             ycxmFragment = new HgFragment(type);

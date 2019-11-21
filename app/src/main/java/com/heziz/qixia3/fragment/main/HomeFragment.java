@@ -15,10 +15,12 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.heziz.qixia3.R;
 import com.heziz.qixia3.adaper.HomeListAdapter;
+import com.heziz.qixia3.adaper.HomeListAdapter2;
 import com.heziz.qixia3.app.MyApplication;
 import com.heziz.qixia3.base.BaseFragment;
 import com.heziz.qixia3.bean.HomeBean;
 import com.heziz.qixia3.bean.HomeListBean;
+import com.heziz.qixia3.bean.JiedaoNumBean;
 import com.heziz.qixia3.bean.ProjectBean;
 import com.heziz.qixia3.bean.UserInfor;
 import com.heziz.qixia3.network.API;
@@ -108,8 +110,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     LinearLayout llQT;
 
 
-    HomeListAdapter adapter;
-    private List<HomeListBean<List<ProjectBean>>> homeListBeans = new ArrayList<>();
+    HomeListAdapter2 adapter;
+    private List<HomeListBean<List<JiedaoNumBean>>> homeListBeans = new ArrayList<>();
 
     private UserInfor userInfor;
 
@@ -171,7 +173,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         tvZC.setText("智慧&差别化工地");
         dataSave = new ListDataSave(getActivity().getApplicationContext(), "project_list");
         userInfor = MyApplication.getInstance().getUserInfor();
-        adapter = new HomeListAdapter(getActivity(), homeListBeans);
+        adapter = new HomeListAdapter2(getActivity(), homeListBeans);
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), home_bg_icon4);
 //        gridLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity().getApplicationContext());
@@ -231,11 +233,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         if (userInfor.getPosition().equals("3")) {
             params.put("createName", userInfor.getAccount());
         }
-        JsonCallBack1<SRequstBean<List<HomeListBean<List<ProjectBean>>>>> jsonCallBack1 = new JsonCallBack1<SRequstBean<List<HomeListBean<List<ProjectBean>>>>>() {
+        JsonCallBack1<SRequstBean<List<HomeListBean<List<JiedaoNumBean>>>>> jsonCallBack1 = new JsonCallBack1<SRequstBean<List<HomeListBean<List<JiedaoNumBean>>>>>() {
             @Override
-            public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<List<HomeListBean<List<ProjectBean>>>>> response) {
-                List<HomeListBean<List<ProjectBean>>> list = response.body().getData();
-                dataSave.setDataList("project", list);
+            public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<List<HomeListBean<List<JiedaoNumBean>>>>> response) {
+                List<HomeListBean<List<JiedaoNumBean>>> list = response.body().getData();
+                //dataSave.setDataList("project", list);
                 if (userInfor.getPosition().equals("2")) {
                     for (int i = 0; i < list.size(); i++) {
                         if (list.get(i).getPopedom().equals(userInfor.getManagerId())) {
@@ -256,7 +258,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             }
 
             @Override
-            public void onError(com.lzy.okgo.model.Response<SRequstBean<List<HomeListBean<List<ProjectBean>>>>> response) {
+            public void onError(com.lzy.okgo.model.Response<SRequstBean<List<HomeListBean<List<JiedaoNumBean>>>>> response) {
                 super.onError(response);
                 dissmissProgressDialog();
             }

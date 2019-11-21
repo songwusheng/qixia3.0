@@ -178,7 +178,7 @@
                 android:drawablePadding="@dimen/padding10"
                 android:gravity="center"
                 android:textSize="@dimen/text12"
-                android:text="五达标一公示"/>
+                android:text="项目检查"/>
             <TextView
                 android:id="@+id/tvFd"
                 android:layout_width="0dp"

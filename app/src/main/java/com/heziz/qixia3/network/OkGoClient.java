@@ -208,7 +208,7 @@ public class OkGoClient {
     }
 
 
-    /*----我的 五达标一公示-----*/
+    /*----我的 八达标一公示-----*/
     public void postJsonData4(String url, Map<String, String> params, Map<String, String> params1,String keyName,String valueName, JsonCallBack1 callBack) {
         JSONObject object=new JSONObject();
         JSONObject object1=new JSONObject();
@@ -247,7 +247,7 @@ public class OkGoClient {
                 .execute(callBack);
     }
 
-    /*----我的 五达标一公示-----*/
+    /*----我的 八达标一公示-----*/
     public void postJsonData5(String url, Map<String, String> params, String keyName,String valueName, JsonCallBack1 callBack) {
         JSONObject object=new JSONObject();
         JSONObject object1=new JSONObject();
@@ -286,7 +286,7 @@ public class OkGoClient {
                 .execute(callBack);
     }
 
-    /*----我的 五达标一公示-----*/
+    /*----我的 八达标一公示-----*/
     public void postJsonData6(String url, Map<String, String> params, Map<String, String> params1,String keyName,String valueName, JsonCallBack1 callBack) {
         JSONObject object=new JSONObject();
         JSONObject object1=new JSONObject();

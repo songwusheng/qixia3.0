@@ -264,7 +264,7 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
             case R.id.tvRc:
                 intent.setClass(mContext,CommActivity.class);
                 intent.putExtra("type",2);
-                intent.putExtra("title","五达标一公示");
+                intent.putExtra("title","项目检查");
                 break;
             case R.id.tvFd:
                 if(userInfor.getPosition().equals("3")){

@@ -1,7 +1,10 @@
 package com.heziz.qixia3.ui.newjm;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -24,6 +27,7 @@ import com.heziz.qixia3.network.JsonCallBack1;
 import com.heziz.qixia3.network.OkGoClient;
 import com.heziz.qixia3.network.SRequstBean;
 import com.heziz.qixia3.ui.LoginActivity;
+import com.heziz.qixia3.ui.mine.WorkStatusActivity;
 import com.heziz.qixia3.ui.mine.clcx.MineCLCXListActivity;
 import com.heziz.qixia3.ui.mine.fdl.MineFdlListActivity;
 import com.heziz.qixia3.ui.mine.mineinfo.MineInfoActivity;
@@ -52,7 +56,11 @@ public class MineNewFragment extends BaseFragment implements View.OnClickListene
     TextView tvPhone;
     @BindView(R.id.tvXGMM)
     TextView tvXGMM;
+    @BindView(R.id.tvGZZT)
+    TextView tvGZZT;
     private UserInfor userInfor;
+    MyBroadcastReceiver mBroadcastReceiver;
+    private String workStatus;
     public MineNewFragment() {
         // Required empty public constructor
     }
@@ -71,19 +79,35 @@ public class MineNewFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void initViews() {
-
+        mBroadcastReceiver = new MyBroadcastReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("xg_workstatus_success");
+        getActivity().registerReceiver(mBroadcastReceiver, intentFilter);
         userInfor=MyApplication.getInstance().getUserInfor();
         tvPhone.setText(userInfor.getName());
+        workStatus=userInfor.getWorkStatus();
+        initDatas();
+
 
     }
 
     private void initDatas() {
 
+        if(workStatus.equals("0")){
+            tvGZZT.setText("工作状态：无");
+        }else if(workStatus.equals("1")){
+            tvGZZT.setText("工作状态：工作中");
+        }else if(workStatus.equals("2")){
+            tvGZZT.setText("工作状态：会议中");
+        }else if(workStatus.equals("3")){
+            tvGZZT.setText("工作状态：外出");
+        }
     }
 
     private void initeListeners() {
         btn.setOnClickListener(this);
         tvXGMM.setOnClickListener(this);
+        tvGZZT.setOnClickListener(this);
     }
 
     @Override
@@ -106,8 +130,30 @@ public class MineNewFragment extends BaseFragment implements View.OnClickListene
             case R.id.tvXGMM:
                 intent.setClass(getActivity(), MineXGMMActivity.class);
                 break;
+            case R.id.tvGZZT:
+                intent.setClass(getActivity(), WorkStatusActivity.class);
+                break;
 
         }
         startActivity(intent);
+    }
+
+    class MyBroadcastReceiver extends BroadcastReceiver {
+        public static final String TAG = "MyBroadcastReceiver";
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals("xg_workstatus_success")) {
+                //finish();
+                workStatus=intent.getStringExtra("status");
+                initDatas();
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(mBroadcastReceiver);
     }
 }

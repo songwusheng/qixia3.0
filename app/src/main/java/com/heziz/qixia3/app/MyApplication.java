@@ -13,6 +13,8 @@ import com.pgyersdk.update.PgyUpdateManager;
 import com.tencent.smtt.sdk.QbSdk;
 import com.tencent.smtt.sdk.TbsListener;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by sws on 2018/home_bg_icon3/28.
  * from:
@@ -42,6 +44,9 @@ public class MyApplication extends Application {
 //        new PgyUpdateManager.Builder()
 //                .register();
         PgyCrashManager.register();
+
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
         SDKInitializer.initialize(this);
         loadLibrary();
         QbSdk.setDownloadWithoutWifi(true);
@@ -124,4 +129,5 @@ public class MyApplication extends Application {
         }
         return  versionName;
     }
+
 }

@@ -6,12 +6,17 @@ android {
         applicationId "com.heziz.qixia3"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 54
-        versionName "1.0.54"
+        versionCode 2
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters "armeabi"
         }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : "com.heziz.qixia3",
+                JPUSH_APPKEY : "ca24f91afc50415ae5737279", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
         multiDexEnabled true
     }
     compileOptions {
@@ -136,4 +141,7 @@ dependencies {
     compile 'com.contrarywind:Android-PickerView:4.1.7'
     implementation files('libs/tbssdk.jar')
     compile 'cn.ittiger:TigerVideoPlayer:1.1'
+
+    compile 'cn.jiguang.sdk:jpush:3.3.9'  // 此处以JPush 3.3.9 版本为例。
+    compile 'cn.jiguang.sdk:jcore:2.1.6'  // 此处以JCore 2.1.6 版本为例。
 }

@@ -71,6 +71,21 @@
                 android:background="@color/white"
                 android:text="修改密码"
                 android:drawableRight="@drawable/project_jt"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding3"
+                android:background="@color/hui" />
+
+
+            <TextView
+                android:id="@+id/tvGZZT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding15"
+                android:textSize="@dimen/text14"
+                android:background="@color/white"
+                android:text="工作状态：外出"
+                android:drawableRight="@drawable/project_jt"/>
 
         </LinearLayout>
         <Button

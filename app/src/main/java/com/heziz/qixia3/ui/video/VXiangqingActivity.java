@@ -91,6 +91,8 @@ public class VXiangqingActivity extends BaseActivity implements View.OnClickList
     public static final int KEY_Handler_First_Frame = 20;
     public static final int KEY_Handler_Net_Error = 30;
     public static final int KEY_Handler_Play_Failed = 40;
+    public static final int KEY_Handler_TIme_Out = 50;
+    public static final int KEY_Handler_Start_Request = 60;
     public static final int KEY_Handler_Talk_Success = 70;
     public static final int KEY_Handler_Talk_failed = 80;
     private RelativeLayout rlBack;
@@ -175,7 +177,12 @@ public class VXiangqingActivity extends BaseActivity implements View.OnClickList
     @BindView(R.id.ivjdxx)
     ImageView ivjdxx;
     ProjectBean bean;
+    @BindView(R.id.llFDSX)
+    LinearLayout llFDSX;
+    @BindView(R.id.rlControl)
+    RelativeLayout rlControl;
 
+    private boolean canChangeFlag;
     /*定位参数*/
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
@@ -219,9 +226,37 @@ public class VXiangqingActivity extends BaseActivity implements View.OnClickList
                     }
                     break;
                 case KEY_Handler_Stream_Played:
-                    Log.w("main","当前播放winIndex=="+msg.obj);
-//                    dissmissProgressDialog();
-                    winIndex=(int)msg.obj;
+                    //dissmissProgressDialog();
+                    visibleView();
+                    canChangeFlag=true;
+                    winIndex = (int) msg.obj;
+                    break;
+                case KEY_Handler_Play_Failed:
+                    //dissmissProgressDialog();
+                    canChangeFlag=true;
+                    ToastUtil.showToast("播放失败");
+                    mPlayManager.stop((int) msg.obj);
+                    break;
+                case KEY_Handler_TIme_Out:
+                    //dissmissProgressDialog();
+                    canChangeFlag=true;
+                    ToastUtil.showToast("网络超时");
+                    mPlayManager.stop((int) msg.obj);
+                    break;
+                case KEY_Handler_First_Frame:
+                    //dissmissProgressDialog();
+                    //ToastUtil.showToast("KEY_Handler_First_Frame");
+                    //mPlayManager.stop((int) msg.obj);
+                    break;
+                case KEY_Handler_Net_Error:
+                    //dissmissProgressDialog();
+                    canChangeFlag=true;
+                    ToastUtil.showToast("网络错误");
+                    //mPlayManager.stop((int) msg.obj);
+                    break;
+                case KEY_Handler_Start_Request:
+                    //dissmissProgressDialog();
+                    //ToastUtil.showToast("开始请求");
                     break;
             }
         }
@@ -256,7 +291,14 @@ public class VXiangqingActivity extends BaseActivity implements View.OnClickList
         initCommonWindow();
 
     }
-
+    private void visibleView(){
+        rlControl.setVisibility(View.VISIBLE);
+        llFDSX.setVisibility(View.VISIBLE);
+    }
+    private void unvisibleView(){
+        rlControl.setVisibility(View.GONE);
+        llFDSX.setVisibility(View.GONE);
+    }
     /**
      * 批量播放
      */
@@ -480,12 +522,12 @@ public class VXiangqingActivity extends BaseActivity implements View.OnClickList
                     tvXmxj.setText(ProjectUtils.getValue(bean.getZjResult()));
                     tvWlxj.setText(ProjectUtils.getValue(bean.getWgResult()));
                     if(bean.getContractStartDate()!=null){
-                        tvkg.setText(TimeUtils.getTime(bean.getContractStartDate()));
+                        tvkg.setText(bean.getContractStartDate().substring(0,10));
                     }else{
                         tvkg.setText("-");
                     }
                     if(bean.getContractEndDate()!=null){
-                        tvjg.setText(ProjectUtils.getValue(TimeUtils.getTime(bean.getContractEndDate())));
+                        tvjg.setText(ProjectUtils.getValue(bean.getContractEndDate().substring(0,10)));
                     }else{
                         tvjg.setText("-");
                     }
@@ -544,8 +586,23 @@ public class VXiangqingActivity extends BaseActivity implements View.OnClickList
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                currentNum=position;
-                startPlay(channels.get(position));
+
+                if(canChangeFlag){
+
+
+                    if (channels.get(position).getState() == ChannelInfo.ChannelState.Online) {
+                        unvisibleView();
+                        canChangeFlag=false;
+                        currentNum=position;
+                        startPlay(channels.get(position));
+                    } else if (channels.get(position).getState() == ChannelInfo.ChannelState.Offline) {
+                        ToastUtil.showToast("切换失败，设备不在线");
+                    } else {
+                        ToastUtil.showToast("切换失败，设备升级");
+                    }
+                } else{
+                    ToastUtil.showToast("正在加载，请勿切换");
+                }
 
             }
         });

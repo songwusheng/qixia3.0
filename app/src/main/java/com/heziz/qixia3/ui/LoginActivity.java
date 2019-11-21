@@ -45,6 +45,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jpush.android.api.JPushInterface;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
@@ -286,8 +287,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onSuccess(com.lzy.okgo.model.Response<HezhiResponse<UserInfor>> response) {
                 //保存uuid
+                UserInfor userInfor=response.body().data;
                 MyApplication.getInstance().setUserInfor(response.body().data);
                 dissmissProgressDialog();
+                JPushInterface.setAlias(mContext,0,userInfor.getName());
                 startMyActivity(NewHomeActivity.class);
                 finish();
             }

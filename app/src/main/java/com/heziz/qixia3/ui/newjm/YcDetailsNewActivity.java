@@ -387,6 +387,8 @@ public class YcDetailsNewActivity extends BaseActivity {
             xAxis.setDrawGridLines(false);
             xAxis.setTextSize(6);
             xAxis.setLabelRotationAngle(45);
+            //很重要，设置x轴上的标签数和点数一样，不会出现多余的标签
+            xAxis.setGranularity(1);
             //xAxis.setLabelCount(12);
             // vertical grid lines
 //          如果设置为true，则在绘制时会避免“剪掉”在x轴上的图表或屏幕边缘的第一个和最后一个坐标轴标签项。
@@ -397,7 +399,7 @@ public class YcDetailsNewActivity extends BaseActivity {
                 public String getFormattedValue(float value, AxisBase axis) {
                     String time="";
                     int value1=(int)value;
-                    if(value1<list.size()){
+                    if(value1<list.size()&&value1>=0){
                         time=list.get(value1).getTimeSlot().substring(11,16);
                     }
                     return time;

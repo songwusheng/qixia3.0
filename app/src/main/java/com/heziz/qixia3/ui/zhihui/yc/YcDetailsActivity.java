@@ -269,12 +269,12 @@ public class YcDetailsActivity extends BaseActivity implements View.OnClickListe
                 tvXmxj.setText(ProjectUtils.getValue(bean.getZjResult()));
                 tvWlxj.setText(ProjectUtils.getValue(bean.getWgResult()));
                 if(bean.getContractStartDate()!=null){
-                    tvkg.setText(TimeUtils.getTime(bean.getContractStartDate()));
+                    tvkg.setText(bean.getContractStartDate());
                 }else{
                     tvkg.setText("-");
                 }
                 if(bean.getContractEndDate()!=null){
-                    tvjg.setText(ProjectUtils.getValue(TimeUtils.getTime(bean.getContractEndDate())));
+                    tvjg.setText(ProjectUtils.getValue(bean.getContractEndDate()));
                 }else{
                     tvjg.setText("-");
                 }

@@ -16,6 +16,7 @@ public class UserInfor implements Serializable{
      * station : null
      * managerId : null
      * position : 3
+     * workStatus
      * name
      */
 
@@ -25,6 +26,15 @@ public class UserInfor implements Serializable{
     private Object managerId;
     private String position;
     private String name;
+    private String workStatus;
+
+    public String getWorkStatus() {
+        return workStatus;
+    }
+
+    public void setWorkStatus(String workStatus) {
+        this.workStatus = workStatus;
+    }
 
     public String getName() {
         return name;

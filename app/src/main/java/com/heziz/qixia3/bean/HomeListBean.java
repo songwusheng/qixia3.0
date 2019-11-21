@@ -40,6 +40,8 @@ public class HomeListBean<T> implements Serializable {
     private double cost;
     private int szg;
     private int qzg;
+    private int wsbZh;
+    private int zhDiff;
     private T list;
 
     public T getList() {

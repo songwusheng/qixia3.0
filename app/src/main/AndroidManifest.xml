@@ -45,7 +45,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- SD卡读取权限，用户写入离线定位数据 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-
+    <uses-permission
+        android:name="com.huawei.android.launcher.permission.CHANGE_BADGE "/>
     <!-- 必选 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 获取网络状态 -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 网络通信 -->
@@ -78,7 +79,34 @@
 
         <meta-data
             android:name="PGYER_APPID"
-            android:value="8e260f78d236bc0f5479c54c6799d400" />
+            android:value="b1cb47faa836f0744f668d2aaeb0ff2f" />
+
+        <service android:name=".service.MyJpushService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":pushcore">
+            <intent-filter>
+                <action android:name="cn.jiguang.user.service.action" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name=".receiver.MyJPushReceiver"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+                <category android:name="com.heziz.qixia3" />
+            </intent-filter>
+        </receiver>
+
+
 
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
@@ -165,7 +193,8 @@
         <activity android:name=".ui.newjm.SanjiActivity" />
         <activity android:name=".ui.searchpassword.QRYHMActivity" />
         <activity android:name=".ui.searchpassword.SearchPasswordActivity" />
-        <activity android:name=".ui.searchpassword.SearchSucessActivity"></activity>
+        <activity android:name=".ui.searchpassword.SearchSucessActivity" />
+        <activity android:name=".ui.mine.WorkStatusActivity"></activity>
     </application>
 
 </manifest>

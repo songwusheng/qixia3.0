@@ -146,8 +146,8 @@ public class ProjectBean implements Serializable {
     private Object isUpdate;
     private Object siteid;
     private String pType;
-    private Long contractStartDate;
-    private Long contractEndDate;
+    private String contractStartDate;
+    private String contractEndDate;
     private Long factStartDate;
     private Object factEndDate;
     private String pArea;
@@ -250,6 +250,22 @@ public class ProjectBean implements Serializable {
 
     private String zjResult;
     private String wgResult;
+
+    public String getContractStartDate() {
+        return contractStartDate;
+    }
+
+    public void setContractStartDate(String contractStartDate) {
+        this.contractStartDate = contractStartDate;
+    }
+
+    public String getContractEndDate() {
+        return contractEndDate;
+    }
+
+    public void setContractEndDate(String contractEndDate) {
+        this.contractEndDate = contractEndDate;
+    }
 
     public String getZjResult() {
         return zjResult;
@@ -395,21 +411,7 @@ public class ProjectBean implements Serializable {
         this.pType = pType;
     }
 
-    public Long getContractStartDate() {
-        return contractStartDate;
-    }
 
-    public void setContractStartDate(Long contractStartDate) {
-        this.contractStartDate = contractStartDate;
-    }
-
-    public Long getContractEndDate() {
-        return contractEndDate;
-    }
-
-    public void setContractEndDate(Long contractEndDate) {
-        this.contractEndDate = contractEndDate;
-    }
 
     public Long getFactStartDate() {
         return factStartDate;

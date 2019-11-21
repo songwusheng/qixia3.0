@@ -67,7 +67,8 @@ public class CLCXDetailsActivity extends BaseActivity {
                     ivPic.setVisibility(View.GONE);
                     btn.setText("停止回放");
                 }else{
-                    video_player_view.onChangeUIPauseState();
+                    //video_player_view.onChangeUIPauseState();
+                    video_player_view.exitSmallWindowPlay(true);
                     video_player_view.setVisibility(View.GONE);
                     ivPic.setVisibility(View.VISIBLE);
                     btn.setText("回放现场视频");

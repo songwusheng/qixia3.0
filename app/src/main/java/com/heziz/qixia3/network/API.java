@@ -56,7 +56,7 @@ public class API {
  //通过设备id车辆未冲洗列表
  public static String CAR_DEVICE_LIST=base_url+"hzjg/qxNewDemand/getFtpAlarmByDivId";
  //websocket地址
-public static String WEBSOCKET_URL="ws://skt.heziz.com:28012/websocket";
+public static String WEBSOCKET_URL="ws://skt.heziz.com:28020/websocket";
  //根据设备id查看扬尘折线图
  public static String YC_HISTORY_URL=base_url+"hzjg/newDemandForDust/getAWeekOrOnDayAvgOfFugitiveDustByDeviceId/1"; //根据项目id获取扬尘报警数据
  public static String YC_HISTORY_URL1=base_url+"hzjg/newDemandForDust/getAWeekOrOnDayAvgOfFugitiveDustByDeviceId1/"; //根据项目id获取扬尘报警数据
@@ -107,15 +107,15 @@ public static String WEBSOCKET_URL="ws://skt.heziz.com:28012/websocket";
  //获取非道路机械的项目下具体购油数据list
  public static String FDL_PROJECT_DETAILS_LIST=base_url+"hzjg/projectDieselOilOpt/queryTDieselOilList";
 
- //日常任务--五达标一公示
+ //日常任务--八达标一公示
  public static String RCRW_WDBYGS=base_url+"hzxm/daliy/queryZCCountVo";
- //五达标一公示--已查项目列表
+ //八达标一公示--已查项目列表
  public static String WDBYGS_YC_LIST=base_url+"hzxm/daliy/searchPage";
- //五达标一公示--未查项目列表
+ //八达标一公示--未查项目列表
  public static String WDBYGS_WC_LIST=base_url+"hzxm/daliy/queryNotCheck";
- //五达标一公示--合格列表
+ //八达标一公示--合格列表
  public static String HG_LIST=base_url+"hzxm/daliy/searchList";
- //五达标一公示--不合格列表
+ //八达标一公示--不合格列表
  public static String BHG_LIST=base_url+"hzxm/daliy/searchList";
 
  //日常任务--网络人员
@@ -124,6 +124,8 @@ public static String WEBSOCKET_URL="ws://skt.heziz.com:28012/websocket";
 
  //我的界面
  public static String YC_CL_NUM=base_url+"hzjg/qxNewDemand/getProjectAlarmByprojectId";
+ //我的界面--工作状态
+ public static String WORKSTATUS=base_url+"urmp/user/setWorkStatus";
  //我的--扬尘报警列表
  public static String MINE_YC_LIST=base_url+"hzjg/qxNewDemand/getWeatherAlarmByProject";
  //我的--扬尘报警列表--工地详情列表
@@ -136,7 +138,7 @@ public static String WEBSOCKET_URL="ws://skt.heziz.com:28012/websocket";
  public static String MINE_CLCX_DETAILS_LIST=base_url+"hzjg/qxNewDemand/getFtpAlarmByprojectId";
  //我的--车辆报警列表--工地详情列表
  public static String MINE_CLCX_DETAILS_LIST1=base_url+"hzjg/qxNewDemand/getFtpAlarmByprojectId1";
- //我的--五达标一公示list
+ //我的--八达标一公示list
  public static String MINE_WDBYGS_LIST=base_url+"hzxm/daliy/searchAPPPage";
  //我的--专项检查list
  public static String MINE_ZXJC_LIST=base_url+"hzxm/customDaliy/searchPage";

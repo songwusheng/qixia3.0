@@ -100,7 +100,7 @@ public class MineWDBYGSListActivity extends BaseActivity implements View.OnClick
     }
 
     private void initViews() {
-        tvTitle.setText("五达标一公示");
+        tvTitle.setText("八达标一公示");
         userInfor = MyApplication.getInstance().getUserInfor();
         SXData();
         adapter=new MineWDBYGSListAdapter(this,list);
