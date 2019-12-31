@@ -45,8 +45,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- SD卡读取权限，用户写入离线定位数据 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission
-        android:name="com.huawei.android.launcher.permission.CHANGE_BADGE "/>
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE " />
     <!-- 必选 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 获取网络状态 -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 网络通信 -->
@@ -81,7 +80,8 @@
             android:name="PGYER_APPID"
             android:value="b1cb47faa836f0744f668d2aaeb0ff2f" />
 
-        <service android:name=".service.MyJpushService"
+        <service
+            android:name=".service.MyJpushService"
             android:enabled="true"
             android:exported="false"
             android:process=":pushcore">
@@ -93,7 +93,7 @@
         <receiver
             android:name=".receiver.MyJPushReceiver"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
                 <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
@@ -102,11 +102,10 @@
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
                 <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+
                 <category android:name="com.heziz.qixia3" />
             </intent-filter>
         </receiver>
-
-
 
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
@@ -152,22 +151,20 @@
         <activity android:name=".ui.zhihui.sp.SpStreetDeviceListActivity" />
         <activity android:name=".ui.zhihui.sp.SpStreetProjectActivity" />
         <activity android:name=".ui.zhihui.clwcx.ClwcxStreetDeviceActivity" />
-        <activity android:name=".ui.rcjc.WDBGDZCActivity" />
         <activity android:name=".ui.zhihui.clwcx.ClcxStreetProjectActivity" />
         <activity android:name=".ui.mine.yc.MineYcListActivity" />
-        <activity android:name=".ui.mine.wdbygs.MineWDBYGSListActivity" />
+        <!-- <activity android:name=".ui.mine.wdbygs.MineWDBYGSListActivity" /> -->
         <activity android:name=".ui.mine.yc.MineYcGJProjectXXListActivity" />
-        <activity android:name=".ui.mine.zxjc.MineZXJCListActivity" />
+        <!-- <activity android:name=".ui.mine.zxjc.MineZXJCListActivity" /> -->
         <activity android:name=".ui.mine.clcx.MineCLCXListActivity" />
         <activity android:name=".ui.mine.clcx.MineCLCXProjectXXActivity" />
         <activity android:name=".ui.mine.fdl.MineFdlListActivity" />
         <activity android:name=".ui.mine.fdl.MineFDLdetailsActivity" />
-        <activity android:name=".ui.mine.wdbygs.MineWDBYGSdetailsActivity" />
-        <activity android:name=".ui.mine.wdbygs.MineWDBYGSZGDetailsActivity" />
-        <activity android:name=".ui.mine.zxjc.MineZXJCDetailsActivity" />
-        <activity android:name=".ui.mine.zxjc.MineZXJCZGDetailsActivity" />
+        <!-- <activity android:name=".ui.mine.wdbygs.MineWDBYGSdetailsActivity" /> -->
+        <!-- <activity android:name=".ui.mine.wdbygs.MineWDBYGSZGDetailsActivity" /> -->
+        <!-- <activity android:name=".ui.mine.zxjc.MineZXJCDetailsActivity" /> -->
+        <!-- <activity android:name=".ui.mine.zxjc.MineZXJCZGDetailsActivity" /> -->
         <activity android:name=".ui.zhihui.clwcx.ClcxDeviceDetailsActivity" />
-        <activity android:name=".ui.rcjc.HGLActivity" />
         <activity android:name=".ui.rcjc.WebviewActivity" />
         <activity
             android:name=".bigimage.JBrowseImgActivity"
@@ -194,7 +191,32 @@
         <activity android:name=".ui.searchpassword.QRYHMActivity" />
         <activity android:name=".ui.searchpassword.SearchPasswordActivity" />
         <activity android:name=".ui.searchpassword.SearchSucessActivity" />
-        <activity android:name=".ui.mine.WorkStatusActivity"></activity>
+        <activity android:name=".ui.mine.WorkStatusActivity" />
+        <activity android:name=".ui.rcjc.ProjectCheckActivity" />
+        <activity
+            android:name=".ui.rcjc.监管方日常检查.DayCheckActivity"
+            android:label="@string/title_activity_day_check"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".ui.rcjc.监管方日常检查.NewDayCheckActivity" />
+        <activity android:name=".ui.rcjc.监管方日常检查.NewCheckSelectProActivity" />
+        <activity android:name=".ui.rcjc.监管方日常检查.NewCheckDetailsActivity" />
+        <activity android:name=".ui.rcjc.监管方日常检查.CheckDetailsctivity" />
+        <activity android:name=".image.ImagePreviewActivity" />
+        <activity android:name=".ui.rcjc.监管方专项检查.ZXCheckActivity" />
+        <activity android:name=".ui.rcjc.监管方专项检查.NewZXCheckActivity" />
+        <activity android:name=".ui.rcjc.项目方自查.XMZCCheckActivity" />
+        <activity android:name=".ui.rcjc.监管方专项检查.ZXCheckDetailsctivity" />
+        <activity android:name=".ui.rcjc.项目方日常检查待整改.XMRCCheckDZGActivity" />
+        <activity android:name=".ui.rcjc.项目方专项检查待整改.XMZXCheckDZGActivity" />
+        <activity android:name=".ui.rcjc.项目方自查.NewZCActivity" />
+        <activity android:name=".ui.rcjc.项目方自查.XMFZCDetailsctivity" />
+        <activity android:name=".ui.rcjc.项目方日常检查待整改.XMFRCDZGDetailsctivity" />
+        <activity android:name=".ui.rcjc.项目方专项检查待整改.XMFZXDZGDetailsctivity" />
+        <activity
+            android:name="com.heziz.MediaPlayActivity"
+            android:label="@string/title_activity_media_play"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".ui.rcjc.ProjectCheckNumDetailsActivity"></activity>
     </application>
 
 </manifest>

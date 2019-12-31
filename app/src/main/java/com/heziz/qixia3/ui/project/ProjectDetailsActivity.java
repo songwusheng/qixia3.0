@@ -248,7 +248,12 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
 //                    String car=object.getString("ftpAlarmCount");
                     tvCar.setText("今日违章"+bean.getFtpAlarmCount()+"起");
                     spNum=Integer.valueOf(bean.getVideoNum());
-                    tvSp.setText("已安装"+bean.getVideoNum()+"台");
+                    if(bean.getVideoNum().equals("0")){
+                        tvSp.setText("未安装");
+                    }else{
+                        tvSp.setText("已安装"+bean.getVideoNum()+"台");
+                    }
+
                     tvYc.setText("告警"+bean.getWeatherAlarmNum()+"次");
 //                } catch (JSONException e) {
 //                    e.printStackTrace();

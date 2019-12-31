@@ -28,9 +28,9 @@ public class ChannelInfoAdapter extends BaseQuickAdapter<ChannelInfo,BaseViewHol
     protected void convert(BaseViewHolder helper, ChannelInfo item) {
         helper.setText(R.id.tvChannelName, item.getName());
         if(item.getState()==ChannelInfo.ChannelState.Online){
-            Glide.with(mContext).load(R.drawable.sp_online).crossFade().into((ImageView) helper.getView(R.id.ivChannel));
+            Glide.with(mContext).load(R.drawable.sp_online).into((ImageView) helper.getView(R.id.ivChannel));
         }else{
-            Glide.with(mContext).load(R.drawable.sp_offline).crossFade().into((ImageView) helper.getView(R.id.ivChannel));
+            Glide.with(mContext).load(R.drawable.sp_offline).into((ImageView) helper.getView(R.id.ivChannel));
         }
 ////        helper.setText(R.id.tvNum, String.valueOf(n));
 ////                .setText(R.id.tweetText, item.getText())

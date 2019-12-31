@@ -1,10 +1,5 @@
 package com.heziz.qixia3.network;
 
-import android.util.Log;
-
-import com.google.gson.Gson;
-import com.heziz.qixia3.bean.rcjc.RcjcBean;
-import com.heziz.qixia3.utils.LogUtils;
 import com.lzy.okgo.callback.AbsCallback;
 
 import okhttp3.Response;

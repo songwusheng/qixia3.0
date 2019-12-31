@@ -8,8 +8,9 @@
     <!--<color name="maincolor1">#9DAEFC</color>-->
     <color name="maincolor1">#45A6F7</color>
     <color name="maincolor2">#92CEFF</color>
+    <color name="maincolor3">#44A6F8</color>
     <color name="zxt_yjx_color">#FBD8B4</color>
-    <color name="textcolor">#45A6F7</color>
+    <color name="textcolor">#596EFF</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
     <color name="hui">#e8e8e8</color>
@@ -28,4 +29,6 @@
     <color name="color4">#E1E7FF</color>
 
     <color name="transparent">#00000000</color>
+
+    <color name="color_f6">#f6f6f6</color>
 </resources>

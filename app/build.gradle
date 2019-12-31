@@ -1,21 +1,21 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 android {
-    compileSdkVersion 25
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.heziz.qixia3"
         minSdkVersion 19
-        targetSdkVersion 26
-        versionCode 2
-        versionName "1.0.2"
+        targetSdkVersion 28
+        versionCode 4
+        versionName "1.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters "armeabi"
         }
         manifestPlaceholders = [
-                JPUSH_PKGNAME : "com.heziz.qixia3",
+                JPUSH_PKGNAME: "com.heziz.qixia3",
                 JPUSH_APPKEY : "ca24f91afc50415ae5737279", //JPush 上注册的包名对应的 Appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
         multiDexEnabled true
     }
@@ -100,18 +100,17 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:support-v4:25.1.0'
-    implementation 'com.android.support:design:25.1.0'
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:recyclerview-v7:25.1.0'
-    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support.constraint:constraint-layout:1.1.3'
+    compile 'com.android.support:support-compat:25.1.1'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
+    compile 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.google.code.gson:gson:2.2.4'
-    compile 'com.youth.banner:banner:1.4.10'
-    compile 'com.bigkoo:convenientbanner:2.0.5'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     compile 'com.lzy.net:okgo:3.0.4'
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
     implementation files('libs/BaiduLBS_Android.jar')
     compile(name: 'AudioTalk-release', ext: 'aar')
     compile(name: 'BaseLib-release', ext: 'aar')
@@ -124,24 +123,24 @@ dependencies {
     compile(name: 'pulltorefresh-1.00.000', ext: 'aar')
     compile(name: 'WindowComponent-release', ext: 'aar')
     compile 'com.pgyersdk:sdk:3.0.3'
-    //    implementation 'pub.devrel:easypermissions:1.2.0'
-    //    compile 'com.android.support:multidex:1.0.1'
-    compile 'com.android.support:support-compat:25.1.1'
     compile 'com.daimajia.easing:library:2.0@aar'
     compile 'com.daimajia.androidanimations:library:2.3@aar'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.0.1'
+    //    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    //    compile 'io.reactivex.rxjava2:rxjava:2.0.5'
     implementation files('libs/commons-io-2.5.jar')
-    implementation files('libs/BaiduLBS_Android.jar')
-    //    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
     implementation 'com.github.mjdev:libaums:0.5.5'
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile 'com.contrarywind:Android-PickerView:4.1.7'
+    compile 'com.contrarywind:Android-PickerView:4.1.9'
     implementation files('libs/tbssdk.jar')
     compile 'cn.ittiger:TigerVideoPlayer:1.1'
+    compile 'cn.jiguang.sdk:jpush:3.3.9'
+    // 此处以JPush 3.3.9 版本为例。
+    compile 'cn.jiguang.sdk:jcore:2.1.6'
+    // 此处以JCore 2.1.6 版本为例。
+    compile 'com.android.support:multidex:1.0.0'
+    implementation project(':imagepicker')
 
-    compile 'cn.jiguang.sdk:jpush:3.3.9'  // 此处以JPush 3.3.9 版本为例。
-    compile 'cn.jiguang.sdk:jcore:2.1.6'  // 此处以JCore 2.1.6 版本为例。
+    compile 'me.codeboy.android:align-text-view:2.3.2'
 }

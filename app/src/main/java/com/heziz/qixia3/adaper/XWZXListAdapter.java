@@ -60,7 +60,7 @@ public class XWZXListAdapter extends BaseQuickAdapter<XWZXBean,BaseViewHolder> {
 //            Glide.with(mContext).load(R.mipmap.wj_i
 //        if (mg).crossFade().into((ImageView) helper.getView(R.id.ivlx));
 //        }else{
-            Glide.with(mContext).load(R.drawable.xwzx_wj_icon).crossFade().into((ImageView) helper.getView(R.id.ivlx));
+            Glide.with(mContext).load(R.drawable.xwzx_wj_icon).into((ImageView) helper.getView(R.id.ivlx));
 
         //}
     }

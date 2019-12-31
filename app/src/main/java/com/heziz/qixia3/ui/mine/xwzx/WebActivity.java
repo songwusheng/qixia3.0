@@ -70,16 +70,10 @@ public class WebActivity extends BaseActivity implements TbsReaderView.ReaderCal
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new java.util.Date());
         base=getIntent().getStringExtra("url");
-        showProgressDialog();
+        //showProgressDialog();
         if(base.endsWith("jpg")||base.endsWith("jpeg")||base.endsWith("png")||base.endsWith("bmp")){
             iv.setVisibility(View.VISIBLE);
-            Glide.with(this).load(base).into(new SimpleTarget<GlideDrawable>() {
-                @Override
-                public void onResourceReady(GlideDrawable glideDrawable, GlideAnimation<? super GlideDrawable> glideAnimation) {
-                    dissmissProgressDialog();
-                    iv.setImageDrawable(glideDrawable);
-                }
-            });
+            Glide.with(this).load(base).into(iv);
 
         }else{
 

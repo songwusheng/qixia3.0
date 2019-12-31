@@ -1,7 +1,6 @@
 package com.heziz.qixia3.ui.newjm;
 
 import android.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -10,9 +9,7 @@ import android.widget.TextView;
 import com.heziz.qixia3.R;
 import com.heziz.qixia3.base.BaseActivity;
 import com.heziz.qixia3.fragment.main.HomeFragment;
-import com.heziz.qixia3.fragment.main.MineFragment;
 import com.heziz.qixia3.fragment.main.ProjectFragment;
-import com.heziz.qixia3.fragment.main.RenwuFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +24,7 @@ public class CommActivity extends BaseActivity {
 
     private HomeFragment homeFragment;
     private ProjectFragment projectFragment;
-    private RenwuFragment renwuFragment;
+    //private RenwuFragment renwuFragment;
     private MineNewFragment mineFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +50,8 @@ public class CommActivity extends BaseActivity {
                 fragmentTransaction.add(R.id.flMain, projectFragment);
                 break;
             case 2:
-                renwuFragment = new RenwuFragment();
-                fragmentTransaction.add(R.id.flMain, renwuFragment);
+                //renwuFragment = new RenwuFragment();
+                //fragmentTransaction.add(R.id.flMain, renwuFragment);
                 break;
             case 3:
                 mineFragment = new MineNewFragment();

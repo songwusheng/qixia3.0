@@ -3,6 +3,8 @@ package com.heziz.qixia3.network;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.heziz.qixia3.app.MyApplication;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpHeaders;
@@ -49,7 +51,14 @@ public class OkGoClient {
                 .execute(callBack);
     }
 
-    public void getJsonData0(String url, Map<String, String> params, JsonCallBack0 callBack) {
+    public void getJsonData0(String url, Map<String, String> params, JsonCallBack2 callBack) {
+        OkGo.getInstance()
+                .setRetryCount(1)
+                .get(url)
+                .params(params)
+                .execute(callBack);
+    }
+    public void getJsonData2(String url, Map<String, String> params, JsonCallBack0 callBack) {
         OkGo.getInstance()
                 .setRetryCount(1)
                 .get(url)
@@ -156,6 +165,43 @@ public class OkGoClient {
                 // 根据键值对对象获取键和值
                 String key = me.getKey();
                 String value = me.getValue();
+                object1.put(key,value);
+            }
+            for (Map.Entry<String, String> me : set1) {
+                // 根据键值对对象获取键和值
+                String key = me.getKey();
+                String value = me.getValue();
+                object2.put(key,value);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.w("main","请求参数："+object.toString());
+        OkGo.getInstance()
+                .setRetryCount(1)
+                .post(url)
+                .upJson(object.toString().replace("\\",""))
+//                .params(map)
+                .execute(callBack);
+    }
+
+    public void postJsonData22(String url, Map<String, Object> params, Map<String, String> params1, JsonCallBack1 callBack) {
+        JSONObject object=new JSONObject();
+        JSONObject object1=new JSONObject();
+        JSONObject object2=new JSONObject();
+
+        try {
+            object.put("entity",object1);
+            object.put("paging",object2);
+            // 获取所有键值对对象的集合
+            Set<Map.Entry<String, Object>> set = params.entrySet();
+            Set<Map.Entry<String, String>> set1 = params1.entrySet();
+            // 遍历键值对对象的集合，得到每一个键值对对象
+            for (Map.Entry<String, Object> me : set) {
+                // 根据键值对对象获取键和值
+                String key = me.getKey();
+                Object value = me.getValue();
                 object1.put(key,value);
             }
             for (Map.Entry<String, String> me : set1) {
@@ -323,6 +369,36 @@ public class OkGoClient {
                 .setRetryCount(1)
                 .post(url)
                 .upJson(object.toString().replace("\\",""))
+//                .params(map)
+                .execute(callBack);
+    }
+
+
+    public void postJsonData9(String url, Object params, JsonCallBack1 callBack) {
+        Gson gson=new Gson();
+        String s=gson.toJson(params);
+        OkGo.getInstance()
+                .setRetryCount(1)
+                .post(url)
+                .upJson(s)
+//                .params(map)
+                .execute(callBack);
+    }
+    public void postJsonData10(String url, Map<String, String> params, JsonCallBack1 callBack) {
+        JSONObject object=new JSONObject(params);
+        OkGo.getInstance()
+                .setRetryCount(1)
+                .post(url)
+                .upJson(object.toString())
+//                .params(map)
+                .execute(callBack);
+    }
+    public void postJsonData11(String url, Map<String, Object> params, JsonCallBack0 callBack) {
+        JSONObject object=new JSONObject(params);
+        OkGo.getInstance()
+                .setRetryCount(1)
+                .post(url)
+                .upJson(object.toString())
 //                .params(map)
                 .execute(callBack);
     }

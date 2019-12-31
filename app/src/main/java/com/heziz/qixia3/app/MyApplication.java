@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.util.Log;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.heziz.qixia3.bean.JPushCommBean;
 import com.heziz.qixia3.bean.UserInfor;
 import com.pgyersdk.crash.PgyCrashManager;
 import com.pgyersdk.update.PgyUpdateManager;
@@ -28,6 +29,16 @@ public class MyApplication extends Application {
     private static Context mContext;
     private String otgString;
 
+    private JPushCommBean jPushCommBean;
+
+    public JPushCommBean getjPushCommBean() {
+        return jPushCommBean;
+    }
+
+    public void setjPushCommBean(JPushCommBean jPushCommBean) {
+        this.jPushCommBean = jPushCommBean;
+    }
+
     public String getOtgString() {
         return otgString;
     }
@@ -39,6 +50,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        jPushCommBean=new JPushCommBean("0","0","0","0","0","0");
         instance=this;
         mContext=this;
 //        new PgyUpdateManager.Builder()

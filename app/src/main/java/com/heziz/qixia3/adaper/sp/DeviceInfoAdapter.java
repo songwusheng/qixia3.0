@@ -30,9 +30,9 @@ public class DeviceInfoAdapter extends BaseQuickAdapter<ProjectVideoBean<VideoPr
     protected void convert(BaseViewHolder helper, ProjectVideoBean<VideoProjectBean> item) {
         helper.setText(R.id.tvChannelName, "设备");
         if(item.getIsOnline().equals("Offline")){
-            Glide.with(mContext).load(R.drawable.sp_offline).crossFade().into((ImageView) helper.getView(R.id.ivChannel));
+            Glide.with(mContext).load(R.drawable.sp_offline).into((ImageView) helper.getView(R.id.ivChannel));
         }else{
-            Glide.with(mContext).load(R.drawable.sp_online).crossFade().into((ImageView) helper.getView(R.id.ivChannel));
+            Glide.with(mContext).load(R.drawable.sp_online).into((ImageView) helper.getView(R.id.ivChannel));
         }
 ////        helper.setText(R.id.tvNum, String.valueOf(n));
 ////                .setText(R.id.tweetText, item.getText())

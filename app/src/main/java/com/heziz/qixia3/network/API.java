@@ -107,20 +107,51 @@ public static String WEBSOCKET_URL="ws://skt.heziz.com:28020/websocket";
  //获取非道路机械的项目下具体购油数据list
  public static String FDL_PROJECT_DETAILS_LIST=base_url+"hzjg/projectDieselOilOpt/queryTDieselOilList";
 
- //日常任务--八达标一公示
- public static String RCRW_WDBYGS=base_url+"hzxm/daliy/queryZCCountVo";
- //八达标一公示--已查项目列表
- public static String WDBYGS_YC_LIST=base_url+"hzxm/daliy/searchPage";
- //八达标一公示--未查项目列表
- public static String WDBYGS_WC_LIST=base_url+"hzxm/daliy/queryNotCheck";
- //八达标一公示--合格列表
- public static String HG_LIST=base_url+"hzxm/daliy/searchList";
- //八达标一公示--不合格列表
- public static String BHG_LIST=base_url+"hzxm/daliy/searchList";
 
+ //日常任务--五达标一公示
+ public static String RCRW_WDBYGS=base_url+"hzxm/daliy/queryZCCountVo";
  //日常任务--网络人员
  public static String RCRW_WLRY=base_url+"hzxm/daliy/queryWCCountVo";
- public static String WEB_URL1="https://oa.heziz.com/loginApp";
+ //网格人员检查情况和项目方自查情况详情列表
+ public static String WG_XM_LIST=base_url+"hzxm/daliy/queryPage";
+ //日常检查
+ public static String RCJC_LIST=base_url+"hzxm/daliy/searchPage";
+ //专项检查
+ public static String ZXJC_LIST=base_url+"hzxm/customDaliy/getSimplePage";
+ //新增专项检查推送
+ public static String ZXJC_NOTICE=base_url+"urmp/appPush/push";
+ public static String ZXJC_NOTICE_NO=base_url+"urmp/appPush/notpush";
+ //新增专项检查推送获取人名
+ public static String RM=base_url+"urmp/user/getUsernameByAccount";
+ //新增专项检查
+ public static String NEW_ZXCHECK=base_url+"hzxm/customDaliy/selfAdd";
+ //专项检查详情
+ public static String ZXCHECK_DETAILS=base_url+"hzxm/customDaliy/getDetail";
+ //专项审核
+ public static String ZXCHECK_SH=base_url+"hzxm/customDaliy/selfModify";
+ //专项检查--删除列表
+ public static String ZXCHECK_DELETE=base_url+"hzxm/customDaliy/deleteByIdAndEndStatus";
+
+ //日常检查--新增--选择项目列表
+ public static String RCJC_PROJECT_LIST=base_url1+"getProjectInfoList";
+ //日常检查--删除--选择项目列表
+ public static String RCJC_DELETE_CHECK=base_url+"hzxm/daliy/delete";
+
+ //日常检查--新增检查
+ //public static String RCJC_ADD_CHECK=base_url+"hzxm/daliy/add";
+ public static String RCJC_ADD_CHECK=base_url+"hzxm/daliy/jgAdd";
+ //日常检查--修改整改状态
+ public static String CHANGE_STATUS_CHECK=base_url+"hzxm/daliy/jgModify";
+
+ //项目方自查
+ public static String XMF_ZC_CHECK_LIST=base_url+"hzxm/daliy/searchSimplePage";
+ //项目方自查--新增
+ public static String XMF_ZC_CHECK_NEW=base_url+"hzxm/daliy/selfAdd";
+ //项目方自查--详情
+ public static String XMF_CHECK_DETAILS=base_url+"hzxm/daliy/getDetail";
+ //项目方自查--复查
+ public static String XMF_CHECK_FC=base_url+"hzxm/daliy/selfModify";
+
 
  //我的界面
  public static String YC_CL_NUM=base_url+"hzjg/qxNewDemand/getProjectAlarmByprojectId";
@@ -161,4 +192,7 @@ public static String WEBSOCKET_URL="ws://skt.heziz.com:28020/websocket";
 
  public static String FILE=base_url2+"policyDoc/add?fileName=";
 
+
+ //文件上传
+ public static String IMAGE_FILE_UPLOAD="https://appaj.heziz.com/upload/file/uploadSftpTest";
 }

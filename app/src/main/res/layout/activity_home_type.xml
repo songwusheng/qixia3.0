@@ -19,7 +19,7 @@
             android:layout_weight="0.5"
             android:layout_height="match_parent"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/text16"
             android:padding="@dimen/padding5"
             android:gravity="center"
             android:text="序号"/>
@@ -29,7 +29,7 @@
             android:layout_weight="0.7"
             android:layout_height="match_parent"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/text16"
             android:padding="@dimen/padding5"
             android:gravity="center"
             android:text="街道"/>
@@ -39,7 +39,7 @@
             android:layout_weight="0.7"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/text16"
             android:padding="@dimen/padding5"
             android:gravity="center"
             android:text="项目数\n（个）"/>
@@ -54,7 +54,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/text16"
                 android:padding="@dimen/padding5"
                 android:gravity="center"
                 android:text="智慧工地\n（个）"/>

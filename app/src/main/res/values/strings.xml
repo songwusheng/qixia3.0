@@ -7,8 +7,6 @@
 
     <string name="home_title">栖霞网格化管理平台</string>
 
-    <string name="zhcb">智慧#38差别化工地项目</string>
-
     <string name="yc_name">扬尘检测</string>
     <string name="sp_name">视频监控</string>
     <string name="car_name">车辆冲洗</string>
@@ -20,6 +18,8 @@
     <string name="online">在线数</string>
     <string name="offline">离线数</string>
     <string name="title_activity_mine">MineActivity</string>
+    <string name="title_activity_day_check">DayCheckActivity</string>
+    <string name="title_activity_media_play">MediaPlayActivity</string>
 
 
 </resources>

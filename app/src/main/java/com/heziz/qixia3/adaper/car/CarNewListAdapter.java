@@ -49,7 +49,7 @@ public class CarNewListAdapter extends BaseQuickAdapter<CarDetailsBean1,BaseView
         helper.setText(R.id.tvpzColor, item.getLicensePlateColor()+"牌");
         //helper.setText(R.id.tvType,item.getDateTimeString());
         helper.setText(R.id.tvTime,item.getDateTimeString());
-        Glide.with(mContext).load(item.getDistantview()).crossFade().into((ImageView) helper.getView(R.id.iv));
+        Glide.with(mContext).load(item.getDistantview()).into((ImageView) helper.getView(R.id.iv));
 
         //helper.getView(R.id.iv).setOnClickListener(new View.OnClickListener() {
         //    @Override

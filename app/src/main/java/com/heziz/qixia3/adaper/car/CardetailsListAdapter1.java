@@ -43,7 +43,7 @@ public class CardetailsListAdapter1 extends BaseQuickAdapter<CarDetailsBean1,Bas
 ////                .setVisible(R.id.tweetRT, item.isRetweet())
 ////                .linkify(R.id.tweetText);
 //        if (item.get)
-        Glide.with(mContext).load(item.getLicensePlateImg()).crossFade().into((ImageView) helper.getView(R.id.iv));
+        Glide.with(mContext).load(item.getLicensePlateImg()).into((ImageView) helper.getView(R.id.iv));
 
         helper.getView(R.id.iv).setOnClickListener(new View.OnClickListener() {
             @Override

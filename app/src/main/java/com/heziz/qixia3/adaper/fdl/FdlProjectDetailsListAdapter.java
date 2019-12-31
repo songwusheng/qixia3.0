@@ -44,7 +44,7 @@ public class FdlProjectDetailsListAdapter extends BaseQuickAdapter<FdlProjectDet
 ////                .setVisible(R.id.tweetRT, item.isRetweet())
 ////                .linkify(R.id.tweetText);
 //        if (item.get)
-        Glide.with(mContext).load(item.getInvoicePath()).crossFade().into((ImageView) helper.getView(R.id.tvFp));
+        Glide.with(mContext).load(item.getInvoicePath()).into((ImageView) helper.getView(R.id.tvFp));
         helper.getView(R.id.tvFp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

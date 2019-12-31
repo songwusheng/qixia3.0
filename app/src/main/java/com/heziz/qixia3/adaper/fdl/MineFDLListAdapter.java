@@ -6,7 +6,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.heziz.qixia3.R;
 import com.heziz.qixia3.bean.fdl.MineFDLBean;
-import com.heziz.qixia3.bean.mine.wdbygs.MineWDBYGSListBean;
 
 import java.util.List;
 

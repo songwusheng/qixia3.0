@@ -28,6 +28,7 @@ import com.heziz.qixia3.ui.mine.xwzx.XWZXListActivity;
 import com.heziz.qixia3.ui.newjm.BaojingxxActivity;
 import com.heziz.qixia3.ui.newjm.CommActivity;
 import com.heziz.qixia3.ui.newjm.TdSmzAqZlActivity;
+import com.heziz.qixia3.ui.rcjc.ProjectCheckActivity;
 import com.heziz.qixia3.ui.zhihui.clwcx.ClcxStreetProjectActivity;
 import com.heziz.qixia3.ui.zhihui.clwcx.ClwcxStreetDeviceActivity;
 import com.heziz.qixia3.ui.zhihui.fdl.FDLProjectListActivity;
@@ -262,9 +263,7 @@ public class NewHomeActivity extends BaseActivity implements View.OnClickListene
                 intent.putExtra("title","地图");
                 break;
             case R.id.tvRc:
-                intent.setClass(mContext,CommActivity.class);
-                intent.putExtra("type",2);
-                intent.putExtra("title","项目检查");
+                intent.setClass(mContext,ProjectCheckActivity.class);
                 break;
             case R.id.tvFd:
                 if(userInfor.getPosition().equals("3")){

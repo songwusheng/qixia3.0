@@ -111,8 +111,8 @@ public class CLCXListActivity extends BaseActivity {
                         refresh();
                         break;
                     case R.id.rb4:
-                        refresh();
                         flag=3;
+                        refresh();
                         break;
 
                 }

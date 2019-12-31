@@ -367,7 +367,7 @@ dissmissProgressDialog();
          * 保存数据到服务器
          */
             //上传单个文件
-            String url = API.FILE+name+"&siteId="+API.STATION;
+        String url = API.FILE+name+"&siteId="+API.STATION;
 //    File  file = new File(file.getAbsolutePath(), file.getName());
         List<File> list1=new ArrayList<>();
         list1.add(file);

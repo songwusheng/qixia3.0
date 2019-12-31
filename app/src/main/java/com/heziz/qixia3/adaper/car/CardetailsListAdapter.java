@@ -36,7 +36,7 @@ public class CardetailsListAdapter extends BaseQuickAdapter<CarDetailsBean,BaseV
         helper.setText(R.id.tvCp, item.getLicensePlate());
         helper.setText(R.id.tvNumber, helper.getLayoutPosition()+1+"");
         helper.setText(R.id.tvTime,item.getDateTimeString());
-        Glide.with(mContext).load(item.getLicensePlateImg()).crossFade().into((ImageView) helper.getView(R.id.iv));
+        Glide.with(mContext).load(item.getLicensePlateImg()).into((ImageView) helper.getView(R.id.iv));
 
         helper.getView(R.id.iv).setOnClickListener(new View.OnClickListener() {
             @Override
