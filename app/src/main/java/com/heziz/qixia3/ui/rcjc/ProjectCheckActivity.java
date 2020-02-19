@@ -123,7 +123,7 @@ public class ProjectCheckActivity extends BaseActivity implements View.OnClickLi
         ButterKnife.bind(this);
         initViews();
         initListeners();
-        initDatas();
+
         initDatas1();
     }
 
@@ -151,6 +151,7 @@ public class ProjectCheckActivity extends BaseActivity implements View.OnClickLi
             llWGRYJCQK.setVisibility(View.GONE);
 
         }else{
+            initDatas();
             llZXJCDZG.setVisibility(View.GONE);
             llXMZCQK.setVisibility(View.VISIBLE);
             llWGRYJCQK.setVisibility(View.VISIBLE);
@@ -227,19 +228,19 @@ public class ProjectCheckActivity extends BaseActivity implements View.OnClickLi
 
     private void refreshJPUSH(JPushCommBean jPushCommBean){
         if(userInfor.getPosition().equals("3")){
-            if(jPushCommBean.getZcdfc().equals("0")){
+            if(Integer.valueOf(jPushCommBean.getZcdfc())<=0){
                 tvNum1.setVisibility(View.GONE);
             }else{
                 tvNum1.setText(jPushCommBean.getZcdfc());
                 tvNum1.setVisibility(View.VISIBLE);
             }
-            if(jPushCommBean.getZg().equals("0")){
+            if(Integer.valueOf(jPushCommBean.getZg())<=0){
                 tvNum2.setVisibility(View.GONE);
             }else{
                 tvNum2.setText(jPushCommBean.getZg());
                 tvNum2.setVisibility(View.VISIBLE);
             }
-            if(jPushCommBean.getZxdzg().equals("0")){
+            if(Integer.valueOf(jPushCommBean.getZxdzg())<=0){
                 tvNum3.setVisibility(View.GONE);
             }else{
                 tvNum3.setText(jPushCommBean.getZxdzg());
@@ -247,13 +248,13 @@ public class ProjectCheckActivity extends BaseActivity implements View.OnClickLi
             }
 
         }else{
-            if(jPushCommBean.getZgdsh().equals("0")){
+            if(Integer.valueOf(jPushCommBean.getZgdsh())<=0){
                 tvNum1.setVisibility(View.GONE);
             }else{
                 tvNum1.setText(jPushCommBean.getZgdsh());
                 tvNum1.setVisibility(View.VISIBLE);
             }
-            if(jPushCommBean.getZxdfc().equals("0")){
+            if(Integer.valueOf(jPushCommBean.getZxdfc())<=0){
                 tvNum2.setVisibility(View.GONE);
             }else{
                 tvNum2.setText(jPushCommBean.getZxdfc());

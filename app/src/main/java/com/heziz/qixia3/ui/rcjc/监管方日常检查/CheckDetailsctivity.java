@@ -280,11 +280,13 @@ public class CheckDetailsctivity extends BaseActivity implements ImagePickerAdap
     private void chengeStatus(int position){
         if (statusList.get(position).equals("待复查")) {
             llZGJG.setVisibility(View.VISIBLE);
-            llFCJG.setVisibility(View.VISIBLE);
-            llFCJG1.setVisibility(View.GONE);
-            llFCcz.setVisibility(View.VISIBLE);
-            etFCDes.setEnabled(true);
-            etFCDes.setText("");
+            if(checkDetailsBean.getEndStatus()!=4){
+                llFCJG.setVisibility(View.VISIBLE);
+                llFCJG1.setVisibility(View.GONE);
+                llFCcz.setVisibility(View.VISIBLE);
+                etFCDes.setEnabled(true);
+                etFCDes.setText("");
+            }
             setDatas(position,2);
         } else if (statusList.get(position).equals("整改合格")){
             llFCJG.setVisibility(View.VISIBLE);

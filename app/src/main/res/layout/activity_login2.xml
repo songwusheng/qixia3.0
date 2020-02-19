@@ -36,7 +36,8 @@
         android:gravity="center"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:padding="@dimen/padding30">
+        android:paddingLeft="@dimen/padding30"
+        android:paddingRight="@dimen/padding30">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -143,11 +144,22 @@
             android:textColor="@color/maincolor1"
             android:background="@drawable/mine_bg_yuanjiao"
             android:layout_marginTop="50dp"/>
+
+        <TextView
+            android:id="@+id/tvYQCX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/text16"
+            android:textColor="@color/white"
+            android:layout_margin="@dimen/padding20"
+            android:text="疫情期间行程查询"/>
+
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.2"
         android:layout_alignParentBottom="true"
         android:textSize="8sp"
         android:textColor="#ffffff"

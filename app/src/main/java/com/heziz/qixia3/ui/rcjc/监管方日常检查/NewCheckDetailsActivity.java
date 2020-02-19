@@ -339,6 +339,9 @@ public class NewCheckDetailsActivity extends BaseActivity  implements ImagePicke
                     if(selImageList.size()==0){
                         ToastUtil.showToast("至少上传一张图片");
                         return;
+                    }else if (status==2&&etDes.getText().toString().equals("")){
+                        ToastUtil.showToast("请填写不合格描述！");
+                        return;
                     }else{
                         showProgressDialog();
                         uploadPicture();

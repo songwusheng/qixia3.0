@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -55,7 +56,7 @@ public class ZXCheckActivity extends BaseActivity implements View.OnClickListene
     @BindView(R.id.tb)
     TabLayout tb;
     @BindView(R.id.recycleView)
-    SlideRecyclerView recycleView;
+    RecyclerView recycleView;
     ZXCheckListAdapter adapter;
     List<ZXCheckListBean> listBeans=new ArrayList<>();
     String title;
@@ -127,18 +128,18 @@ public class ZXCheckActivity extends BaseActivity implements View.OnClickListene
                 refresh();
             }
         });
-        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (view.getId()){
-                    case R.id.tv_delete:
-                        showProgressDialog();
-                        deleteList(listBeans.get(position).getId(),position);
-
-                        break;
-                }
-            }
-        });
+        //adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        //    @Override
+        //    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        //        switch (view.getId()){
+        //            case R.id.tv_delete:
+        //                showProgressDialog();
+        //                deleteList(listBeans.get(position).getId(),position);
+        //
+        //                break;
+        //        }
+        //    }
+        //});
 
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -276,32 +277,32 @@ public class ZXCheckActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-    private void deleteList(int id,int position) {
-        params3.put("id",id+"");
-        params3.put("endStatus",listBeans.get(position).getEndStatus()+"");
-        String url1 = API.ZXCHECK_DELETE + "?access_token=" + MyApplication.getInstance().getUserInfor().getUuid();
-
-        JsonCallBack2<SRequstBean<String>> jsonCallBack1 = new JsonCallBack2<SRequstBean<String>>() {
-            @Override
-            public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<String>> response) {
-                dissmissProgressDialog();
-                recycleView.closeMenu();
-                listBeans.remove(position);
-                adapter.notifyDataSetChanged();
-                ToastUtil.showToast("删除成功");
-            }
-
-            @Override
-            public void onError(com.lzy.okgo.model.Response<SRequstBean<String>> response) {
-                super.onError(response);
-                dissmissProgressDialog();
-                ToastUtil.showToast("删除失败");
-            }
-
-        };
-        OkGoClient.getInstance()
-                .getJsonData0(url1, params3, jsonCallBack1);
-    }
+    //private void deleteList(int id,int position) {
+    //    params3.put("id",id+"");
+    //    params3.put("endStatus",listBeans.get(position).getEndStatus()+"");
+    //    String url1 = API.ZXCHECK_DELETE + "?access_token=" + MyApplication.getInstance().getUserInfor().getUuid();
+    //
+    //    JsonCallBack2<SRequstBean<String>> jsonCallBack1 = new JsonCallBack2<SRequstBean<String>>() {
+    //        @Override
+    //        public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<String>> response) {
+    //            dissmissProgressDialog();
+    //            recycleView.closeMenu();
+    //            listBeans.remove(position);
+    //            adapter.notifyDataSetChanged();
+    //            ToastUtil.showToast("删除成功");
+    //        }
+    //
+    //        @Override
+    //        public void onError(com.lzy.okgo.model.Response<SRequstBean<String>> response) {
+    //            super.onError(response);
+    //            dissmissProgressDialog();
+    //            ToastUtil.showToast("删除失败");
+    //        }
+    //
+    //    };
+    //    OkGoClient.getInstance()
+    //            .getJsonData0(url1, params3, jsonCallBack1);
+    //}
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

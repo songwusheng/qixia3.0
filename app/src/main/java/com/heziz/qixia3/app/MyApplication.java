@@ -50,9 +50,9 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        jPushCommBean=new JPushCommBean("0","0","0","0","0","0");
-        instance=this;
-        mContext=this;
+        jPushCommBean = new JPushCommBean("0", "0", "0", "0", "0", "0");
+        instance = this;
+        mContext = this;
 //        new PgyUpdateManager.Builder()
 //                .register();
         PgyCrashManager.register();
@@ -95,7 +95,8 @@ public class MyApplication extends Application {
         QbSdk.initX5Environment(getApplicationContext(), cb);
 
     }
-    private void loadLibrary(){
+
+    private void loadLibrary() {
         System.loadLibrary("gnustl_shared");
         System.loadLibrary("dsl");
         System.loadLibrary("dslalien");
@@ -105,29 +106,36 @@ public class MyApplication extends Application {
         System.loadLibrary("netsdk");
         System.loadLibrary("CommonSDK");
     }
-    public static MyApplication getInstance(){
+
+    public static MyApplication getInstance() {
         return instance;
     }
 
-    public UserInfor getUserInfor(){
+    public UserInfor getUserInfor() {
         return userInfor;
     }
 
-    public void setUserInfor(UserInfor userInfor){
-        this.userInfor=userInfor;
+    public void setUserInfor(UserInfor userInfor) {
+        this.userInfor = userInfor;
+        if (userInfor.getMap() != null) {
+
+        } else {
+            userInfor.setMap(new JPushCommBean("0", "0", "0", "0", "0", "0"));
+        }
     }
 
     @Override
     public String getPackageName() {
         return super.getPackageName();
     }
+
     public static Context getAppContext() {
         return mContext;
     }
 
-    public String getVersion(){
+    public String getVersion() {
         PackageInfo pkg;
-        String versionName="";
+        String versionName = "";
         try {
             pkg = getPackageManager().getPackageInfo(getApplicationContext().getPackageName(), 0);
             String appName = pkg.applicationInfo.loadLabel(getPackageManager()).toString();
@@ -139,7 +147,7 @@ public class MyApplication extends Application {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return  versionName;
+        return versionName;
     }
 
 }

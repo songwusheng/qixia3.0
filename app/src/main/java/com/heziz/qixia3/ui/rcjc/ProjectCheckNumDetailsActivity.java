@@ -242,6 +242,7 @@ public class ProjectCheckNumDetailsActivity extends BaseActivity implements View
         OkGoClient.getInstance()
                 .postJsonData2(url1, params1,params2,jsonCallBack1);
     }
+
     private void initListeners() {
 
         rlBack.setOnClickListener(this);

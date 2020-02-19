@@ -14,6 +14,7 @@
 
         android:textColor="@drawable/text_color_selector3"
         android:background="@drawable/check_item_selector"
+        android:textSize="@dimen/text12"
         android:gravity="center"
         android:text="道路保洁"/>
     <TextView

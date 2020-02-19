@@ -242,7 +242,8 @@ public class XMRCCheckDZGActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void refreshJPUSH(String pushNum){
-        if(pushNum.equals("0")){
+        int num=Integer.valueOf(pushNum);
+        if(num<=0){
             tvNum.setVisibility(View.GONE);
         }else{
             tvNum.setText(pushNum);

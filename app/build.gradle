@@ -5,9 +5,9 @@ android {
     defaultConfig {
         applicationId "com.heziz.qixia3"
         minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 4
-        versionName "1.0.4"
+        targetSdkVersion 27
+        versionCode 11
+        versionName "1.0.11"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters "armeabi"
@@ -45,11 +45,10 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
-
     signingConfigs {
 
         release {
-            storeFile file("F:\\hezizproject\\jiaojie\\Key\\taiyuan.jks")
+            storeFile file("E:\\Key\\taiyuan.jks")
 
             storePassword "zxcvasdf"
 
@@ -59,7 +58,7 @@ android {
         }
         debug {
 
-            storeFile file("F:\\hezizproject\\jiaojie\\Key\\taiyuan.jks")
+            storeFile file("E:\\Key\\taiyuan.jks")
 
             storePassword "zxcvasdf"
 
@@ -70,6 +69,30 @@ android {
         }
 
     }
+//    signingConfigs {
+//
+//        release {
+//            storeFile file("F:\\hezizproject\\jiaojie\\Key\\taiyuan.jks")
+//
+//            storePassword "zxcvasdf"
+//
+//            keyAlias "key0"
+//
+//            keyPassword "zxcvasdf"
+//        }
+//        debug {
+//
+//            storeFile file("F:\\hezizproject\\jiaojie\\Key\\taiyuan.jks")
+//
+//            storePassword "zxcvasdf"
+//
+//            keyAlias "key0"
+//
+//            keyPassword "zxcvasdf"
+//
+//        }
+//
+//    }
 //    signingConfigs {
 //
 //        release {
@@ -102,15 +125,15 @@ android {
 dependencies {
     implementation 'com.android.support:support-v4:26.1.0'
     implementation 'com.android.support:design:26.1.0'
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support.constraint:constraint-layout:1.1.3'
-    compile 'com.android.support:support-compat:25.1.1'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
-    compile 'com.android.support:appcompat-v7:26.1.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support:support-compat:25.1.1'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.google.code.gson:gson:2.2.4'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
-    compile 'com.lzy.net:okgo:3.0.4'
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
+    implementation 'com.lzy.net:okgo:3.0.4'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
     implementation files('libs/BaiduLBS_Android.jar')
     compile(name: 'AudioTalk-release', ext: 'aar')
     compile(name: 'BaseLib-release', ext: 'aar')
@@ -122,9 +145,9 @@ dependencies {
     compile(name: 'PlayManager-release', ext: 'aar')
     compile(name: 'pulltorefresh-1.00.000', ext: 'aar')
     compile(name: 'WindowComponent-release', ext: 'aar')
-    compile 'com.pgyersdk:sdk:3.0.3'
-    compile 'com.daimajia.easing:library:2.0@aar'
-    compile 'com.daimajia.androidanimations:library:2.3@aar'
+    implementation 'com.pgyersdk:sdk:3.0.3'
+    implementation 'com.daimajia.easing:library:2.0@aar'
+    implementation 'com.daimajia.androidanimations:library:2.3@aar'
     //    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //    compile 'io.reactivex.rxjava2:rxjava:2.0.5'
     implementation files('libs/commons-io-2.5.jar')
@@ -132,15 +155,15 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile 'com.contrarywind:Android-PickerView:4.1.9'
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
     implementation files('libs/tbssdk.jar')
-    compile 'cn.ittiger:TigerVideoPlayer:1.1'
-    compile 'cn.jiguang.sdk:jpush:3.3.9'
+    implementation 'cn.ittiger:TigerVideoPlayer:1.1'
+    implementation 'cn.jiguang.sdk:jpush:3.3.9'
     // 此处以JPush 3.3.9 版本为例。
-    compile 'cn.jiguang.sdk:jcore:2.1.6'
+    implementation 'cn.jiguang.sdk:jcore:2.1.6'
     // 此处以JCore 2.1.6 版本为例。
-    compile 'com.android.support:multidex:1.0.0'
+    implementation 'com.android.support:multidex:1.0.0'
     implementation project(':imagepicker')
 
-    compile 'me.codeboy.android:align-text-view:2.3.2'
+    implementation 'me.codeboy.android:align-text-view:2.3.2'
 }

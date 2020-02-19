@@ -31,6 +31,7 @@ import com.heziz.qixia3.network.API;
 import com.heziz.qixia3.network.HezhiResponse;
 import com.heziz.qixia3.network.JsonCallBack;
 import com.heziz.qixia3.network.OkGoClient;
+import com.heziz.qixia3.ui.rcjc.WebviewActivity;
 import com.heziz.qixia3.ui.searchpassword.QRYHMActivity;
 import com.heziz.qixia3.ui.searchpassword.SearchPasswordActivity;
 import com.heziz.qixia3.utils.ToastUtil;
@@ -68,6 +69,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     LinearLayout llProgress;
     @BindView(R.id.tvPass)
     TextView tvPass;
+    @BindView(R.id.tvYQCX)
+    TextView tvYQCX;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,11 +128,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         //下载失败
                         ToastUtil.showToast("下载失败");
                         Log.e("pgyer", "download apk failed");
+                        dialog.dismiss();
                     }
 
                     @Override
                     public void downloadSuccessful(Uri uri) {
-                        Log.e("pgyer", "download apk failed");
+                        //Log.e("pgyer", "download apk failed");
                         // 使用蒲公英提供的安装方法提示用户 安装apk
                         dialog.dismiss();
                         PgyUpdateManager.installApk(uri);
@@ -235,6 +239,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         btnLogin.setOnClickListener(this);
         llSave.setOnClickListener(this);
         tvPass.setOnClickListener(this);
+        tvYQCX.setOnClickListener(this);
     }
     private void requestPermission() {
         ActivityCompat.requestPermissions(this,
@@ -278,6 +283,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 startMyActivity(QRYHMActivity.class);
                 //showPasswordDialog();
                 break;
+            case R.id.tvYQCX:
+               Intent intent=new Intent(LoginActivity.this, WebviewActivity.class);
+               intent.putExtra("id",6);
+//               intent.putExtra("mWebUrl","https://ncov.html5.qq.com/community?channelid=1&jump_from=91M95wSzI7vNHuOHyQEaPXxQ&seqno=y7f_Jq43F3_j3I6Xfa6UCC2d&from=singlemessage&isappinstalled=0");
+               intent.putExtra("mWebUrl","http://search1.cubigdata.cn/?from=100006#/checkPage");
+                startActivity(intent);
+                //showPasswordDialog();
+                break;
         }
     }
 
@@ -290,6 +303,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 UserInfor userInfor=response.body().data;
                 MyApplication.getInstance().setUserInfor(response.body().data);
                 dissmissProgressDialog();
+                MyApplication.getInstance().setjPushCommBean(userInfor.getMap());
                 JPushInterface.setAlias(mContext,0,userInfor.getName());
                 startMyActivity(NewHomeActivity.class);
                 finish();

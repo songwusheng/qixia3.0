@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -52,7 +53,7 @@ public class XMZXCheckDZGActivity extends BaseActivity implements View.OnClickLi
     @BindView(R.id.tb)
     TabLayout tb;
     @BindView(R.id.recycleView)
-    SlideRecyclerView recycleView;
+    RecyclerView recycleView;
     XMFZXListAdapter adapter;
     List<ZXCheckListBean> listBeans=new ArrayList<>();
     String title;

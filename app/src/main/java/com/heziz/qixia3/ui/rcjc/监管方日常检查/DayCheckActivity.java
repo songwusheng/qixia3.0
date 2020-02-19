@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,7 +53,7 @@ public class DayCheckActivity extends BaseActivity implements View.OnClickListen
     @BindView(R.id.tb)
     TabLayout tb;
     @BindView(R.id.recycleView)
-    SlideRecyclerView recycleView;
+    RecyclerView recycleView;
     JGCheckListAdapter adapter;
     List<XMFCheckListBean> listBeans=new ArrayList<>();
     String title;
@@ -114,18 +115,18 @@ public class DayCheckActivity extends BaseActivity implements View.OnClickListen
                 refresh();
             }
         });
-        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (view.getId()){
-                    case R.id.tv_delete:
-                        showProgressDialog();
-                        deleteList(listBeans.get(position).getId(),position);
-
-                        break;
-                }
-            }
-        });
+        //adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        //    @Override
+        //    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        //        switch (view.getId()){
+        //            case R.id.tv_delete:
+        //                showProgressDialog();
+        //                deleteList(listBeans.get(position).getId(),position);
+        //
+        //                break;
+        //        }
+        //    }
+        //});
 
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -258,31 +259,31 @@ public class DayCheckActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-    private void deleteList(int id,int position) {
-        params3.put("ids",id+"");
-        String url1 = API.RCJC_DELETE_CHECK + "?access_token=" + MyApplication.getInstance().getUserInfor().getUuid();
-
-        JsonCallBack2<SRequstBean<DeleteCheckBean>> jsonCallBack1 = new JsonCallBack2<SRequstBean<DeleteCheckBean>>() {
-            @Override
-            public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<DeleteCheckBean>> response) {
-                dissmissProgressDialog();
-                recycleView.closeMenu();
-                listBeans.remove(position);
-                adapter.notifyDataSetChanged();
-                ToastUtil.showToast("删除成功");
-            }
-
-            @Override
-            public void onError(com.lzy.okgo.model.Response<SRequstBean<DeleteCheckBean>> response) {
-                super.onError(response);
-                dissmissProgressDialog();
-                ToastUtil.showToast("删除失败");
-            }
-
-        };
-        OkGoClient.getInstance()
-                .getJsonData0(url1, params3, jsonCallBack1);
-    }
+    //private void deleteList(int id,int position) {
+    //    params3.put("ids",id+"");
+    //    String url1 = API.RCJC_DELETE_CHECK + "?access_token=" + MyApplication.getInstance().getUserInfor().getUuid();
+    //
+    //    JsonCallBack2<SRequstBean<DeleteCheckBean>> jsonCallBack1 = new JsonCallBack2<SRequstBean<DeleteCheckBean>>() {
+    //        @Override
+    //        public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<DeleteCheckBean>> response) {
+    //            dissmissProgressDialog();
+    //            recycleView.closeMenu();
+    //            listBeans.remove(position);
+    //            adapter.notifyDataSetChanged();
+    //            ToastUtil.showToast("删除成功");
+    //        }
+    //
+    //        @Override
+    //        public void onError(com.lzy.okgo.model.Response<SRequstBean<DeleteCheckBean>> response) {
+    //            super.onError(response);
+    //            dissmissProgressDialog();
+    //            ToastUtil.showToast("删除失败");
+    //        }
+    //
+    //    };
+    //    OkGoClient.getInstance()
+    //            .getJsonData0(url1, params3, jsonCallBack1);
+    //}
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -306,7 +307,8 @@ public class DayCheckActivity extends BaseActivity implements View.OnClickListen
         }
     }
     private void refreshJPUSH(String pushNum){
-        if(pushNum.equals("0")){
+        int num=Integer.valueOf(pushNum);
+        if(num<=0){
             tvNum.setVisibility(View.GONE);
         }else{
             tvNum.setText(pushNum);
