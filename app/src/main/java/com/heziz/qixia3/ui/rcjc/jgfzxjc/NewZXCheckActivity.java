@@ -1,4 +1,4 @@
-package com.heziz.qixia3.ui.rcjc.监管方专项检查;
+package com.heziz.qixia3.ui.rcjc.jgfzxjc;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -24,15 +24,13 @@ import com.heziz.qixia3.app.MyApplication;
 import com.heziz.qixia3.base.BaseActivity;
 import com.heziz.qixia3.bean.UserInfor;
 import com.heziz.qixia3.bean.rcjc.CheckProbean;
-import com.heziz.qixia3.bean.rcjc.PushPlusBean;
 import com.heziz.qixia3.bean.rcjc.jgf.NewZXCheckBean;
 import com.heziz.qixia3.network.API;
-import com.heziz.qixia3.network.JsonCallBack;
 import com.heziz.qixia3.network.JsonCallBack0;
 import com.heziz.qixia3.network.JsonCallBack1;
 import com.heziz.qixia3.network.OkGoClient;
 import com.heziz.qixia3.network.SRequstBean;
-import com.heziz.qixia3.ui.rcjc.监管方日常检查.NewCheckSelectProActivity;
+import com.heziz.qixia3.ui.rcjc.jgfrcjc.NewCheckSelectProActivity;
 import com.heziz.qixia3.utils.GlideImageLoader;
 import com.heziz.qixia3.utils.ScreenUtils;
 import com.heziz.qixia3.utils.TimeUtils;

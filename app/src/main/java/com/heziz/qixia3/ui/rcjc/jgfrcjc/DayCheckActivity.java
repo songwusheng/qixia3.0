@@ -1,4 +1,4 @@
-package com.heziz.qixia3.ui.rcjc.项目方自查;
+package com.heziz.qixia3.ui.rcjc.jgfrcjc;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.heziz.qixia3.R;
-import com.heziz.qixia3.adaper.xmjc.rcjc.xmf.XMFCheckListAdapter;
+import com.heziz.qixia3.adaper.xmjc.rcjc.JGCheckListAdapter;
 import com.heziz.qixia3.app.MyApplication;
 import com.heziz.qixia3.base.BaseActivity;
 import com.heziz.qixia3.bean.JPushCommBean;
@@ -28,7 +28,6 @@ import com.heziz.qixia3.network.JsonCallBack1;
 import com.heziz.qixia3.network.OkGoClient;
 import com.heziz.qixia3.network.RequestBean;
 import com.heziz.qixia3.network.SRequstBean;
-import com.heziz.qixia3.ui.rcjc.监管方专项检查.ZXCheckActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,16 +37,13 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * 项目方项目自查
- */
-public class XMZCCheckActivity extends BaseActivity implements View.OnClickListener{
+public class DayCheckActivity extends BaseActivity implements View.OnClickListener{
 
     @BindView(R.id.tb)
     TabLayout tb;
     @BindView(R.id.recycleView)
     RecyclerView recycleView;
-    XMFCheckListAdapter adapter;
+    JGCheckListAdapter adapter;
     List<XMFCheckListBean> listBeans=new ArrayList<>();
     String title;
     @BindView(R.id.rlBack)
@@ -70,13 +66,14 @@ public class XMZCCheckActivity extends BaseActivity implements View.OnClickListe
 
     private UserInfor userInfor;
 
-    private int tabtype=1;
+    private int type=1;
+
     private ZDYJPushReceiver zdyjPushReceiver;
     private JPushCommBean jPushCommBean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_xmzc_check);
+        setContentView(R.layout.activity_day_check);
 
         ButterKnife.bind(this);
         initViews();
@@ -92,7 +89,7 @@ public class XMZCCheckActivity extends BaseActivity implements View.OnClickListe
         tb.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                tabtype=tab.getPosition()+1;
+                    type=tab.getPosition()+1;
                    refresh();
             }
 
@@ -103,18 +100,30 @@ public class XMZCCheckActivity extends BaseActivity implements View.OnClickListe
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                tabtype=tab.getPosition()+1;
+                type=tab.getPosition()+1;
                 refresh();
             }
         });
+        //adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        //    @Override
+        //    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        //        switch (view.getId()){
+        //            case R.id.tv_delete:
+        //                showProgressDialog();
+        //                deleteList(listBeans.get(position).getId(),position);
+        //
+        //                break;
+        //        }
+        //    }
+        //});
+
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent(mContext,XMFZCDetailsctivity.class);
+                Intent intent=new Intent(mContext,CheckDetailsctivity.class);
+                intent.putExtra("type",type);
                 intent.putExtra("id",listBeans.get(position).getId());
-                intent.putExtra("type",tabtype);
-                intent.putExtra("checkname",listBeans.get(position).getProjectLeaderName());
-                //intent.putExtra("bean",listBeans.get(position));
+                intent.putExtra("popedomName",listBeans.get(position).getPopedomName());
                 startActivityForResult(intent,100);
             }
         });
@@ -125,21 +134,20 @@ public class XMZCCheckActivity extends BaseActivity implements View.OnClickListe
                 initDatas();
             }
         });
+
     }
 
     private void initViews() {
         userInfor=MyApplication.getInstance().getUserInfor();
-
+        jPushCommBean=MyApplication.getInstance().getjPushCommBean();
         title=getIntent().getStringExtra("title");
         tvTitle.setText(title);
 
-            tb.addTab(tb.newTab().setText("检查记录"));
-            //tb.addTab(tb.newTab().setText("通知整改"));
-            tb.addTab(tb.newTab().setText("待复查"));
+        tb.addTab(tb.newTab().setText("检查记录"));
+        tb.addTab(tb.newTab().setText("通知整改"));
+        tb.addTab(tb.newTab().setText("待复查"));
 
-
-
-        adapter=new XMFCheckListAdapter(this,listBeans);
+        adapter=new JGCheckListAdapter(this,listBeans);
         LinearLayoutManager manager=new LinearLayoutManager(getApplicationContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recycleView.setLayoutManager(manager);
@@ -147,8 +155,7 @@ public class XMZCCheckActivity extends BaseActivity implements View.OnClickListe
         adapter.bindToRecyclerView(recycleView);
         adapter.setEmptyView(R.layout.empty_view);
 
-        jPushCommBean=MyApplication.getInstance().getjPushCommBean();
-        refreshJPUSH(jPushCommBean.getZcdfc());
+        refreshJPUSH(jPushCommBean.getZgdsh());
         zdyjPushReceiver=new ZDYJPushReceiver();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("jpush_refresh");
@@ -157,17 +164,24 @@ public class XMZCCheckActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void initDatas() {
-        //"managerRoleIds":  "辖区登录时查询",
-        //"pass":  "1",
-        //        "projectAccount":  "项目方登录时查询",
-        //        "projectName":  "",
-        //        "siteId":  "站长登录时查询",
-        //        "type":  "1"
         String url1 = API.XMF_ZC_CHECK_LIST+"?access_token="+ MyApplication.getInstance().getUserInfor().getUuid();
-        params1.put("projectAccount",userInfor.getAccount());
-        params1.put("pass",tabtype+"");
-        params1.put("type","1");
-
+        params1.put("changeAccount",userInfor.getAccount());
+        params1.put("type","2");
+        if(userInfor.getPosition().equals("1")){
+            params1.put("siteId",API.STATION);
+        }else if(userInfor.getPosition().equals("2")){
+            params1.put("managerRoleIds",userInfor.getManagerId()+"");
+        }
+        if(type==1){
+            params1.put("pass","1");
+            params1.remove("endStatus");
+        }else if(type==2){
+            params1.remove("endStatus");
+            params1.put("pass","2");
+        }else{
+            params1.put("endStatus","5");
+            params1.remove("pass");
+        }
 
         params2.put("pageNow",pageNow+"");
         params2.put("pageSize","20");
@@ -179,7 +193,7 @@ public class XMZCCheckActivity extends BaseActivity implements View.OnClickListe
 //                            carDDetailsBeanList.addAll(response.body().getData().getList());
                     if(response.body().getData().getList().size()!=0){
                         listBeans.addAll(response.body().getData().getList());
-                        if(listBeans.size()<10){
+                        if(listBeans.size()<20){
                             adapter.loadMoreEnd();
                         }else{
                             adapter.loadMoreComplete();
@@ -219,7 +233,7 @@ public class XMZCCheckActivity extends BaseActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.btnNew:
-                Intent intent=new Intent(mContext,NewZCActivity.class);
+                Intent intent=new Intent(mContext,NewDayCheckActivity.class);
                 //if(userInfor.getPosition().equals("3")){
                     intent.putExtra("title","新增日常检查");
                 //}else{
@@ -234,6 +248,31 @@ public class XMZCCheckActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
+    //private void deleteList(int id,int position) {
+    //    params3.put("ids",id+"");
+    //    String url1 = API.RCJC_DELETE_CHECK + "?access_token=" + MyApplication.getInstance().getUserInfor().getUuid();
+    //
+    //    JsonCallBack2<SRequstBean<DeleteCheckBean>> jsonCallBack1 = new JsonCallBack2<SRequstBean<DeleteCheckBean>>() {
+    //        @Override
+    //        public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<DeleteCheckBean>> response) {
+    //            dissmissProgressDialog();
+    //            recycleView.closeMenu();
+    //            listBeans.remove(position);
+    //            adapter.notifyDataSetChanged();
+    //            ToastUtil.showToast("删除成功");
+    //        }
+    //
+    //        @Override
+    //        public void onError(com.lzy.okgo.model.Response<SRequstBean<DeleteCheckBean>> response) {
+    //            super.onError(response);
+    //            dissmissProgressDialog();
+    //            ToastUtil.showToast("删除失败");
+    //        }
+    //
+    //    };
+    //    OkGoClient.getInstance()
+    //            .getJsonData0(url1, params3, jsonCallBack1);
+    //}
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -251,11 +290,11 @@ public class XMZCCheckActivity extends BaseActivity implements View.OnClickListe
         public void onReceive(Context context, Intent intent) {
             //{"badge":"0","zcdfc":"0","zg":"0","zgdsh":"0","zxdfc":"0","zxdzg":"0"}
             jPushCommBean=(JPushCommBean) intent.getSerializableExtra("jPushCommBean");
-            refreshJPUSH(jPushCommBean.getZcdfc());
+
+            refreshJPUSH(jPushCommBean.getZgdsh());
 
         }
     }
-
     private void refreshJPUSH(String pushNum){
         int num=Integer.valueOf(pushNum);
         if(num<=0){

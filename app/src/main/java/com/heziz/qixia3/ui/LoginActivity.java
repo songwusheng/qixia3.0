@@ -36,6 +36,7 @@ import com.heziz.qixia3.ui.searchpassword.QRYHMActivity;
 import com.heziz.qixia3.ui.searchpassword.SearchPasswordActivity;
 import com.heziz.qixia3.utils.ToastUtil;
 import com.heziz.qixia3.view.ClearEditText;
+import com.pgyersdk.crash.PgyCrashManager;
 import com.pgyersdk.update.DownloadFileListener;
 import com.pgyersdk.update.PgyUpdateManager;
 import com.pgyersdk.update.UpdateManagerListener;
@@ -77,15 +78,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         setContentView(R.layout.activity_login2);
 
         ButterKnife.bind(this);
-        requestPermission();
+        try  {
+            // code
+            requestPermission();
 
-        initViews();
+            initViews();
 
-        initListeners();
+            initListeners();
 
-        getLoginInfo();
+            getLoginInfo();
 
-        checkUpdata();
+            checkUpdata();
+        } catch (Exception e) {
+            PgyCrashManager.reportCaughtException(e);
+        }
+
     }
 
     private void checkUpdata() {
@@ -185,13 +192,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 tvTitle2.setVisibility(View.GONE);
                 tvTitle3.setVisibility(View.GONE);
                 tvTitle1.setText("正在下载");
-                if (ContextCompat.checkSelfPermission(LoginActivity.this, WRITE_EXTERNAL_STORAGE)
+                if (ActivityCompat.checkSelfPermission(LoginActivity.this, WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
                     //申请WRITE_EXTERNAL_STORAGE权限
                     ActivityCompat.requestPermissions(LoginActivity.this, new String[]{WRITE_EXTERNAL_STORAGE},
                             101);
                 }else{
-                    PgyUpdateManager.downLoadApk(appBean.getDownloadURL());
+                    dowm();
                 }
 
             }
@@ -207,13 +214,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 // 授权被允许
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    PgyUpdateManager.downLoadApk(appBean1.getDownloadURL());
+                    dowm();
 
                 } else {
                     toast("缺少权限");
                 }
                 break;
         }
+    }
+
+    private void dowm(){
+//        new Thread(){
+//            @Override
+//            public void run() {
+                PgyUpdateManager.downLoadApk(appBean1.getDownloadURL());
+//            }
+//        }.start();
+
     }
     private void getLoginInfo() {
         SharedPreferences sp = getSharedPreferences("login", Context.MODE_PRIVATE);

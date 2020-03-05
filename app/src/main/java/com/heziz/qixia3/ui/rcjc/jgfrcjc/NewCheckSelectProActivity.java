@@ -1,4 +1,4 @@
-package com.heziz.qixia3.ui.rcjc.监管方日常检查;
+package com.heziz.qixia3.ui.rcjc.jgfrcjc;
 
 import android.content.Intent;
 import android.os.Bundle;

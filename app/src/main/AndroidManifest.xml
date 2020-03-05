@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <!-- Optional for location -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
@@ -196,24 +196,24 @@
         <activity android:name=".ui.mine.WorkStatusActivity" />
         <activity android:name=".ui.rcjc.ProjectCheckActivity" />
         <activity
-            android:name=".ui.rcjc.监管方日常检查.DayCheckActivity"
+            android:name=".ui.rcjc.jgfrcjc.DayCheckActivity"
             android:label="@string/title_activity_day_check"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".ui.rcjc.监管方日常检查.NewDayCheckActivity" />
-        <activity android:name=".ui.rcjc.监管方日常检查.NewCheckSelectProActivity" />
-        <activity android:name=".ui.rcjc.监管方日常检查.NewCheckDetailsActivity" />
-        <activity android:name=".ui.rcjc.监管方日常检查.CheckDetailsctivity" />
+        <activity android:name=".ui.rcjc.jgfrcjc.NewDayCheckActivity" />
+        <activity android:name=".ui.rcjc.jgfrcjc.NewCheckSelectProActivity" />
+        <activity android:name=".ui.rcjc.jgfrcjc.NewCheckDetailsActivity" />
+        <activity android:name=".ui.rcjc.jgfrcjc.CheckDetailsctivity" />
         <activity android:name=".image.ImagePreviewActivity" />
-        <activity android:name=".ui.rcjc.监管方专项检查.ZXCheckActivity" />
-        <activity android:name=".ui.rcjc.监管方专项检查.NewZXCheckActivity" />
-        <activity android:name=".ui.rcjc.项目方自查.XMZCCheckActivity" />
-        <activity android:name=".ui.rcjc.监管方专项检查.ZXCheckDetailsctivity" />
-        <activity android:name=".ui.rcjc.项目方日常检查待整改.XMRCCheckDZGActivity" />
-        <activity android:name=".ui.rcjc.项目方专项检查待整改.XMZXCheckDZGActivity" />
-        <activity android:name=".ui.rcjc.项目方自查.NewZCActivity" />
-        <activity android:name=".ui.rcjc.项目方自查.XMFZCDetailsctivity" />
-        <activity android:name=".ui.rcjc.项目方日常检查待整改.XMFRCDZGDetailsctivity" />
-        <activity android:name=".ui.rcjc.项目方专项检查待整改.XMFZXDZGDetailsctivity" />
+        <activity android:name=".ui.rcjc.jgfzxjc.ZXCheckActivity" />
+        <activity android:name=".ui.rcjc.jgfzxjc.NewZXCheckActivity" />
+        <activity android:name=".ui.rcjc.xmfzc.XMZCCheckActivity" />
+        <activity android:name=".ui.rcjc.jgfzxjc.ZXCheckDetailsctivity" />
+        <activity android:name=".ui.rcjc.xmfrcjc.XMRCCheckDZGActivity" />
+        <activity android:name=".ui.rcjc.xmfzxjc.XMZXCheckDZGActivity" />
+        <activity android:name=".ui.rcjc.xmfzc.NewZCActivity" />
+        <activity android:name=".ui.rcjc.xmfzc.XMFZCDetailsctivity" />
+        <activity android:name=".ui.rcjc.xmfrcjc.XMFRCDZGDetailsctivity" />
+        <activity android:name=".ui.rcjc.xmfzxjc.XMFZXDZGDetailsctivity" />
         <activity
             android:name="com.heziz.MediaPlayActivity"
             android:label="@string/title_activity_media_play"

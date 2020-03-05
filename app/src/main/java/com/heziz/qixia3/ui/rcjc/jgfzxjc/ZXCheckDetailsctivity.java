@@ -1,4 +1,4 @@
-package com.heziz.qixia3.ui.rcjc.监管方专项检查;
+package com.heziz.qixia3.ui.rcjc.jgfzxjc;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

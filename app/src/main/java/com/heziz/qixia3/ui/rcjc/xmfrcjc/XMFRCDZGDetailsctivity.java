@@ -1,4 +1,4 @@
-package com.heziz.qixia3.ui.rcjc.项目方自查;
+package com.heziz.qixia3.ui.rcjc.xmfrcjc;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -11,8 +11,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -57,7 +55,7 @@ import butterknife.ButterKnife;
 /**
  * 项目方的自查列表-->>检查记录详情
  */
-public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdapter.OnRecyclerViewItemClickListener, View.OnClickListener {
+public class XMFRCDZGDetailsctivity extends BaseActivity implements ImagePickerAdapter.OnRecyclerViewItemClickListener, View.OnClickListener {
     public static final int IMAGE_ITEM_ADD = -1;
     public static final int REQUEST_CODE_SELECT = 100;
     public static final int REQUEST_CODE_PREVIEW = 101;
@@ -99,15 +97,27 @@ public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdap
     TextView tvFCTime;
     @BindView(R.id.etFCDes)
     EditText etFCDes;
-    @BindView(R.id.tvFCStatus)
-    TextView tvFCStatus;
+    //@BindView(R.id.tvFCStatus)
+    //TextView tvFCStatus;
     @BindView(R.id.recyclerViewFC)
     RecyclerView recyclerViewFC;
 
-    @BindView(R.id.rg)
-    RadioGroup rg;
-    @BindView(R.id.rb1)
-    RadioButton rb1;
+
+
+    @BindView(R.id.llFCJG3)
+    LinearLayout llFCJG3;
+    @BindView(R.id.tvFCRy3)
+    TextView tvFCRy3;
+    @BindView(R.id.tvFCTime3)
+    TextView tvFCTime3;
+    @BindView(R.id.tvFCStatus3)
+    TextView tvFCStatus3;
+    @BindView(R.id.etFCDes3)
+    EditText etFCDes3;
+    //@BindView(R.id.rg)
+    //RadioGroup rg;
+    //@BindView(R.id.rb1)
+    //RadioButton rb1;
     @BindView(R.id.btnSubmit)
     Button btnSubmit;
 
@@ -132,16 +142,18 @@ public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdap
 
     private StringBuffer stringBuffer=new StringBuffer();
 
+    Map<String,String> params1=new HashMap<>();
 
 
     private int currentPosition;
 
     private UserInfor userInfor;
-    private String checkname;
+
+    private String popedomName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_xmf_zc_details);
+        setContentView(R.layout.activity_xmf_rc_details);
 
         ButterKnife.bind(this);
         initViews();
@@ -154,17 +166,16 @@ public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdap
         userInfor=MyApplication.getInstance().getUserInfor();
         type = getIntent().getIntExtra("type", 0);
         id = getIntent().getIntExtra("id", 0);
-        checkname = getIntent().getStringExtra("checkname");
+        popedomName = getIntent().getStringExtra("popedomName");
 
-        tvJCRy.setText(checkname);
-        tvFCRy.setText(checkname);
+        tvJCRy.setText(popedomName);
         if (type == 1) {
-            tvTitle.setText("检查记录");
+            tvTitle.setText("整改记录");
         } else if (type == 2) {
-            tvTitle.setText("待复查");
+            tvTitle.setText("待整改");
         }
-        //复查结果默认选中合格
-        rg.check(R.id.rb1);
+        ////复查结果默认选中合格
+        //rg.check(R.id.rb1);
         initImagePicker();
         //巡检图片适配器初始化
         adapter = new ImagePickerAdapter(this, selImageList, 0, 1);
@@ -182,10 +193,11 @@ public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdap
         for (int i = 0; i < 9; i++) {
             statusList.add(getStatus(0));
         }
-        mAdapter = new MyGridViewAdapter(XMFZCDetailsctivity.this);
+        mAdapter = new MyGridViewAdapter(XMFRCDZGDetailsctivity.this);
         mAdapter.setData(goods, 0, statusList);//传数组, 并指定默认值
         goodsGridView.setAdapter(mAdapter);
 
+        showProgressDialog();
         getDetails();
 
     }
@@ -211,7 +223,7 @@ public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdap
         params1.put("id", id + "");
         JsonCallBack1<SRequstBean<CheckDetailsBean>> jsonCallBack1 = new JsonCallBack1<SRequstBean<CheckDetailsBean>>() {
             @Override
-            public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<CheckDetailsBean>> response) {
+            public void onSuccess(Response<SRequstBean<CheckDetailsBean>> response) {
                 dissmissProgressDialog();
                 if (response.body().getData() != null) {
                     //ToastUtil.showToast("获取详情成功");
@@ -247,7 +259,7 @@ public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdap
             }
 
             @Override
-            public void onError(com.lzy.okgo.model.Response<SRequstBean<CheckDetailsBean>> response) {
+            public void onError(Response<SRequstBean<CheckDetailsBean>> response) {
                 super.onError(response);
                 //adapter.loadMoreFail();
                 dissmissProgressDialog();
@@ -285,29 +297,33 @@ public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdap
     }
 
     private void chengeStatus(int position){
-        if (statusList.get(position).equals("待复查")) {
+        if (statusList.get(position).equals("待整改")) {
             llFCJG.setVisibility(View.VISIBLE);
             llFCJG1.setVisibility(View.GONE);
             llFCJG2.setVisibility(View.VISIBLE);
+            llFCJG3.setVisibility(View.GONE);
             selImageList1.clear();
-            adapter1 = new ImagePickerAdapter(XMFZCDetailsctivity.this, selImageList1, maxImgCount, 2);
-            adapter1.setOnItemClickListener(XMFZCDetailsctivity.this);
+            adapter1 = new ImagePickerAdapter(XMFRCDZGDetailsctivity.this, selImageList1, maxImgCount, 2);
+            adapter1.setOnItemClickListener(XMFRCDZGDetailsctivity.this);
             adapter1.setImages(selImageList1);
             recyclerViewFC.setAdapter(adapter1);
             etFCDes.setEnabled(true);
             etFCDes.setText("");
             setDatas(position,2);
-        } else if (statusList.get(position).equals("复查合格")){
+        } else if (statusList.get(position).equals("整改完成")||statusList.get(position).equals("整改合格")){
             llFCJG.setVisibility(View.VISIBLE);
             llFCJG1.setVisibility(View.VISIBLE);
             llFCJG2.setVisibility(View.GONE);
-            adapter1 = new ImagePickerAdapter(XMFZCDetailsctivity.this, selImageList1, 0, 2);
-            adapter1.setOnItemClickListener(XMFZCDetailsctivity.this);
+            llFCJG3.setVisibility(View.GONE);
+            adapter1 = new ImagePickerAdapter(XMFRCDZGDetailsctivity.this, selImageList1, 0, 2);
+            adapter1.setOnItemClickListener(XMFRCDZGDetailsctivity.this);
             recyclerViewFC.setAdapter(adapter1);
             setDatas(position,3);
             etFCDes.setEnabled(false);
+
         }else{
             llFCJG.setVisibility(View.GONE);
+            llFCJG3.setVisibility(View.GONE);
             setDatas(position,1);
         }
     }
@@ -318,14 +334,22 @@ public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdap
         switch (position) {
             case 0:
                 tvJCTitle.setText("道路保洁");
-                tvJCStatus.setText(getStatus(checkDetailsBean.getCleaningStatus()));
+                tvJCStatus.setText(getStatus1(checkDetailsBean.getCleaningStatus()));
                 etJCDes.setText(checkDetailsBean.getCleaningCommonts());
                 imgs = checkDetailsBean.getCleaningImage();
                 if(type==3){
                     imgs1 = checkDetailsBean.getChangeCleaningImage();
                     etFCDes.setText(checkDetailsBean.getChangeCleaningCommonts());
                     tvFCTime.setText(checkDetailsBean.getChangeCleaningTime());
-                    tvFCStatus.setText(getStatus(checkDetailsBean.getCleaningStatus()));
+                    //tvFCStatus.setText(getStatus(checkDetailsBean.getCleaningStatus()));
+                    tvFCRy.setText(checkDetailsBean.getChangeCleaningName());
+                    if(statusList.get(position).equals("整改合格")){
+                        llFCJG3.setVisibility(View.VISIBLE);
+                        tvFCRy3.setText(checkDetailsBean.getCheckCleaningName());
+                        tvFCTime3.setText(checkDetailsBean.getCheckCleaningTime());
+                        etFCDes3.setText(checkDetailsBean.getCheckCleaningCommonts());
+                        tvFCStatus3.setText("整改合格");
+                    }
                 }
 
                 //tvZGTime.setText(checkDetailsBean.getChangeCleaningTime());
@@ -333,105 +357,170 @@ public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdap
             break;
             case 1:
                 tvJCTitle.setText("裸露地面覆盖");
-                tvJCStatus.setText(getStatus(checkDetailsBean.getCoverageStatus()));
+                tvJCStatus.setText(getStatus1(checkDetailsBean.getCoverageStatus()));
                 etJCDes.setText(checkDetailsBean.getCoverageCommonts());
                 imgs = checkDetailsBean.getCoverageImage();
                 if (type==3){
                     imgs1 = checkDetailsBean.getChangeCoverageImage();
                     etFCDes.setText(checkDetailsBean.getChangeCoverageCommonts());
                     tvFCTime.setText(checkDetailsBean.getChangeCoverageTime());
-                    tvFCStatus.setText(getStatus(checkDetailsBean.getCoverageStatus()));
+                    //tvFCStatus.setText(getStatus(checkDetailsBean.getCoverageStatus()));
+                    tvFCRy.setText(checkDetailsBean.getChangeCoverageName());
+                    if(statusList.get(position).equals("整改合格")){
+                        llFCJG3.setVisibility(View.VISIBLE);
+                        tvFCRy3.setText(checkDetailsBean.getCheckCoverageName());
+                        tvFCTime3.setText(checkDetailsBean.getCheckCoverageTime());
+                        etFCDes3.setText(checkDetailsBean.getCheckCoverageCommonts());
+                        tvFCStatus3.setText("整改合格");
+                    }
                 }
                 //tvZGTime.setText(checkDetailsBean.getChangeCoverageTime());
                 break;
             case 2:
                 tvJCTitle.setText("工地围挡");
-                tvJCStatus.setText(getStatus(checkDetailsBean.getEnclosureStatus()));
+                tvJCStatus.setText(getStatus1(checkDetailsBean.getEnclosureStatus()));
                 etJCDes.setText(checkDetailsBean.getEnclosureCommonts());
                 imgs = checkDetailsBean.getEnclosureImage();
                 if (type==3) {
                     imgs1 = checkDetailsBean.getChangeEnclosureImage();
                     etFCDes.setText(checkDetailsBean.getChangeEnclosureCommonts());
                     tvFCTime.setText(checkDetailsBean.getChangeEnclosureTime());
-                    tvFCStatus.setText(getStatus(checkDetailsBean.getEnclosureStatus()));
+                    //tvFCStatus.setText(getStatus(checkDetailsBean.getEnclosureStatus()));
+                    tvFCRy.setText(checkDetailsBean.getChangeEnclosureName());
+                    if(statusList.get(position).equals("整改合格")){
+                        llFCJG3.setVisibility(View.VISIBLE);
+                        tvFCRy3.setText(checkDetailsBean.getCheckEnclosureName());
+                        tvFCTime3.setText(checkDetailsBean.getCheckEnclosureTime());
+                        etFCDes3.setText(checkDetailsBean.getCheckEnclosureCommonts());
+                        tvFCStatus3.setText("整改合格");
+                    }
                 }
                 //tvZGTime.setText(checkDetailsBean.getChangeEnclosureTime());
                 break;
             case 3:
                 tvJCTitle.setText("道路硬化");
-                tvJCStatus.setText(getStatus(checkDetailsBean.getHardeningStatus()));
+                tvJCStatus.setText(getStatus1(checkDetailsBean.getHardeningStatus()));
                 etJCDes.setText(checkDetailsBean.getHardeningCommonts());
                 imgs = checkDetailsBean.getHardeningImage();
                 if (type==3) {
                     imgs1 = checkDetailsBean.getChangeHardeningImage();
                     etFCDes.setText(checkDetailsBean.getChangeHardeningCommonts());
                     tvFCTime.setText(checkDetailsBean.getChangeHardeningTime());
-                    tvFCStatus.setText(getStatus(checkDetailsBean.getHardeningStatus()));
+                    //tvFCStatus.setText(getStatus(checkDetailsBean.getHardeningStatus()));
+                    tvFCRy.setText(checkDetailsBean.getChangeHardeningName());
+                    if(statusList.get(position).equals("整改合格")){
+                        llFCJG3.setVisibility(View.VISIBLE);
+                        tvFCRy3.setText(checkDetailsBean.getCheckHardeningName());
+                        tvFCTime3.setText(checkDetailsBean.getCheckHardeningTime());
+                        etFCDes3.setText(checkDetailsBean.getCheckHardeningCommonts());
+                        tvFCStatus3.setText("整改合格");
+                    }
                 }
                 //tvZGTime.setText(checkDetailsBean.getChangeHardeningTime());
                 break;
             case 4:
                 tvJCTitle.setText("出入口冲洗");
-                tvJCStatus.setText(getStatus(checkDetailsBean.getInoutStatus()));
+                tvJCStatus.setText(getStatus1(checkDetailsBean.getInoutStatus()));
                 etJCDes.setText(checkDetailsBean.getInoutCommonts());
                 imgs = checkDetailsBean.getInoutImage();
                 if (type==3) {
                     imgs1 = checkDetailsBean.getChangeInoutImage();
                     etFCDes.setText(checkDetailsBean.getChangeInoutCommonts());
                     tvFCTime.setText(checkDetailsBean.getChangeInoutTime());
-                    tvFCStatus.setText(getStatus(checkDetailsBean.getInoutStatus()));
+                    //tvFCStatus.setText(getStatus(checkDetailsBean.getInoutStatus()));
+                    tvFCRy.setText(checkDetailsBean.getChangeInoutName());
+                    if(statusList.get(position).equals("整改合格")){
+                        llFCJG3.setVisibility(View.VISIBLE);
+                        tvFCRy3.setText(checkDetailsBean.getCheckInoutName());
+                        tvFCTime3.setText(checkDetailsBean.getCheckInoutTime());
+                        etFCDes3.setText(checkDetailsBean.getCheckInoutCommonts());
+                        tvFCStatus3.setText("整改合格");
+                    }
                 }
                 //tvZGTime.setText(checkDetailsBean.getChangeInoutTime());
                 break;
             case 5:
                 tvJCTitle.setText("油品管理");
-                tvJCStatus.setText(getStatus(checkDetailsBean.getOilsStatus()));
+                tvJCStatus.setText(getStatus1(checkDetailsBean.getOilsStatus()));
                 etJCDes.setText(checkDetailsBean.getOilsCommonts());
                 imgs = checkDetailsBean.getOilsImage();
                 if (type==3) {
                     imgs1 = checkDetailsBean.getChangeOilsImage();
                     etFCDes.setText(checkDetailsBean.getChangeOilsCommonts());
                     tvFCTime.setText(checkDetailsBean.getChangeOilsTime());
-                    tvFCStatus.setText(getStatus(checkDetailsBean.getOilsStatus()));
+                    //tvFCStatus.setText(getStatus(checkDetailsBean.getOilsStatus()));
+                    tvFCRy.setText(checkDetailsBean.getChangeOilsName());
+                    if(statusList.get(position).equals("整改合格")){
+                        llFCJG3.setVisibility(View.VISIBLE);
+                        tvFCRy3.setText(checkDetailsBean.getCheckOilsName());
+                        tvFCTime3.setText(checkDetailsBean.getCheckOilsTime());
+                        etFCDes3.setText(checkDetailsBean.getCheckOilsCommonts());
+                        tvFCStatus3.setText("整改合格");
+                    }
+
                 }
                 //tvZGTime.setText(checkDetailsBean.getChangeOilsTime());
                 break;
             case 6:
                 tvJCTitle.setText("工程机械");
-                tvJCStatus.setText(getStatus(checkDetailsBean.getEngineStatus()));
+                tvJCStatus.setText(getStatus1(checkDetailsBean.getEngineStatus()));
                 etJCDes.setText(checkDetailsBean.getEngineCommonts());
                 imgs = checkDetailsBean.getEngineImage();
                 if (type==3) {
                     imgs1 = checkDetailsBean.getChangeEngineImage();
                     etFCDes.setText(checkDetailsBean.getChangeEngineCommonts());
                     tvFCTime.setText(checkDetailsBean.getChangeEngineTime());
-                    tvFCStatus.setText(getStatus(checkDetailsBean.getEngineStatus()));
+                    //tvFCStatus.setText(getStatus(checkDetailsBean.getEngineStatus()));
+                    tvFCRy.setText(checkDetailsBean.getChangeEngineName());
+                    if(statusList.get(position).equals("整改合格")){
+                        llFCJG3.setVisibility(View.VISIBLE);
+                        tvFCRy3.setText(checkDetailsBean.getCheckEngineName());
+                        tvFCTime3.setText(checkDetailsBean.getCheckEngineTime());
+                        etFCDes3.setText(checkDetailsBean.getCheckEngineCommonts());
+                        tvFCStatus3.setText("整改合格");
+                    }
                 }
                 //tvZGTime.setText(checkDetailsBean.getChangeEngineTime());
                 break;
             case 7:
                 tvJCTitle.setText("渣土运输管理");
-                tvJCStatus.setText(getStatus(checkDetailsBean.getTransportStatus()));
+                tvJCStatus.setText(getStatus1(checkDetailsBean.getTransportStatus()));
                 etJCDes.setText(checkDetailsBean.getTransportCommonts());
                 imgs = checkDetailsBean.getTransportImage();
                 if (type==3) {
                     imgs1 = checkDetailsBean.getChangeTransportImage();
                     etFCDes.setText(checkDetailsBean.getChangeTransportCommonts());
                     tvFCTime.setText(checkDetailsBean.getChangeTransportTime());
-                    tvFCStatus.setText(getStatus(checkDetailsBean.getTransportStatus()));
+                    //tvFCStatus.setText(getStatus(checkDetailsBean.getTransportStatus()));
+                    tvFCRy.setText(checkDetailsBean.getChangeTransportName());
+                    if(statusList.get(position).equals("整改合格")){
+                        llFCJG3.setVisibility(View.VISIBLE);
+                        tvFCRy3.setText(checkDetailsBean.getCheckTransportName());
+                        tvFCTime3.setText(checkDetailsBean.getCheckTransportTime());
+                        etFCDes3.setText(checkDetailsBean.getCheckTransportCommonts());
+                        tvFCStatus3.setText("整改合格");
+                    }
                 }
                 //tvZGTime.setText(checkDetailsBean.getChangeTransportTime());
                 break;
             case 8:
                 tvJCTitle.setText("责任公示牌");
-                tvJCStatus.setText(getStatus(checkDetailsBean.getPublicityStatus()));
+                tvJCStatus.setText(getStatus1(checkDetailsBean.getPublicityStatus()));
                 etJCDes.setText(checkDetailsBean.getPublicityCommonts());
                 imgs = checkDetailsBean.getPublicityImage();
                 if (type==3) {
                     imgs1 = checkDetailsBean.getChangePublicityImage();
                     etFCDes.setText(checkDetailsBean.getChangePublicityCommonts());
                     tvFCTime.setText(checkDetailsBean.getChangePublicityTime());
-                    tvFCStatus.setText(getStatus(checkDetailsBean.getPublicityStatus()));
+                    //tvFCStatus.setText(getStatus(checkDetailsBean.getPublicityStatus()));
+                    tvFCRy.setText(checkDetailsBean.getChangePublicityName());
+                    if(statusList.get(position).equals("整改合格")){
+                        llFCJG3.setVisibility(View.VISIBLE);
+                        tvFCRy3.setText(checkDetailsBean.getCheckPublicityName());
+                        tvFCTime3.setText(checkDetailsBean.getCheckPublicityTime());
+                        etFCDes3.setText(checkDetailsBean.getCheckPublicityCommonts());
+                        tvFCStatus3.setText("整改合格");
+                    }
                 }
                 //tvZGTime.setText(checkDetailsBean.getChangePublicityTime());
                 break;
@@ -483,10 +572,13 @@ public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdap
                 ss = "合格";
                 break;
             case 2:
-                ss = "待复查";
+                ss = "待整改";
+                break;
+            case 3:
+                ss = "整改完成";
                 break;
             case 4:
-                ss = "复查合格";
+                ss = "整改合格";
                 break;
             default: {
                 ss = "审核中";
@@ -498,28 +590,10 @@ public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdap
 
     private String getStatus1(int status) {
         String ss = "";
-        switch (status) {
-            case 1:
-                ss = "未检查";
-                break;
-            case 2:
-                ss = "合格";
-                break;
-            case 3:
-                ss = "不合格";
-                break;
-            case 4:
-                ss = "通知整改";
-                break;
-            case 5:
-                ss = "整改待确认";
-                break;
-            case 6:
-                ss = "整改通过";
-                break;
-            case 7:
-                ss = "整改不通过";
-                break;
+        if(status==1){
+            ss="合格";
+        }else{
+            ss="不合格";
         }
         return ss;
     }
@@ -544,18 +618,18 @@ public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdap
     }
 
     private void setFCJG() {
+        Map<String,String> params2=new HashMap<>();
         String str=stringBuffer.toString();
-        Map<String,String> params1=new HashMap<>();
-        params1.put("id",checkDetailsBean.getId()+"");
-        params1.put("change"+classs[currentPosition]+"Account",userInfor.getName());
-        params1.put("change"+classs[currentPosition]+"Commonts",etFCDes.getText().toString());
-        params1.put("change"+classs[currentPosition]+"Image",str.substring(0,str.length()-1));
-        params1.put("change"+classs[currentPosition]+"Time",TimeUtils.getCurrentTime());
-        params1.put(classs[currentPosition].toLowerCase()+"Status",rb1.isChecked()?"4":"2");
+        params2.put("id",checkDetailsBean.getId()+"");
+        params2.put("change"+classs[currentPosition]+"Account",userInfor.getName());
+        params2.put("change"+classs[currentPosition]+"Commonts",etFCDes.getText().toString());
+        params2.put("change"+classs[currentPosition]+"Image",str.substring(0,str.length()-1));
+        params2.put("change"+classs[currentPosition]+"Time",TimeUtils.getCurrentTime());
+        params2.put(classs[currentPosition].toLowerCase()+"Status","3");
         String url1 = API.XMF_CHECK_FC + "?access_token=" + MyApplication.getInstance().getUserInfor().getUuid();
         JsonCallBack1<SRequstBean<String>> jsonCallBack1 = new JsonCallBack1<SRequstBean<String>>() {
             @Override
-            public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<String>> response) {
+            public void onSuccess(Response<SRequstBean<String>> response) {
                 //ToastUtil.showToast("更改成功");
                 //dissmissProgressDialog();
                 //Intent intent = new Intent();
@@ -565,7 +639,7 @@ public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdap
             }
 
             @Override
-            public void onError(com.lzy.okgo.model.Response<SRequstBean<String>> response) {
+            public void onError(Response<SRequstBean<String>> response) {
                 super.onError(response);
                 //adapter.loadMoreFail();
                 dissmissProgressDialog();
@@ -573,7 +647,7 @@ public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdap
 
         };
         OkGoClient.getInstance()
-                .postJsonData10(url1, params1, jsonCallBack1);
+                .postJsonData10(url1, params2, jsonCallBack1);
     }
 
     private SelectDialog showDialog(SelectDialog.SelectDialogListener listener, List<String> names) {
@@ -607,14 +681,14 @@ public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdap
                                  */
                                 //打开选择,本次允许选择的数量
                                 ImagePicker.getInstance().setSelectLimit(maxImgCount - selImageList1.size());
-                                Intent intent = new Intent(XMFZCDetailsctivity.this, ImageGridActivity.class);
+                                Intent intent = new Intent(XMFRCDZGDetailsctivity.this, ImageGridActivity.class);
                                 intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS, true); // 是否是直接打开相机
                                 startActivityForResult(intent, REQUEST_CODE_SELECT);
                                 break;
                             case 1:
                                 //打开选择,本次允许选择的数量
                                 ImagePicker.getInstance().setSelectLimit(maxImgCount - selImageList1.size());
-                                Intent intent1 = new Intent(XMFZCDetailsctivity.this, ImageGridActivity.class);
+                                Intent intent1 = new Intent(XMFRCDZGDetailsctivity.this, ImageGridActivity.class);
                                 /* 如果需要进入选择的时候显示已经选中的图片，
                                  * 详情请查看ImagePickerActivity
                                  * */
@@ -632,13 +706,13 @@ public class XMFZCDetailsctivity extends BaseActivity implements ImagePickerAdap
                 //打开预览
                 Intent intentPreview = new Intent();
                 if (num == 1) {
-                    intentPreview.setClass(XMFZCDetailsctivity.this,ImagePreviewActivity.class);
+                    intentPreview.setClass(XMFRCDZGDetailsctivity.this,ImagePreviewActivity.class);
                     intentPreview.putExtra(ImagePicker.EXTRA_IMAGE_ITEMS, (ArrayList<ImageItem>) adapter.getImages());
                 } else {
-                    if(statusList.get(currentPosition).equals("复查合格")){
-                        intentPreview.setClass(XMFZCDetailsctivity.this,ImagePreviewActivity.class);
+                    if(statusList.get(currentPosition).equals("整改完成")||statusList.get(currentPosition).equals("整改合格")){
+                        intentPreview.setClass(XMFRCDZGDetailsctivity.this,ImagePreviewActivity.class);
                     }else{
-                        intentPreview.setClass(XMFZCDetailsctivity.this, ImagePreviewDelActivity.class);
+                        intentPreview.setClass(XMFRCDZGDetailsctivity.this, ImagePreviewDelActivity.class);
                     }
                     intentPreview.putExtra(ImagePicker.EXTRA_IMAGE_ITEMS, (ArrayList<ImageItem>) adapter1.getImages());
                 }

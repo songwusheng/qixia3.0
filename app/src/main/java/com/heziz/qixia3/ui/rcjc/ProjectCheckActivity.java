@@ -4,9 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -22,15 +20,11 @@ import com.heziz.qixia3.bean.rcjc.RcjcBean;
 import com.heziz.qixia3.network.API;
 import com.heziz.qixia3.network.JsonCallBack0;
 import com.heziz.qixia3.network.OkGoClient;
-import com.heziz.qixia3.ui.rcjc.监管方日常检查.DayCheckActivity;
-import com.heziz.qixia3.ui.rcjc.监管方专项检查.ZXCheckActivity;
-import com.heziz.qixia3.ui.rcjc.项目方自查.XMZCCheckActivity;
-import com.heziz.qixia3.ui.rcjc.项目方专项检查待整改.XMZXCheckDZGActivity;
-import com.heziz.qixia3.ui.rcjc.项目方日常检查待整改.XMRCCheckDZGActivity;
-import com.heziz.qixia3.utils.ToastUtil;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.heziz.qixia3.ui.rcjc.jgfrcjc.DayCheckActivity;
+import com.heziz.qixia3.ui.rcjc.jgfzxjc.ZXCheckActivity;
+import com.heziz.qixia3.ui.rcjc.xmfzc.XMZCCheckActivity;
+import com.heziz.qixia3.ui.rcjc.xmfzxjc.XMZXCheckDZGActivity;
+import com.heziz.qixia3.ui.rcjc.xmfrcjc.XMRCCheckDZGActivity;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -38,10 +32,6 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.jpush.android.api.CustomMessage;
-import cn.jpush.android.api.JPushMessage;
-import cn.jpush.android.api.NotificationMessage;
-import cn.jpush.android.service.JPushMessageReceiver;
 
 public class ProjectCheckActivity extends BaseActivity implements View.OnClickListener {
 

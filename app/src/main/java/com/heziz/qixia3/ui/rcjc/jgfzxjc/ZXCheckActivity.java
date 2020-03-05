@@ -1,4 +1,4 @@
-package com.heziz.qixia3.ui.rcjc.监管方专项检查;
+package com.heziz.qixia3.ui.rcjc.jgfzxjc;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -27,16 +27,10 @@ import com.heziz.qixia3.bean.UserInfor;
 import com.heziz.qixia3.bean.rcjc.jgf.ZXCheckListBean;
 import com.heziz.qixia3.network.API;
 import com.heziz.qixia3.network.JsonCallBack1;
-import com.heziz.qixia3.network.JsonCallBack2;
 import com.heziz.qixia3.network.OkGoClient;
 import com.heziz.qixia3.network.RequestBean;
 import com.heziz.qixia3.network.SRequstBean;
-import com.heziz.qixia3.utils.ToastUtil;
-import com.heziz.qixia3.view.SlideRecyclerView;
 import com.heziz.qixia3.view.SpinnerPopuwindow1;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;

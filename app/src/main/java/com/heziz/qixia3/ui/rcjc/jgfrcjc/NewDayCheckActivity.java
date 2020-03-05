@@ -1,4 +1,4 @@
-package com.heziz.qixia3.ui.rcjc.项目方自查;
+package com.heziz.qixia3.ui.rcjc.jgfrcjc;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,9 +31,6 @@ import com.heziz.qixia3.network.API;
 import com.heziz.qixia3.network.JsonCallBack1;
 import com.heziz.qixia3.network.OkGoClient;
 import com.heziz.qixia3.network.SRequstBean;
-import com.heziz.qixia3.ui.rcjc.监管方日常检查.NewCheckDetailsActivity;
-import com.heziz.qixia3.ui.rcjc.监管方日常检查.NewCheckSelectProActivity;
-import com.heziz.qixia3.utils.TimeUtils;
 import com.heziz.qixia3.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -43,9 +40,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 项目方新增自查
+ * 监管方新增日常检查界面
  */
-public class NewZCActivity extends BaseActivity implements View.OnClickListener {
+public class NewDayCheckActivity extends BaseActivity implements View.OnClickListener {
 
     public static final int SELECT_PROJECT_CODE = 100;
     public static final int CLEANING_CHECk_CODE = 101;
@@ -121,12 +118,11 @@ public class NewZCActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void initDatas() {
-        String url1 = API.XMF_ZC_CHECK_NEW+"?access_token="+ MyApplication.getInstance().getUserInfor().getUuid();
+        String url1 = API.RCJC_ADD_CHECK+"?access_token="+ MyApplication.getInstance().getUserInfor().getUuid();
         JsonCallBack1<SRequstBean<String>> jsonCallBack1 = new JsonCallBack1<SRequstBean<String>>() {
             @Override
             public void onSuccess(com.lzy.okgo.model.Response<SRequstBean<String>> response) {
                 dissmissProgressDialog();
-                ToastUtil.showToast("提交成功");
                 finish();
             }
 
@@ -220,7 +216,6 @@ public class NewZCActivity extends BaseActivity implements View.OnClickListener 
                                 case 7:
                                     intent.putExtra("publicityBean",publicityBean);
                                     startActivityForResult(intent, PUBLICITY_CHECK_CODE);
-
                                     break;
                                 case 8:
                                     intent.putExtra("transportBean",transportBean);
@@ -256,8 +251,8 @@ public class NewZCActivity extends BaseActivity implements View.OnClickListener 
                         endStatus=4;
                         //ToastUtil.showToast("不是全部合格");
                     }
-                    bigCheckBean.setEndStatus(endStatus);
-                    bigCheckBean.setStartTime(TimeUtils.getCurrentTime());
+                    //bigCheckBean.setEndStatus(endStatus);
+                    //bigCheckBean.setStartTime(TimeUtils.getCurrentTime());
                     showProgressDialog();
                     initDatas();
                 }else{
@@ -284,13 +279,13 @@ public class NewZCActivity extends BaseActivity implements View.OnClickListener 
                     checkProbean = (CheckProbean) data.getSerializableExtra("checkbean");
                     tvSelectPro.setText(checkProbean.getProjectName());
 
-                    //bigCheckBean.setChangeProjectAccount(checkProbean.getChangeProjectAccount());
+                    //bigCheckBean.setChangeProjectAccount(checkProbean.getCreateName());
                     //bigCheckBean.setManagerRoleIds(checkProbean.getManagerRoleIds());
                     //bigCheckBean.setProjectAdress(checkProbean.getProjectAdress());
                     bigCheckBean.setProjectId(checkProbean.getProjectId());
                     //bigCheckBean.setProjectName(checkProbean.getProjectName());
                     //bigCheckBean.setSiteId(checkProbean.getStation());
-                    //bigCheckBean.setStartPopedomAccount(userInfor.getName());
+                    bigCheckBean.setStartPopedomAccount(userInfor.getName());
                     //bigCheckBean.setCommitCommonts("");
 
                     break;

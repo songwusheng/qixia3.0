@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.heziz.qixia3.ui.rcjc.监管方日常检查.CheckDetailsctivity">
+    tools:context="com.heziz.qixia3.ui.rcjc.jgfrcjc.CheckDetailsctivity">
 
     <include layout="@layout/include_title_er" />
     <LinearLayout

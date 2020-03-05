@@ -1,6 +1,5 @@
-package com.heziz.qixia3.ui.rcjc.项目方专项检查待整改;
+package com.heziz.qixia3.ui.rcjc.xmfzxjc;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,19 +10,14 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.heziz.qixia3.R;
 import com.heziz.qixia3.adaper.xmjc.ImagePickerAdapter;
-import com.heziz.qixia3.adaper.xmjc.MyGridViewAdapter;
 import com.heziz.qixia3.app.MyApplication;
 import com.heziz.qixia3.base.BaseActivity;
 import com.heziz.qixia3.bean.UserInfor;
-import com.heziz.qixia3.bean.rcjc.ChangeStatusBean;
-import com.heziz.qixia3.bean.rcjc.CheckDetailsBean;
 import com.heziz.qixia3.bean.rcjc.jgf.ZXCheckDetailsBean;
 import com.heziz.qixia3.image.ImagePreviewActivity;
 import com.heziz.qixia3.network.API;
@@ -35,7 +29,6 @@ import com.heziz.qixia3.utils.GlideImageLoader;
 import com.heziz.qixia3.utils.StringUtil;
 import com.heziz.qixia3.utils.TimeUtils;
 import com.heziz.qixia3.utils.ToastUtil;
-import com.heziz.qixia3.view.MyGridView;
 import com.heziz.qixia3.view.SelectDialog;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;

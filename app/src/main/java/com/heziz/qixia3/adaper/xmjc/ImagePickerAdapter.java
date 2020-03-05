@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.heziz.qixia3.R;
-import com.heziz.qixia3.ui.rcjc.监管方日常检查.NewCheckDetailsActivity;
+import com.heziz.qixia3.ui.rcjc.jgfrcjc.NewCheckDetailsActivity;
 import com.lzy.imagepicker.bean.ImageItem;
 
 import java.util.ArrayList;
