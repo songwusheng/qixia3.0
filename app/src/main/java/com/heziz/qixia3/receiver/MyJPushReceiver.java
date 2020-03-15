@@ -33,7 +33,7 @@ public class MyJPushReceiver extends JPushMessageReceiver {
     @Override
     public void onAliasOperatorResult(Context context, JPushMessage jPushMessage) {
         //super.onAliasOperatorResult(context, jPushMessage);
-        //ToastUtil.showToast(jPushMessage.getAlias());
+        ToastUtil.showToast(jPushMessage.getAlias());
     }
 
     @Override

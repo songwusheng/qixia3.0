@@ -1,6 +1,7 @@
 package com.heziz.qixia3.ui;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -8,10 +9,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +38,7 @@ import com.heziz.qixia3.network.OkGoClient;
 import com.heziz.qixia3.ui.rcjc.WebviewActivity;
 import com.heziz.qixia3.ui.searchpassword.QRYHMActivity;
 import com.heziz.qixia3.ui.searchpassword.SearchPasswordActivity;
+import com.heziz.qixia3.utils.FileUtil;
 import com.heziz.qixia3.utils.ToastUtil;
 import com.heziz.qixia3.view.ClearEditText;
 import com.pgyersdk.crash.PgyCrashManager;
@@ -42,6 +47,7 @@ import com.pgyersdk.update.PgyUpdateManager;
 import com.pgyersdk.update.UpdateManagerListener;
 import com.pgyersdk.update.javabean.AppBean;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,6 +78,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     TextView tvPass;
     @BindView(R.id.tvYQCX)
     TextView tvYQCX;
+
+    private String path;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,16 +142,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     public void downloadFailed() {
                         //下载失败
                         ToastUtil.showToast("下载失败");
-                        Log.e("pgyer", "download apk failed");
                         dialog.dismiss();
                     }
 
                     @Override
                     public void downloadSuccessful(Uri uri) {
-                        //Log.e("pgyer", "download apk failed");
                         // 使用蒲公英提供的安装方法提示用户 安装apk
                         dialog.dismiss();
-                        PgyUpdateManager.installApk(uri);
+                        path=FileUtil.getPath(LoginActivity.this,uri);
+//                        PgyUpdateManager.installApk(uri);
+                        installAPK(FileUtil.getPath(LoginActivity.this,uri));
                     }
 
                     @Override
@@ -192,7 +200,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 tvTitle2.setVisibility(View.GONE);
                 tvTitle3.setVisibility(View.GONE);
                 tvTitle1.setText("正在下载");
-                if (ActivityCompat.checkSelfPermission(LoginActivity.this, WRITE_EXTERNAL_STORAGE)
+                if (ContextCompat.checkSelfPermission(LoginActivity.this, WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
                     //申请WRITE_EXTERNAL_STORAGE权限
                     ActivityCompat.requestPermissions(LoginActivity.this, new String[]{WRITE_EXTERNAL_STORAGE},
@@ -347,38 +355,71 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         return mScreenWidth * 3 / 4;
     }
 
-    private void showPasswordDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this,R.style.no_border_dialog);
-        LayoutInflater inflater = LayoutInflater.from(LoginActivity.this);
-        View v = inflater.inflate(R.layout.password_view, null);
-        Button btnUp= (Button) v.findViewById(R.id.btnUp);
-        Button btnCancel= (Button) v.findViewById(R.id.btnCacel);
-        LinearLayout llDialog= (LinearLayout) v.findViewById(R.id.llDialog);
-        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) llDialog.getLayoutParams();
-        lp.width = getScreenWidth();
-        llDialog.setLayoutParams(lp);
-        dialog = builder.create();
-        dialog.show();
-        dialog.setCancelable(false);
-        dialog.getWindow().setContentView(v);
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        btnUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                callPhone("4001165850");
-            }
 
-        });
+    /**
+     * 安装Apk
+     */
+    private void installAPK(String mSavePath) {
+        File apkFile = new File(mSavePath);
+        if (!apkFile.exists()) {
+            return;
+        }
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+//      安装完成后，启动app（源码中少了这句话）
+
+        if (null != apkFile) {
+            try {
+                //兼容7.0
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    Uri contentUri = FileProvider.getUriForFile(mContext, mContext.getPackageName() + ".fileProvider", apkFile);
+                    intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+                    //兼容8.0
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        boolean hasInstallPermission = mContext.getPackageManager().canRequestPackageInstalls();
+                        if (!hasInstallPermission) {
+//                            startInstallPermissionSettingActivity();
+                            toInstallPermissionSettingIntent();
+                            return;
+                        }
+                    }
+                } else {
+                    intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                }
+                if (mContext.getPackageManager().queryIntentActivities(intent, 0).size() > 0) {
+                    mContext.startActivity(intent);
+                }
+            } catch (Throwable e) {
+                e.printStackTrace();
+            }
+        }
     }
-    public void callPhone(String phoneNum) {
-        Intent intent = new Intent(Intent.ACTION_DIAL);
-        Uri data = Uri.parse("tel:" + phoneNum);
-        intent.setData(data);
-        startActivity(intent);
+
+    private void startInstallPermissionSettingActivity() {
+        //注意这个是8.0新API
+        Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
     }
+
+    private void toInstallPermissionSettingIntent() {//打开安装未知来源的设置界面
+        Uri packageURI = Uri.parse("package:" + getPackageName());
+        Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI);
+        startActivityForResult(intent, 200);
+    }
+    @Override
+    protected void onActivityResult ( int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == 200) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                if (getPackageManager().canRequestPackageInstalls()) {//再次判断有没有授予
+//                        installApp(address);//安装
+//                    PgyUpdateManager.installApk(uri1);
+                    installAPK(path);
+                }
+            }
+        }
+    }
+
 }
